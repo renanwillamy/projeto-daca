@@ -54,7 +54,7 @@
 		<!--Thema para primefaces -->
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>afterdark</artifactId>
+			<artifactId>excite-bike</artifactId>
 			<version>1.0.10</version>
 		</dependency>
 	</dependencies>
