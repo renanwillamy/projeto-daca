@@ -12,21 +12,21 @@
 
 	<ui:define name="content">
 
-		<p:dataTable style="padding-bottom:30px; padding-top:30px;" var="prod" value="#{dtBasicView.prods}">
+		<p:dataTable style="padding-bottom:30px; padding-top:30px;" var="prod" value="#{produtoLista.produtos}">
 			<p:column headerText="Id">
 				<h:outputText value="#{prod.id}" />
 			</p:column>
 
-			<p:column headerText="Year">
-				<h:outputText value="#{prod.year}" />
+			<p:column headerText="Descrição">
+				<h:outputText value="#{prod.nome}" />
 			</p:column>
 
-			<p:column headerText="Brand">
-				<h:outputText value="#{prod.brand}" />
+			<p:column headerText="Unidade">
+				<h:outputText value="#{prod.und}" />
 			</p:column>
 
 			<p:column headerText="Color">
-				<h:outputText value="#{prod.color}" />
+				<h:outputText value="#{prod.precoVenda}" />
 			</p:column>
 		</p:dataTable>
 

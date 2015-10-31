@@ -1,19 +1,37 @@
 package com.projetodaca.beans.produtos;
 
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
+import com.projetodaca.core.Fachada;
+import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Produto;
-import com.projetodaca.services.ProdutoService;
 
 
 @ViewScoped
 @ManagedBean
 public class ProdutoInsert {
 
-	private ProdutoService prodService = new ProdutoService();
-	private Produto produto = new Produto();
+	private Fachada fachada;
+	private Produto produto;
+	private List<Categoria> categorias;
 
+	@PostConstruct
+	public void  start(){
+		fachada = new Fachada();
+		produto = new Produto();
+		try {
+			categorias = fachada.listCategoria();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public String insertProduto() {
@@ -22,13 +40,15 @@ public class ProdutoInsert {
 			produto.setAtivo(true);
 			produto.setEstoqueMinimo(100);
 			
-			prodService.save(produto);
+			fachada.saveProduto(produto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			FacesContext.getCurrentInstance().addMessage("newPassword", new FacesMessage("Error: Ao salvar Teste"));
 			e.printStackTrace();
 		}
 		
-		return "./index.xhtml?faces-redirect=true";
+		FacesContext.getCurrentInstance().addMessage("Mensagem", new FacesMessage("Usuário salvo"));
+		
+		return "/index?faces-redirect=true";
 	}
 
 
@@ -41,6 +61,16 @@ public class ProdutoInsert {
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
+	}
+
+
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
 	}
 	
 	

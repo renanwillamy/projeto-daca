@@ -34,6 +34,7 @@ public class CategoriaService {
     }
     
     public void delete(Categoria categoria) throws Exception{
+    	dao.delete(categoria);
     }
     
     public List<Categoria> list() throws Exception{
