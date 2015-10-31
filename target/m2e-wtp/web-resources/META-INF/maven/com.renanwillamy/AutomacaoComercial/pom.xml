@@ -28,22 +28,32 @@
 			<version>2.2</version>
 			<scope>provided</scope>
 		</dependency>
-		<!-- Hibernate -->
+
+		<!-- Núcleo do Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
-			<version>4.2.17.Final</version>
+			<version>4.3.1.Final</version>
+			<scope>compile</scope>
 		</dependency>
+		<!-- Implementação de EntityManager da JPA -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.2.17.Final</version>
+			<version>4.3.1.Final</version>
 		</dependency>
-		<!-- Mysql RGBD -->
+		<dependency>
+			<groupId>unknown.binary</groupId>
+			<artifactId>hibernate-jpamodelgen-4.3.1.Final</artifactId>
+			<version>SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- Mysql  -->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
+			<scope>compile</scope>
 		</dependency>
 		<!-- PrimeFaces -->
 		<dependency>
@@ -56,6 +66,12 @@
 			<groupId>org.primefaces.themes</groupId>
 			<artifactId>excite-bike</artifactId>
 			<version>1.0.10</version>
+		</dependency>
+		<!-- Itext para criar pdf -->
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.6</version>
 		</dependency>
 	</dependencies>
 

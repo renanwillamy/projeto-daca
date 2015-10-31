@@ -11,13 +11,13 @@
 	<ui:define name="title">Cadastro de produtos</ui:define>
 
 	<ui:define name="content">
-
+<h:form id="formProd">
 		<p:panelGrid columns="2">
 			<p:outputLabel>Nome:</p:outputLabel>
-			<p:inputText></p:inputText>
+			<p:inputText value="#{produtoInsert.produto.nome}"></p:inputText>
 
 			<p:outputLabel>Número cod. barras:</p:outputLabel>
-			<p:inputText></p:inputText>
+			<p:inputText value="#{produtoInsert.produto.codigoDeBarras}"></p:inputText>
 
 			<p:outputLabel>Unidade:</p:outputLabel>
 			<p:inputText></p:inputText>
@@ -26,7 +26,7 @@
 			<p:inputText></p:inputText>
 
 			<p:outputLabel>Fornecedor:</p:outputLabel>			
-			<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
+			<p:selectOneMenu id="console" 
 				style="width:125px">
 				<f:selectItem itemLabel="Selecione" itemValue="" />
 				<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
@@ -48,13 +48,13 @@
 			<p:inputText></p:inputText>
 
 			<p:outputLabel>Ativo:</p:outputLabel>
-			<p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
+			<p:selectBooleanCheckbox  />
 			
 			<p:separator></p:separator>
-			<p:commandButton value="Salvar"></p:commandButton>
+			<p:commandButton value="Salvar" id="submit" action="#{produtoInsert.insertProduto}"></p:commandButton>
 
 		</p:panelGrid>
-
+</h:form>
 	</ui:define>
 
 
