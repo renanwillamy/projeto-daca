@@ -4,60 +4,88 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <ui:composition template="/templates/template_home.xhtml">
+
+	<f:metadata> 
+	<o:viewParam name="produto" value="produtoEdit.produto" converter="#{produtoConverter}"></o:viewParam>
+	<f:event listener="#{produtoEdit.preRenderView()}" type="preRenderView"></f:event>
+	</f:metadata>
 
 	<ui:define name="title">Alterar produto</ui:define>
 
 	<ui:define name="content">
 
-		<p:panelGrid columns="2">
-		
-		<p:outputLabel>ID:</p:outputLabel>
-			<p:outputLabel></p:outputLabel>
-		
-			<p:outputLabel>Nome:</p:outputLabel>
-			<p:inputText></p:inputText>
+		<h:form >
+			<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+				closable="true"></p:messages>
+			<p:panelGrid columns="2">
+				<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
+				<p:inputText id="nome"  required="true"  value="#{produtoEdit.produto.nome}"></p:inputText>
 
-			<p:outputLabel>Número cod. barras:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:outputLabel>Número cod. barras:</p:outputLabel>
+				<p:inputText value="#{produtoEdit.produto.codigoDeBarras}"></p:inputText>
 
-			<p:outputLabel>Unidade:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:outputLabel>Unidade:</p:outputLabel>
+				<p:selectOneMenu value="#{produtoEdit.produto.und}">				
+					<f:selectItem itemLabel="und" itemValue="und"></f:selectItem>
+					<f:selectItem itemLabel="lt" itemValue="lt"></f:selectItem>
+					<f:selectItem itemLabel="pct" itemValue="pct"></f:selectItem>
+					<f:selectItem itemLabel="mil" itemValue="mil"></f:selectItem>
+					<f:selectItem itemLabel="conj" itemValue="conj"></f:selectItem>
+					<f:selectItem itemLabel="kg" itemValue="kg"></f:selectItem>
+					<f:selectItem itemLabel="mt" itemValue="mt"></f:selectItem>
+				</p:selectOneMenu>
 
-			<p:outputLabel>Quantidade em estoque:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:outputLabel>Quantidade em estoque:</p:outputLabel>
+				<p:inputText value="#{produtoEdit.produto.quantidade}"></p:inputText>
 
-			<p:outputLabel>Fornecedor:</p:outputLabel>			
-			<p:selectOneMenu id="console" value="#{selectOneMenuView.console}"
-				style="width:125px">
-				<f:selectItem itemLabel="Selecione" itemValue="" />
-				<f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
-				<f:selectItem itemLabel="PS4" itemValue="PS4" />
-				<f:selectItem itemLabel="Wii U" itemValue="Wii U" />
-			</p:selectOneMenu>
-			
+				<p:outputLabel for="Fornecedor">Fornecedor:</p:outputLabel>
+				<p:selectOneMenu id="Fornecedor"
+					value="#{produtoEdit.produto.fornecedor}" effect="fold"
+					required="true" >
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{produtoEdit.selectList}" var="forn"
+						itemValue="#{forn}" />
+					<f:converter converterId="fornecedorConverter" />
+				</p:selectOneMenu>
+				<p:outputLabel for="Categoria">Categoria:</p:outputLabel>
+				<p:selectOneMenu id="Categoria"
+					value="#{produtoEdit.produto.categoria}" effect="fold"
+					required="true" >
+					<f:selectItem itemLabel="Selecione" itemValue="" />
+					<f:selectItems value="#{produtoEdit.selectListCat}" var="cat"
+						itemValue="#{cat}" />
+					<f:converter converterId="categoriaConverter" />
+				</p:selectOneMenu>
 
-			<p:outputLabel>Categoria:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:outputLabel for="Custo">Preço de custo:</p:outputLabel>
+				<p:inputText id="Custo"
+					value="#{produtoEdit.produto.precoCusto}" required="true"
+					>
+					<f:validator validatorId="produtoCustoValidator"></f:validator>
+				
+				</p:inputText>
 
-			<p:outputLabel>Preço de custo:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:outputLabel for="PrecoVenda">Preço de venda:</p:outputLabel>
+				<p:inputText id="PrecoVenda"
+					value="#{produtoEdit.produto.precoVenda}" required="true"
+					>
+					<f:validator validatorId="produtoCustoValidator">
+					</f:validator>					
+				</p:inputText>
 
-			<p:outputLabel>Preço de venda:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:outputLabel>Ativo:</p:outputLabel>
+				<p:selectBooleanCheckbox value="#{produtoEdit.produto.ativo}" />
 
-			<p:outputLabel>Margem de lucro:</p:outputLabel>
-			<p:inputText></p:inputText>
+				<p:separator></p:separator>
+				<p:commandButton value="Salvar" id="submit"
+					action="#{produtoEdit.updateProduto}"></p:commandButton>
 
-			<p:outputLabel>Ativo:</p:outputLabel>
-			<p:selectBooleanCheckbox value="#{selectBooleanView.value1}" />
-			
-			<p:separator></p:separator>
-			<p:commandButton value="Salvar"></p:commandButton>
-
-		</p:panelGrid>
+			</p:panelGrid>		
+		</h:form>
 
 	</ui:define>
 

@@ -62,6 +62,13 @@
 			<artifactId>excite-bike</artifactId>
 			<version>1.0.10</version>
 		</dependency>
+		<!-- omnifaces -->
+		<dependency>
+		<groupId>org.omnifaces</groupId>
+		<artifactId>omnifaces</artifactId>
+			<version>1.10</version>
+		</dependency>
+		
 		<!-- Itext para criar pdf -->
 		<dependency>
 			<groupId>com.itextpdf</groupId>

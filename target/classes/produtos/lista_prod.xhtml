@@ -25,8 +25,13 @@
 				<h:outputText value="#{prod.und}" />
 			</p:column>
 
-			<p:column headerText="Color">
+			<p:column headerText="Preço de venda">
 				<h:outputText value="#{prod.precoVenda}" />
+			</p:column>
+			
+			<p:column headerText="Editar">
+				<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar"></p:link>
+				<f:param name="prod" value="#{prod.id}"></f:param>
 			</p:column>
 		</p:dataTable>
 
