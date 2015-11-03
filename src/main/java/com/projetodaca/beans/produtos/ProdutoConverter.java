@@ -9,16 +9,17 @@ import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Produto;
 
 
-@FacesConverter(value = "fornecedorConverter")
+@FacesConverter(value = "produtoConverter")
 public class ProdutoConverter implements Converter {
 	private Fachada fachada;
 
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
 		fachada = new Fachada();
 		
-		if (value == null || (value.trim().length() == 0)||value.equals("Selecione")) {
+		if (value == null || (value.trim().length() == 0)) {
 			return null;
 		}
+	
 		int id = Integer.parseInt(value);
 		Produto produto = null;
 		try {

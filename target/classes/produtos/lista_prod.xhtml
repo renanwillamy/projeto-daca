@@ -30,8 +30,10 @@
 			</p:column>
 			
 			<p:column headerText="Editar">
-				<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar"></p:link>
-				<f:param name="prod" value="#{prod.id}"></f:param>
+				<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar">				
+				<f:param name="id" value="#{prod.id}"></f:param>
+				</p:link>
+				
 			</p:column>
 		</p:dataTable>
 

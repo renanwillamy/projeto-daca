@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
@@ -26,8 +27,9 @@ public class ProdutoEdit {
 	@PostConstruct
 	public void start() {
 		fachada = new Fachada();
-		produto = new Produto();
-
+		if(produto==null){
+			produto = new Produto();
+		}
 		try {
 			fornecedores = fachada.listFornecedor();
 			categorias = fachada.listCategoria();
@@ -36,12 +38,7 @@ public class ProdutoEdit {
 			e.printStackTrace();
 		}
 	}
-	
-	public void preRenderView(){
-		if(produto==null){
-			produto = new Produto();
-		}
-	}
+		
 
 	public Produto getProduto() {
 		return produto;
@@ -51,8 +48,16 @@ public class ProdutoEdit {
 		this.produto = produto;
 	}
 	
-	public void updateProduto(){
-		
+	public String updateProduto(){
+		try {
+			fachada.updateProduto(produto);
+			fachada.addFlashMessage(FacesMessage.SEVERITY_INFO, "Produto Alterado!");
+		} catch (Exception e) {
+			fachada.addFlashMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao tentar alterar o produto!");
+			e.printStackTrace();
+			return "prod_edit";
+		}
+		return "lista_prod?faces-redirect=true";
 	}
 	
 	public List<SelectItem> getSelectList() {
