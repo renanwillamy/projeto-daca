@@ -11,8 +11,14 @@
 	<ui:define name="title">Consulta de produtos</ui:define>
 
 	<ui:define name="content">
-
-		<p:dataTable style="padding-bottom:30px; padding-top:30px;" var="prod" value="#{produtoLista.produtos}">
+	<h:form>
+	<p:panelGrid columns="3" style=" margin : 0 auto; margin-top : 30px;">
+	<p:outputLabel>Filtrar:</p:outputLabel>
+	<p:inputText value="#{produtoLista.filtro}" placeholder="Digite o nome do produto" ></p:inputText>
+	<p:commandButton icon="ui-icon-search" update=":tabelaProdutos" action="#{produtoLista.filtrar}"></p:commandButton>
+	</p:panelGrid>
+	</h:form>
+		<p:dataTable id="tabelaProdutos" style="padding-bottom:30px; padding-top:10px;" var="prod" value="#{produtoLista.produtos}">
 			<p:column headerText="Id">
 				<h:outputText value="#{prod.id}" />
 			</p:column>

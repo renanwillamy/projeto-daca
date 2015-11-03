@@ -23,6 +23,7 @@ public class ProdutoEdit {
 	private List<Fornecedor> fornecedores;
 	private List<SelectItem> selectList;
 	private List<SelectItem> selectListCat;
+	
 
 	@PostConstruct
 	public void start() {
@@ -37,6 +38,12 @@ public class ProdutoEdit {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void filtrar(){
+		
+		
+		
 	}
 		
 
