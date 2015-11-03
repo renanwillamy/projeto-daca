@@ -1,6 +1,9 @@
 package com.projetodaca.core;
 
+import java.io.Serializable;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
 
 import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Fornecedor;
@@ -8,8 +11,9 @@ import com.projetodaca.entities.Produto;
 import com.projetodaca.services.CategoriaService;
 import com.projetodaca.services.FornecedorService;
 import com.projetodaca.services.ProdutoService;
+import com.projetodaca.services.Util;
 
-public class Fachada {
+public class Fachada implements Serializable{
 
 	/**
 	 * Persiste produto no banco de dados
@@ -94,7 +98,7 @@ public class Fachada {
 		return listCategoria;
 	}
 	
-	public Categoria getById(int id) throws Exception{
+	public Categoria getCategoriaById(int id) throws Exception{
 		CategoriaService service = new CategoriaService();
 		Categoria cat = service.getById(id);
 		service = null;
@@ -108,7 +112,50 @@ public class Fachada {
     public Fornecedor saveFornecedor(Fornecedor fornecedor) throws Exception{
     	FornecedorService service  = new FornecedorService();
     	fornecedor = service.save(fornecedor);
+    	service = null;
 		return fornecedor;
+    }
+    
+    public void updateFornecedor(Fornecedor fornecedor) throws Exception{
+    	FornecedorService service  = new FornecedorService();
+    	service.update(fornecedor);
+    	service= null;
+    }
+    
+    public void deleteFornecedor(Fornecedor fornecedor) throws Exception{
+    	FornecedorService service  = new FornecedorService();
+    	service.delete(fornecedor);
+    	service= null;
+    }
+    
+    public List<Fornecedor> listFornecedor() throws Exception{
+        List<Fornecedor> listFornecedor= null;
+        FornecedorService service  = new FornecedorService();
+    	listFornecedor = service.list();
+    	service= null;
+    	return listFornecedor;
+    }
+    
+    public List<Fornecedor> listFornecedor(String where) throws Exception{
+    	 List<Fornecedor> listFornecedor= null;
+         FornecedorService service  = new FornecedorService();
+     	listFornecedor = service.list(where);
+     	service= null;
+     	return listFornecedor;
+    }
+    
+    public Fornecedor getFornecedorById(int id) throws Exception{
+        Fornecedor fornecedor = null;
+        FornecedorService service  = new FornecedorService();
+        fornecedor = service.getById(id);
+        service = null;
+        return fornecedor;
+    }
+    public static void addFlashMessage(FacesMessage.Severity facesMessage, String message) {
+    	Util util = new Util();
+    	util.addFlashMessage(facesMessage, message);
+    	util = null;
+    	
     }
 
 }

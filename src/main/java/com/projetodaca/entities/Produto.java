@@ -182,6 +182,14 @@ public class Produto implements Serializable{
         return true;
     }
     
+    @Override
+    public String toString() {
+    	String txt = "Id: "+id+" Nome: "+nome+" Quantidade: "+quantidade+" Und: "+und+" Cod. Barras: "+codigoDeBarras+
+    			" Estoque Min. :"+estoqueMinimo+" Preço de Venda: "+precoVenda+" Preço Custo:"+precoCusto+" Ativo: "+ativo+" Fornecedor: "+
+    			fornecedor.getNomeFantasia()+" Categoria:"+categoria.getNome();
+    	return txt;
+    }
+    
     
     
 }

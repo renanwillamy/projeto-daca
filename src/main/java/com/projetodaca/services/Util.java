@@ -11,6 +11,10 @@ import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import sun.util.calendar.Gregorian;
 
 /**
@@ -199,5 +203,11 @@ public class Util {
         return novaData;
 
     }
+    
+    public static void addFlashMessage(FacesMessage.Severity facesMessage, String message) {
+	    FacesContext context = FacesContext.getCurrentInstance();
+	    context.getExternalContext().getFlash().setKeepMessages(true);
+	    context.addMessage(null, new FacesMessage(facesMessage, message, null));
+	}
 
 }
