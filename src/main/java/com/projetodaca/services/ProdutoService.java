@@ -45,11 +45,12 @@ public class ProdutoService {
         return listProduto;
     }   
     
-    public List<Produto> list(String where) throws Exception{
+    public List<Produto> listaProdutoPorNome(String nome) throws Exception{
         List<Produto> listProduto= null;
-          listProduto = dao.list(where);
+          listProduto = dao.listaProdutoPorNome(nome);
         return listProduto;
-    }
+    }   
+   
     
     
     public Produto getById(int id) throws Exception{

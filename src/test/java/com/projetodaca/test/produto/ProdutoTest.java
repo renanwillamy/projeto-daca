@@ -32,22 +32,6 @@ public class ProdutoTest {
 
 	}
 	
-	@Test
-	public void testGetProdutoByName() throws Exception {
-		List<Produto>produtos = null;
-		boolean expected = false;
-		boolean obtido = true;
-		produtos = fachada.listProduto("WHERE e.nome like '%Tv%'");
-
-		if (produtos != null && !produtos.isEmpty())
-			obtido = false;
-		
-		for(Produto p: produtos){
-			System.out.println(p.toString());
-		}
-		
-		assertEquals(expected, obtido);
-
-	}
+	
 
 }

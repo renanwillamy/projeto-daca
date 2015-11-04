@@ -13,6 +13,7 @@ import javax.faces.model.SelectItem;
 
 import org.primefaces.context.RequestContext;
 
+import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Fornecedor;
@@ -20,8 +21,13 @@ import com.projetodaca.entities.Produto;
 
 @ViewScoped
 @ManagedBean
-public class ProdutoInsert implements Serializable {
+public class ProdutoInsert extends AbstractManageBean implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8559018315064616512L;
+	
 	private Fachada fachada;
 	private Produto produto;
 	private List<Categoria> categorias;
@@ -50,11 +56,11 @@ public class ProdutoInsert implements Serializable {
 		try {
 
 			fachada.saveProduto(produto);
-			fachada.addFlashMessage(FacesMessage.SEVERITY_INFO, "Produto Salvo!");
+			showFlashMessageInfo("Produto Salvo!");
 		} catch (Exception e) {
 			System.out.println("Erro");
 			e.printStackTrace();
-			fachada.addFlashMessage(FacesMessage.SEVERITY_ERROR, "Erro ao tentar salvar produto!");
+			showFlashMessageError("Erro ao tentar salvar produto!");
 			return "insert_prod";
 		}
 	

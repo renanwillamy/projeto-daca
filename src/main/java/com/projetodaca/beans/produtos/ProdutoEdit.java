@@ -8,13 +8,14 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
 
+import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Produto;
 
 @ManagedBean
-public class ProdutoEdit {
+public class ProdutoEdit extends AbstractManageBean {
 	private Fachada fachada;
 	private Produto produto;
 	private List<Categoria> categorias;
@@ -24,7 +25,6 @@ public class ProdutoEdit {
 	private List<SelectItem> selectList;
 	private List<SelectItem> selectListCat;
 	
-
 	@PostConstruct
 	public void start() {
 		fachada = new Fachada();
@@ -58,9 +58,9 @@ public class ProdutoEdit {
 	public String updateProduto(){
 		try {
 			fachada.updateProduto(produto);
-			fachada.addFlashMessage(FacesMessage.SEVERITY_INFO, "Produto Alterado!");
+			showFlashMessageInfo("Produto Alterado!");
 		} catch (Exception e) {
-			fachada.addFlashMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao tentar alterar o produto!");
+			showFlashMessageError("Ocorreu um erro ao tentar alterar o produto!");
 			e.printStackTrace();
 			return "prod_edit";
 		}

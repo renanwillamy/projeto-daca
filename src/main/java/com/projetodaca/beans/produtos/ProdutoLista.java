@@ -1,5 +1,6 @@
 package com.projetodaca.beans.produtos;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -7,12 +8,17 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 
+import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Produto;
 
 @ManagedBean
-public class ProdutoLista {
+public class ProdutoLista extends AbstractManageBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6405394078384105388L;
 	private Produto produtoSelecionado;
 	private List<Produto> produtos;
 	private Fachada fachada;
@@ -47,10 +53,9 @@ public class ProdutoLista {
 			try {
 				fachada.deleteProduto(produto);
 				filtrar();
-							
+				showFlashMessageInfo("Produto excluido!");
 			} catch (Exception e) {
-				fachada.addFlashMessage(FacesMessage.SEVERITY_ERROR, "Ocorreu um erro ao tentar excluir o produto!");
-
+				showFlashMessageError("Ocorreu um erro ao tentar excluir o produto!");
 				e.printStackTrace();
 			}
 		}
@@ -62,8 +67,8 @@ public class ProdutoLista {
 		try {
 			if (filtro == null)
 				filtro = "";
-			String where = "WHERE e.nome like '%" + filtro + "%'";
-			produtos = fachada.listProduto(where);
+			
+			produtos = fachada.listProdutoPorNome(filtro);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

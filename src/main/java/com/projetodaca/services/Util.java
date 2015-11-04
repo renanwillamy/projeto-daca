@@ -204,10 +204,6 @@ public class Util {
 
     }
     
-    public static void addFlashMessage(FacesMessage.Severity facesMessage, String message) {
-	    FacesContext context = FacesContext.getCurrentInstance();
-	    context.getExternalContext().getFlash().setKeepMessages(true);
-	    context.addMessage(null, new FacesMessage(facesMessage, message, null));
-	}
+    
 
 }

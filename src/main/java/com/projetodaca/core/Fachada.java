@@ -47,10 +47,10 @@ public class Fachada implements Serializable{
 		return listProduto;
 	}
 
-	public List<Produto> listProduto(String where) throws Exception {
+	public List<Produto> listProdutoPorNome(String nome) throws Exception {
 		List<Produto> listProduto = null;
 		ProdutoService service = new ProdutoService();
-		listProduto = service.list(where);
+		listProduto = service.listaProdutoPorNome(nome);
 		return listProduto;
 	}
 
@@ -151,11 +151,6 @@ public class Fachada implements Serializable{
         service = null;
         return fornecedor;
     }
-    public static void addFlashMessage(FacesMessage.Severity facesMessage, String message) {
-    	Util util = new Util();
-    	util.addFlashMessage(facesMessage, message);
-    	util = null;
-    	
-    }
+ 
 
 }

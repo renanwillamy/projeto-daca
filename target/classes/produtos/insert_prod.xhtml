@@ -12,6 +12,7 @@
 
 	<ui:define name="content">
 
+<p:fieldset legend="Cadastro de produtos" style="margin-top:20px;">
 		
 		<h:form >
 			<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
@@ -61,7 +62,7 @@
 					value="#{produtoInsert.produto.precoCusto}" required="true"
 					>
 					<f:validator validatorId="produtoCustoValidator"></f:validator>
-				
+				<f:convertNumber  locale="pt_BR" />
 				</p:inputText>
 
 				<p:outputLabel for="PrecoVenda">Preço de venda:</p:outputLabel>
@@ -69,6 +70,7 @@
 					value="#{produtoInsert.produto.precoVenda}" required="true"
 					>
 					<f:validator validatorId="produtoCustoValidator">
+					<f:convertNumber  locale="pt_BR" />
 					</f:validator>					
 				</p:inputText>
 
@@ -81,6 +83,7 @@
 
 			</p:panelGrid>		
 		</h:form>
+		</p:fieldset>
 
 	</ui:define>
 

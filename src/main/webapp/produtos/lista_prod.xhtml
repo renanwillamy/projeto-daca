@@ -23,43 +23,66 @@
 		<p:dataTable id="tabelaProdutos"
 			style="padding-bottom:30px; padding-top:10px;" var="prod"
 			value="#{produtoLista.produtos}">
-			<p:column headerText="Id">
+			<p:column headerText="Id"  styleClass="centralizarTexto">
 				<h:outputText value="#{prod.id}" />
 			</p:column>
 
-			<p:column headerText="Descrição">
+			<p:column headerText="Descrição"  styleClass="centralizarTexto">
 				<h:outputText value="#{prod.nome}" />
 			</p:column>
 
-			<p:column headerText="Unidade">
+			<p:column headerText="Unidade"  styleClass="centralizarTexto">
 				<h:outputText value="#{prod.und}" />
 			</p:column>
 
-			<p:column headerText="Preço de venda">
-				<h:outputText value="#{prod.precoVenda}" />
+			<p:column headerText="Preço de custo"  styleClass="centralizarTexto">
+				<h:outputText value="#{prod.precoCusto}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
 			</p:column>
 
-			<p:column headerText="Editar">
-				<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar">
-					<f:param name="id" value="#{prod.id}"></f:param>
-				</p:link>
+			<p:column headerText="Ativo"  styleClass="centralizarTexto">
+				<h:outputText value="#{prod.ativo}"
+					converter="produtoAtivoConverter" />
+			</p:column>
+			<p:column headerText="Preço de venda"  styleClass="centralizarTexto">
+				<h:outputText value="#{prod.precoVenda}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
 			</p:column>
 
-			<p:column headerText="Excluir">
+			<p:column headerText="Fornecedor"  styleClass="centralizarTexto">
+				<h:outputText value="#{prod.fornecedor.nomeFantasia}">
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Categoria" styleClass="centralizarTexto">
+				<h:outputText value="#{prod.categoria.nome}"  >
+				</h:outputText>
+			</p:column>
+			<div>
+				<p:column headerText="Editar" styleClass="centralizarTexto">
+					<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar">
+						<f:param name="id" value="#{prod.id}"></f:param>
+					</p:link>
+				</p:column>
+			</div>
+			<p:column headerText="Excluir"  styleClass="centralizarTexto">
 
 				<h:form>
-					<p:growl id="message" showDetail="true" />
-
+					
 					<p:commandLink value="Excluir"
-						actionListener="#{produtoLista.excluir(prod)}" update=":tabelaProdutos">
-						<p:confirm header="Confirmation" message="Are you sure?"
-							icon="ui-icon-alert" />						
+						actionListener="#{produtoLista.excluir(prod)}"
+						update=":tabelaProdutos">
+						<p:confirm header="Atenção"
+							message="Tem certeza que deseja excluir #{prod.nome}?"
+							icon="ui-icon-alert" />
 					</p:commandLink>
 
 					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Yes" type="button"
+						<p:commandButton value="Sim" type="button"
 							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="No" type="button"
+						<p:commandButton value="Não" type="button"
 							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 					</p:confirmDialog>
 				</h:form>

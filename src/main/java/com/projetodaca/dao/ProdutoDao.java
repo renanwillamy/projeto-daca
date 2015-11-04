@@ -62,7 +62,7 @@ public class ProdutoDao implements IDAO<Produto> {
         return list;
     }
 
-    public List<Produto> list(String where) throws Exception {
+    private List<Produto> list(String where) throws Exception {
         List<Produto> list = new ArrayList<Produto>();
         try {
             beginTransaction();
@@ -77,6 +77,11 @@ public class ProdutoDao implements IDAO<Produto> {
             manager.close();
         }
         return list;
+    }
+    
+    public List<Produto> listaProdutoPorNome(String nome) throws Exception {
+    	String where = "WHERE e.nome like '%" + nome + "%'";
+    	return list(where);
     }
 
     
