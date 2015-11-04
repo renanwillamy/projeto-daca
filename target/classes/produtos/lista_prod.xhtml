@@ -11,14 +11,18 @@
 	<ui:define name="title">Consulta de produtos</ui:define>
 
 	<ui:define name="content">
-	<h:form>
-	<p:panelGrid columns="3" style=" margin : 0 auto; margin-top : 30px;">
-	<p:outputLabel>Filtrar:</p:outputLabel>
-	<p:inputText value="#{produtoLista.filtro}" placeholder="Digite o nome do produto" ></p:inputText>
-	<p:commandButton icon="ui-icon-search" update=":tabelaProdutos" action="#{produtoLista.filtrar}"></p:commandButton>
-	</p:panelGrid>
-	</h:form>
-		<p:dataTable id="tabelaProdutos" style="padding-bottom:30px; padding-top:10px;" var="prod" value="#{produtoLista.produtos}">
+		<h:form>
+			<p:panelGrid columns="3" style=" margin : 0 auto; margin-top : 30px;">
+				<p:outputLabel>Filtrar:</p:outputLabel>
+				<p:inputText value="#{produtoLista.filtro}"
+					placeholder="Digite o nome do produto"></p:inputText>
+				<p:commandButton icon="ui-icon-search" update=":tabelaProdutos"
+					action="#{produtoLista.filtrar}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+		<p:dataTable id="tabelaProdutos"
+			style="padding-bottom:30px; padding-top:10px;" var="prod"
+			value="#{produtoLista.produtos}">
 			<p:column headerText="Id">
 				<h:outputText value="#{prod.id}" />
 			</p:column>
@@ -34,12 +38,33 @@
 			<p:column headerText="Preço de venda">
 				<h:outputText value="#{prod.precoVenda}" />
 			</p:column>
-			
+
 			<p:column headerText="Editar">
-				<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar">				
-				<f:param name="id" value="#{prod.id}"></f:param>
+				<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar">
+					<f:param name="id" value="#{prod.id}"></f:param>
 				</p:link>
-				
+			</p:column>
+
+			<p:column headerText="Excluir">
+
+				<h:form>
+					<p:growl id="message" showDetail="true" />
+
+					<p:commandLink value="Excluir"
+						actionListener="#{produtoLista.excluir(prod)}" update=":tabelaProdutos">
+						<p:confirm header="Confirmation" message="Are you sure?"
+							icon="ui-icon-alert" />						
+					</p:commandLink>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Yes" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="No" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</h:form>
+
+
 			</p:column>
 		</p:dataTable>
 

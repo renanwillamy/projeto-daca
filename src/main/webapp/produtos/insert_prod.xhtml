@@ -12,23 +12,19 @@
 
 	<ui:define name="content">
 
-		<p:dialog header="Effects" widgetVar="dlg3" showEffect="explode"
-			hideEffect="bounce" height="100">
-			<h:outputText value="This dialog has nice effects." />
-		</p:dialog>
-
+		
 		<h:form >
 			<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
 				closable="true"></p:messages>
 			<p:panelGrid columns="2">
 				<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
-				<p:inputText id="nome"  required="true"  value="#{produtoInsert.produto.nome}"></p:inputText>
+				<p:inputText label="Nome" id="nome"  required="true"  value="#{produtoInsert.produto.nome}"></p:inputText>
 
 				<p:outputLabel>Número cod. barras:</p:outputLabel>
 				<p:inputText value="#{produtoInsert.produto.codigoDeBarras}"></p:inputText>
 
 				<p:outputLabel>Unidade:</p:outputLabel>
-				<p:selectOneMenu value="#{produtoInsert.produto.und}">				
+				<p:selectOneMenu label="Unidade" value="#{produtoInsert.produto.und}">				
 					<f:selectItem itemLabel="und" itemValue="und"></f:selectItem>
 					<f:selectItem itemLabel="lt" itemValue="lt"></f:selectItem>
 					<f:selectItem itemLabel="pct" itemValue="pct"></f:selectItem>
@@ -39,10 +35,10 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel>Quantidade em estoque:</p:outputLabel>
-				<p:inputText value="#{produtoInsert.produto.quantidade}"></p:inputText>
+				<p:inputText label="Quantidade em estoque" value="#{produtoInsert.produto.quantidade}"></p:inputText>
 
 				<p:outputLabel for="Fornecedor">Fornecedor:</p:outputLabel>
-				<p:selectOneMenu id="Fornecedor"
+				<p:selectOneMenu label="Fornecedor" id="Fornecedor"
 					value="#{produtoInsert.produto.fornecedor}" effect="fold"
 					required="true" >
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -51,7 +47,7 @@
 					<f:converter converterId="fornecedorConverter" />
 				</p:selectOneMenu>
 				<p:outputLabel for="Categoria">Categoria:</p:outputLabel>
-				<p:selectOneMenu id="Categoria"
+				<p:selectOneMenu label="Categoria" id="Categoria"
 					value="#{produtoInsert.produto.categoria}" effect="fold"
 					required="true" >
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -61,7 +57,7 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel for="Custo">Preço de custo:</p:outputLabel>
-				<p:inputText id="Custo"
+				<p:inputText label="Preço de Custo" id="Custo"
 					value="#{produtoInsert.produto.precoCusto}" required="true"
 					>
 					<f:validator validatorId="produtoCustoValidator"></f:validator>
@@ -69,7 +65,7 @@
 				</p:inputText>
 
 				<p:outputLabel for="PrecoVenda">Preço de venda:</p:outputLabel>
-				<p:inputText id="PrecoVenda"
+				<p:inputText label="Preço de Venda" id="PrecoVenda"
 					value="#{produtoInsert.produto.precoVenda}" required="true"
 					>
 					<f:validator validatorId="produtoCustoValidator">
@@ -77,7 +73,7 @@
 				</p:inputText>
 
 				<p:outputLabel>Ativo:</p:outputLabel>
-				<p:selectBooleanCheckbox value="#{produtoInsert.produto.ativo}" />
+				<p:selectBooleanCheckbox label="Ativo" value="#{produtoInsert.produto.ativo}" />
 
 				<p:separator></p:separator>
 				<p:commandButton value="Salvar" id="submit"

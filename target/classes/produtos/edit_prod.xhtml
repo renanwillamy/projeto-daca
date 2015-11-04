@@ -14,7 +14,7 @@
 			converterMessage="Bad request. Unknown produto" required="true"
 			requiredMessage="Por favor utilize links do site!.">
 			<f:converter converterId="produtoConverter" />
-		</f:viewParam>
+		</f:viewParam> 
 	</f:metadata>
 
 
@@ -27,7 +27,7 @@
 				closable="true"></p:messages>
 			<p:panelGrid columns="2">
 				<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
-				<p:inputText id="nome" required="true"
+				<p:inputText label="Nome" id="nome" required="true"
 					value="#{produtoEdit.produto.nome}"></p:inputText>
 
 				<p:outputLabel>Número cod. barras:</p:outputLabel>
@@ -45,10 +45,10 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel>Quantidade em estoque:</p:outputLabel>
-				<p:inputText value="#{produtoEdit.produto.quantidade}"></p:inputText>
+				<p:inputText label="Quantidade" value="#{produtoEdit.produto.quantidade}"></p:inputText>
 
 				<p:outputLabel for="Fornecedor">Fornecedor:</p:outputLabel>
-				<p:selectOneMenu id="Fornecedor"
+				<p:selectOneMenu label="Fornecedor" id="Fornecedor"
 					value="#{produtoEdit.produto.fornecedor}" effect="fold"
 					required="true">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -57,7 +57,7 @@
 					<f:converter converterId="fornecedorConverter" />
 				</p:selectOneMenu>
 				<p:outputLabel for="Categoria">Categoria:</p:outputLabel>
-				<p:selectOneMenu id="Categoria"
+				<p:selectOneMenu label="Categoria" id="Categoria"
 					value="#{produtoEdit.produto.categoria}" effect="fold"
 					required="true">
 					<f:selectItem itemLabel="Selecione" itemValue="" />
@@ -67,21 +67,21 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel for="Custo">Preço de custo:</p:outputLabel>
-				<p:inputText id="Custo" value="#{produtoEdit.produto.precoCusto}"
+				<p:inputText label="Preço de Custo" id="Custo" value="#{produtoEdit.produto.precoCusto}"
 					required="true">
 					<f:validator validatorId="produtoCustoValidator"></f:validator>
 
 				</p:inputText>
 
 				<p:outputLabel for="PrecoVenda">Preço de venda:</p:outputLabel>
-				<p:inputText id="PrecoVenda"
+				<p:inputText Label="Preço de Venda" id="PrecoVenda"
 					value="#{produtoEdit.produto.precoVenda}" required="true">
 					<f:validator validatorId="produtoCustoValidator">
 					</f:validator>
 				</p:inputText>
 
 				<p:outputLabel>Ativo:</p:outputLabel>
-				<p:selectBooleanCheckbox value="#{produtoEdit.produto.ativo}" />
+				<p:selectBooleanCheckbox label="Ativo" value="#{produtoEdit.produto.ativo}" />
 
 				<p:separator></p:separator>
 				<p:commandButton value="Alterar" id="submit"
