@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template_home.xhtml">
+
+	<ui:define name="title">Cadastro de fornecedores</ui:define>
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Cadastro de fornecedores" style="margin-top:20px;">
+
+			<h:form>
+				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+					closable="true"></p:messages>
+				<p:panelGrid columns="2">
+					<p:outputLabel for="razaoSocial" indicateRequired="true">Razão Social:</p:outputLabel>
+					<p:inputText label="razaoSocial" id="razaoSocial" required="true"
+						value="#{fornecedorInsert.fornecedor.razaoSocial}"></p:inputText>
+
+					<p:outputLabel for="nomeFantasia">Nome Fantasia:</p:outputLabel>
+					<p:inputText id="nomeFantasia" label="Nome Fantasia"  value="#{fornecedorInsert.fornecedor.nomeFantasia}" required="true"></p:inputText>
+
+					<p:outputLabel for="cnpj">Cnpj:</p:outputLabel>
+					<p:inputText id="cnpj" label="CNPJ" value="#{fornecedorInsert.fornecedor.cnpj}" required="true"></p:inputText>
+
+					<p:outputLabel for="logradouro">Logradouro:</p:outputLabel>
+					<p:inputText id="logradouro" label="Logradouro" value="#{fornecedorInsert.endereco.logradouro}" required="true"></p:inputText>
+
+					<p:outputLabel for="numero">Número:</p:outputLabel>
+					<p:inputText id="numero" label="Número" value="#{fornecedorInsert.endereco.numResidencia}" required="true"></p:inputText>
+
+					<p:outputLabel for="bairro">Bairro:</p:outputLabel>
+					<p:inputText label="Bairro" id="bairro" value="#{fornecedorInsert.endereco.bairro}" required="true"></p:inputText>
+
+					<p:outputLabel for="cep">Cep:</p:outputLabel>
+					<p:inputText id="cep" label="Cep" value="#{fornecedorInsert.endereco.cep}" required="true"></p:inputText>
+
+					<p:outputLabel for="estado">Estado:</p:outputLabel>
+					<p:selectOneMenu id="estado" label="Estado" required="true"
+						value="#{fornecedorInsert.endereco.estado}">
+						<f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
+						<f:selectItem itemLabel="AC" itemValue="AC"></f:selectItem>
+						<f:selectItem itemLabel="AL" itemValue="AL"></f:selectItem>
+						<f:selectItem itemLabel="AM" itemValue="AM"></f:selectItem>
+						<f:selectItem itemLabel="AP" itemValue="AP"></f:selectItem>
+						<f:selectItem itemLabel="BA" itemValue="BA"></f:selectItem>
+						<f:selectItem itemLabel="CE" itemValue="CE"></f:selectItem>
+						<f:selectItem itemLabel="DF" itemValue="DF"></f:selectItem>
+						<f:selectItem itemLabel="ES" itemValue="ES"></f:selectItem>
+						<f:selectItem itemLabel="GO" itemValue="GO"></f:selectItem>
+						<f:selectItem itemLabel="MA" itemValue="MA"></f:selectItem>
+						<f:selectItem itemLabel="MG" itemValue="MG"></f:selectItem>
+						<f:selectItem itemLabel="MS" itemValue="MS"></f:selectItem>
+						<f:selectItem itemLabel="MT" itemValue="MT"></f:selectItem>
+						<f:selectItem itemLabel="PA" itemValue="PA"></f:selectItem>
+						<f:selectItem itemLabel="PB" itemValue="PB"></f:selectItem>
+						<f:selectItem itemLabel="PE" itemValue="PE"></f:selectItem>
+						<f:selectItem itemLabel="PI" itemValue="PI"></f:selectItem>
+						<f:selectItem itemLabel="PR" itemValue="PR"></f:selectItem>
+						<f:selectItem itemLabel="RJ" itemValue="RJ"></f:selectItem>
+						<f:selectItem itemLabel="RN" itemValue="RN"></f:selectItem>
+						<f:selectItem itemLabel="RS" itemValue="RS"></f:selectItem>
+						<f:selectItem itemLabel="RO" itemValue="RO"></f:selectItem>
+						<f:selectItem itemLabel="RR" itemValue="RR"></f:selectItem>
+						<f:selectItem itemLabel="SC" itemValue="SC"></f:selectItem>
+						<f:selectItem itemLabel="SE" itemValue="SE"></f:selectItem>
+						<f:selectItem itemLabel="SP" itemValue="SP"></f:selectItem>
+						<f:selectItem itemLabel="TO" itemValue="TO"></f:selectItem>
+
+					</p:selectOneMenu>
+
+					<p:outputLabel for="cidade">Cidade:</p:outputLabel>
+					<p:inputText id="cidade" label="Cidade" value="#{fornecedorInsert.endereco.cidade}" required="true" ></p:inputText>
+					
+					<p:outputLabel for="email">Email:</p:outputLabel>
+					<p:inputText id="email" label="Email" value="#{fornecedorInsert.contato.email}"></p:inputText>
+					
+					<p:outputLabel for="celular">Celular:</p:outputLabel>
+					<p:inputText id="celular" label="Celular" value="#{fornecedorInsert.contato.celular}" required="true"></p:inputText>
+					
+					<p:outputLabel for="telefone">Telefone:</p:outputLabel>
+					<p:inputText id="telefone" label="Telefone" value="#{fornecedorInsert.contato.telefone}"></p:inputText>
+									
+
+					<p:separator></p:separator>
+					<p:commandButton value="Salvar" id="submit"
+						action="#{fornecedorInsert.insertFornecedor}"></p:commandButton>
+
+				</p:panelGrid>
+			</h:form>
+		</p:fieldset>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>
