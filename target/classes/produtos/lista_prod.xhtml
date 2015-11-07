@@ -39,16 +39,16 @@
 				<h:outputText value="#{prod.precoCusto}">
 					<f:convertNumber type="currency" />
 				</h:outputText>
-			</p:column>
-
-			<p:column headerText="Ativo"  styleClass="centralizarTexto">
-				<h:outputText value="#{prod.ativo}"
-					converter="produtoAtivoConverter" />
-			</p:column>
+			</p:column>			
 			<p:column headerText="Preço de venda"  styleClass="centralizarTexto">
 				<h:outputText value="#{prod.precoVenda}">
 					<f:convertNumber type="currency" />
 				</h:outputText>
+			</p:column>
+			
+			<p:column headerText="Ativo"  styleClass="centralizarTexto">
+				<h:outputText value="#{prod.ativo}"
+					converter="produtoAtivoConverter" />
 			</p:column>
 
 			<p:column headerText="Fornecedor"  styleClass="centralizarTexto">

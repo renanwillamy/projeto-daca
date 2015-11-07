@@ -26,7 +26,12 @@ import javax.persistence.OneToOne;
 @Entity
 public class Fornecedor implements Serializable {
     
-    public Fornecedor() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public Fornecedor() {
     }
 
     public Fornecedor(String razaoSocial, String nomeFantasia, String cnpj, Endereco endereco) {
@@ -59,7 +64,7 @@ public class Fornecedor implements Serializable {
     @OneToMany(mappedBy = "fornecedor")
     private List<Produto> produtos;
     
-    @OneToMany(mappedBy = "fornecedor",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "fornecedor",fetch = FetchType.EAGER,cascade =CascadeType.PERSIST)
     private List<Contato> contatos; 
 
     public int getId() {

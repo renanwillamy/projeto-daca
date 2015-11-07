@@ -39,11 +39,11 @@ public class FornecedorInsert extends AbstractManageBean implements Serializable
 
 	public String insertFornecedor() {
 
-		try {
-			
-			contato.setFornecedor(fornecedor);			
+		try {					
+					
+			contato.setFornecedor(fornecedor);				
 			ArrayList<Contato> contatos = new ArrayList<>();
-			contatos.add(contato);
+			contatos.add(contato);			
 			fornecedor.setContatos(contatos);		
 			fornecedor.setEndereco(endereco);
 			fachada.saveFornecedor(fornecedor);

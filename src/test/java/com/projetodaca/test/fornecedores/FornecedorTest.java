@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import com.projetodaca.entities.Contato;
 import com.projetodaca.entities.Endereco;
 import com.projetodaca.entities.Fornecedor;
+import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
 
 public class FornecedorTest {
@@ -23,7 +24,7 @@ public class FornecedorTest {
 
 		boolean actual = false;
 		boolean expected = true;
-		
+		Fornecedor fornecedor = null;
 		Endereco endereco = new Endereco();
 		endereco.setLogradouro("Rua José Augusto Gomes");
 		endereco.setCep("58500-000");
@@ -37,35 +38,42 @@ public class FornecedorTest {
 		contato.setCelular("8399922454");
 		contato.setTelefone("833351154");
 
-		Fornecedor fornecedor = new Fornecedor();
-		fornecedor.setCnpj("111.111/0001-33");
-		fornecedor.setNomeFantasia("Nestle");
-		fornecedor.setRazaoSocial("Maria da Silva");
+		ContatoService contService = new ContatoService();
+		//contato = contService.save(contato);
 
-		contato.setFornecedor(fornecedor);
+	///	if (contato.getID() != 0) {
 
-		ArrayList<Contato> contatos = new ArrayList<>();
-		contatos.add(contato);
+			fornecedor = new Fornecedor();
+			fornecedor.setCnpj("111.111/0001-33");
+			fornecedor.setNomeFantasia("Nestle");
+			fornecedor.setRazaoSocial("Maria da Silva");
 
-		fornecedor.setContatos(contatos);
+			contato.setFornecedor(fornecedor);
 
-		fornecedor.setEndereco(endereco);
+			ArrayList<Contato> contatos = new ArrayList<>();
+			contatos.add(contato);
 
-		fornecedor = service.save(fornecedor);
-		
-		int id = fornecedor.getId();
-		
-		fornecedor = null;
-		
-		fornecedor = service.getById(id);
-		
-		if(fornecedor!=null){
-			actual = true;
-		}
-		
+			fornecedor.setContatos(contatos);
+
+			fornecedor.setEndereco(endereco);
+
+			fornecedor = service.save(fornecedor);
+			
+
+			int id = fornecedor.getId();
+
+			fornecedor = null;
+
+			fornecedor = service.getById(id);
+
+			if (fornecedor != null) {
+				actual = true;
+			}
+	//	}
+
 		assertEquals(expected, actual);
-		service.delete(fornecedor);
-		
+		if (fornecedor != null)
+			service.delete(fornecedor);
 
 	}
 

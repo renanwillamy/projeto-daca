@@ -71,21 +71,18 @@
 					<p:outputLabel for="Custo">Preço de custo:</p:outputLabel>
 					<p:inputText label="Preço de Custo" id="Custo"
 						value="#{produtoEdit.produto.precoCusto}" required="true">
-						<f:validator validatorId="produtoCustoValidator"></f:validator>
-
+						<f:convertNumber locale="pt_BR" />
 					</p:inputText>
 
 					<p:outputLabel for="PrecoVenda">Preço de venda:</p:outputLabel>
 					<p:inputText Label="Preço de Venda" id="PrecoVenda"
 						value="#{produtoEdit.produto.precoVenda}" required="true">
-						<f:validator validatorId="produtoCustoValidator">
-						</f:validator>
+						<f:convertNumber locale="pt_BR" />
 					</p:inputText>
 
 					<p:outputLabel>Ativo:</p:outputLabel>
 					<p:selectBooleanCheckbox label="Ativo"
 						value="#{produtoEdit.produto.ativo}" />
-
 					<p:separator></p:separator>
 					<p:commandButton value="Alterar" id="submit"
 						action="#{produtoEdit.updateProduto}"></p:commandButton>

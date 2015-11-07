@@ -3,15 +3,14 @@ package com.projetodaca.core;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
-
 import com.projetodaca.entities.Categoria;
+import com.projetodaca.entities.Contato;
 import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Produto;
 import com.projetodaca.services.CategoriaService;
+import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
 import com.projetodaca.services.ProdutoService;
-import com.projetodaca.services.Util;
 
 public class Fachada implements Serializable{
 
@@ -152,5 +151,27 @@ public class Fachada implements Serializable{
         return fornecedor;
     }
  
+    /**Persiste contato no banco de dados
+     * 
+     * @param contato 
+     */
+    public Contato save(Contato contato) throws Exception{
+    	ContatoService service = new ContatoService();
+    	contato = service.save(contato);
+    	service=null;
+    	return contato;
+    }
 
+    public void update(Contato contato) throws Exception{
+    	ContatoService service = new ContatoService();
+    	service.update(contato);
+    	service=null;
+    }
+    
+    public void delete(Contato contato) throws Exception{
+    	ContatoService service = new ContatoService();
+    	service.delete(contato);
+    	service=null;
+    }
+    
 }
