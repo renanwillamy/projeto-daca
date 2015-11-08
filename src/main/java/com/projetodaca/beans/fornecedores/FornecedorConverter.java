@@ -1,4 +1,4 @@
-package com.projetodaca.beans.produtos;
+package com.projetodaca.beans.fornecedores;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -9,7 +9,7 @@ import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Fornecedor;
 
 
-@FacesConverter(value = "fornecedorConverter", forClass = Fornecedor.class)
+@FacesConverter(value = "fornecedorConverter")
 public class FornecedorConverter implements Converter {
 	private Fachada fachada;
 

@@ -44,7 +44,7 @@ public class FornecedorDao implements IDAO<Fornecedor> {
 		}
 	}
 
-	public List<Fornecedor> list(String where) throws Exception {
+	private List<Fornecedor> list(String where) throws Exception {
 		List<Fornecedor> list = new ArrayList<Fornecedor>();
 		try {
 			beginTransaction();
@@ -61,6 +61,13 @@ public class FornecedorDao implements IDAO<Fornecedor> {
 		}
 		return list;
 	}
+	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {
+		String where = "WHERE e.nomeFantasia like '%"+ nomeFantasia +"%'";
+		
+		return list(where);
+		
+	}
+	
 
 	public List<Fornecedor> list() throws Exception {
 		List<Fornecedor> list = new ArrayList<Fornecedor>();

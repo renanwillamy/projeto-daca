@@ -12,7 +12,7 @@ import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
 import com.projetodaca.services.ProdutoService;
 
-public class Fachada implements Serializable{
+public class Fachada implements Serializable {
 
 	/**
 	 * Persiste produto no banco de dados
@@ -96,82 +96,82 @@ public class Fachada implements Serializable{
 		service = null;
 		return listCategoria;
 	}
-	
-	public Categoria getCategoriaById(int id) throws Exception{
+
+	public Categoria getCategoriaById(int id) throws Exception {
 		CategoriaService service = new CategoriaService();
 		Categoria cat = service.getById(id);
 		service = null;
-		return cat;		
+		return cat;
 	}
-	
-	 /**Persiste fornecedor no banco de dados
-     * 
-     * @param fornecedor 
-     */
-    public Fornecedor saveFornecedor(Fornecedor fornecedor) throws Exception{
-    	FornecedorService service  = new FornecedorService();
-    	fornecedor = service.save(fornecedor);
-    	service = null;
-		return fornecedor;
-    }
-    
-    public void updateFornecedor(Fornecedor fornecedor) throws Exception{
-    	FornecedorService service  = new FornecedorService();
-    	service.update(fornecedor);
-    	service= null;
-    }
-    
-    public void deleteFornecedor(Fornecedor fornecedor) throws Exception{
-    	FornecedorService service  = new FornecedorService();
-    	service.delete(fornecedor);
-    	service= null;
-    }
-    
-    public List<Fornecedor> listFornecedor() throws Exception{
-        List<Fornecedor> listFornecedor= null;
-        FornecedorService service  = new FornecedorService();
-    	listFornecedor = service.list();
-    	service= null;
-    	return listFornecedor;
-    }
-    
-    public List<Fornecedor> listFornecedor(String where) throws Exception{
-    	 List<Fornecedor> listFornecedor= null;
-         FornecedorService service  = new FornecedorService();
-     	listFornecedor = service.list(where);
-     	service= null;
-     	return listFornecedor;
-    }
-    
-    public Fornecedor getFornecedorById(int id) throws Exception{
-        Fornecedor fornecedor = null;
-        FornecedorService service  = new FornecedorService();
-        fornecedor = service.getById(id);
-        service = null;
-        return fornecedor;
-    }
- 
-    /**Persiste contato no banco de dados
-     * 
-     * @param contato 
-     */
-    public Contato save(Contato contato) throws Exception{
-    	ContatoService service = new ContatoService();
-    	contato = service.save(contato);
-    	service=null;
-    	return contato;
-    }
 
-    public void update(Contato contato) throws Exception{
-    	ContatoService service = new ContatoService();
-    	service.update(contato);
-    	service=null;
-    }
-    
-    public void delete(Contato contato) throws Exception{
-    	ContatoService service = new ContatoService();
-    	service.delete(contato);
-    	service=null;
-    }
-    
+	/**
+	 * Persiste fornecedor no banco de dados
+	 * 
+	 * @param fornecedor
+	 */
+	public Fornecedor saveFornecedor(Fornecedor fornecedor) throws Exception {
+		FornecedorService service = new FornecedorService();
+		fornecedor = service.save(fornecedor);
+		service = null;
+		return fornecedor;
+	}
+
+	public void updateFornecedor(Fornecedor fornecedor) throws Exception {
+		FornecedorService service = new FornecedorService();
+		service.update(fornecedor);
+		service = null;
+	}
+
+	public void deleteFornecedor(Fornecedor fornecedor) throws Exception {
+		FornecedorService service = new FornecedorService();
+		service.delete(fornecedor);
+		service = null;
+	}
+
+	public List<Fornecedor> listFornecedor() throws Exception {
+		List<Fornecedor> listFornecedor = null;
+		FornecedorService service = new FornecedorService();
+		listFornecedor = service.list();
+		service = null;
+		return listFornecedor;
+	}
+
+	public Fornecedor getFornecedorById(int id) throws Exception {
+		Fornecedor fornecedor = null;
+		FornecedorService service = new FornecedorService();
+		fornecedor = service.getById(id);
+		service = null;
+		return fornecedor;
+	}
+
+	/**
+	 * Persiste contato no banco de dados
+	 * 
+	 * @param contato
+	 */
+	public Contato save(Contato contato) throws Exception {
+		ContatoService service = new ContatoService();
+		contato = service.save(contato);
+		service = null;
+		return contato;
+	}
+
+	public void update(Contato contato) throws Exception {
+		ContatoService service = new ContatoService();
+		service.update(contato);
+		service = null;
+	}
+
+	public void delete(Contato contato) throws Exception {
+		ContatoService service = new ContatoService();
+		service.delete(contato);
+		service = null;
+	}
+
+	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {
+		FornecedorService service = new FornecedorService();
+		List<Fornecedor> lista = service.listaFornecedorPorNomeFantasia(nomeFantasia);
+		return lista;
+	}
+
 }

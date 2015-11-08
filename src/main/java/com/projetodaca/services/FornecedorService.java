@@ -46,9 +46,9 @@ public class FornecedorService {
         return listFornecedor;
     }
     
-    public List<Fornecedor> list(String where) throws Exception{
+    public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception{
         List<Fornecedor> listFonecedor= null;
-          listFonecedor = dao.list(where);
+          listFonecedor = dao.listaFornecedorPorNomeFantasia(nomeFantasia);
         return listFonecedor;
     }
     

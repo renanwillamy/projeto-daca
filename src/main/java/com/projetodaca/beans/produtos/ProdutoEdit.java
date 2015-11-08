@@ -40,12 +40,7 @@ public class ProdutoEdit extends AbstractManageBean {
 		}
 	}
 	
-	public void filtrar(){
-		
-		
-		
-	}
-		
+	
 
 	public Produto getProduto() {
 		return produto;

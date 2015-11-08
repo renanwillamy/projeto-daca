@@ -58,13 +58,13 @@ public class Fornecedor implements Serializable {
     
     private String observacoes;
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL,fetch=FetchType.EAGER)
     private Endereco endereco;
     
     @OneToMany(mappedBy = "fornecedor")
     private List<Produto> produtos;
     
-    @OneToMany(mappedBy = "fornecedor",fetch = FetchType.EAGER,cascade =CascadeType.PERSIST)
+    @OneToMany(mappedBy = "fornecedor",fetch = FetchType.EAGER,cascade ={CascadeType.PERSIST,CascadeType.MERGE})
     private List<Contato> contatos; 
 
     public int getId() {
