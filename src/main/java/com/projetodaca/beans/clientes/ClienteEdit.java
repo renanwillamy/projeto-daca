@@ -15,73 +15,64 @@ import com.projetodaca.entities.Cliente;
 
 @ViewScoped
 @ManagedBean
-public class ClienteInsert extends AbstractManageBean implements Serializable {
-
-	
+public class ClienteEdit extends AbstractManageBean implements Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 158806803289219795L;
-	private Fachada fachada;		
+	private static final long serialVersionUID = -3854803910581636710L;
+	private Fachada fachada;
 	private Cliente cliente;
 	private Endereco endereco;
 	private Contato contato;
 
-
 	@PostConstruct
 	public void start() {
 		fachada = new Fachada();
-		cliente = new Cliente();
-		contato = new Contato();
+		if (cliente == null)
+			cliente = new Cliente();
 		endereco = new Endereco();
-		
+
 	}
 
-	public String insertCliente() {
+	public String updateCliente() {
+		try {				
 
-		try {					
-					
-			contato.setCliente(cliente);				
-			ArrayList<Contato> contatos = new ArrayList<>();
-			contatos.add(contato);			
-			cliente.setContatos(contatos);		
-			cliente.setEndereco(endereco);
-			fachada.saveCliente(cliente);
-			showFlashMessageInfo("Cliente Salvo!");
+			fachada.updateCliente(cliente);
+			showFlashMessageInfo("Cliente Alterado!");
 		} catch (Exception e) {
-			System.out.println("Erro");
+			showFlashMessageError("Ocorreu um erro ao tentar alterar o Cliente!");
 			e.printStackTrace();
-			showFlashMessageError("Erro ao tentar salvar cliente!");
-			return "insert_cliente";
+			return "edit_Clientes";
 		}
-	
-		return "/index?faces-redirect=true";
+		return "lista_clientes?faces-redirect=true";
 	}
 
 	public Cliente getCliente() {
 		return cliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setCliente(Cliente Cliente) {
+		this.cliente = Cliente;
 	}
 
 	public Endereco getEndereco() {
+		endereco = cliente.getEndereco();
 		return endereco;
 	}
 
 	public void setEndereco(Endereco endereco) {
+		System.out.println(endereco.toString());
 		this.endereco = endereco;
 	}
 
 	public Contato getContato() {
+		//vai existir apenas um contato que é obrigatório
+		contato = cliente.getContatos().get(0);
 		return contato;
 	}
 
 	public void setContato(Contato contato) {
 		this.contato = contato;
 	}
-
-	
 
 }

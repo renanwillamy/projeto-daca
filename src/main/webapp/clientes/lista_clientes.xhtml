@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template_home.xhtml">
+
+	<ui:define name="title">Consulta de clientes</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+				closable="true" />
+			<p:panelGrid columns="3" style=" margin : 0 auto;margin-top : 30px;">
+				<p:outputLabel>Filtrar:</p:outputLabel>
+				<p:inputText value="#{clienteLista.filtro}" size="35"
+					placeholder="Digite o nome do cliente"></p:inputText>
+				<p:commandButton icon="ui-icon-search" update=":tabelaClientes"
+					action="#{clienteLista.filtrar}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+		<p:dataTable id="tabelaClientes" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15"
+			style="padding-bottom:30px; padding-top:10px;" var="cli"
+			value="#{clienteLista.clientes}">
+			<p:column headerText="Id" styleClass="centralizarTexto">
+				<h:outputText value="#{cli.id}" />
+			</p:column>
+
+			<p:column headerText="Nome" styleClass="centralizarTexto">
+				<h:outputText value="#{cli.nome}" />
+			</p:column>
+
+			<p:column headerText="RG" styleClass="centralizarTexto">
+				<h:outputText value="#{cli.RG}" />
+			</p:column>
+
+			<p:column headerText="Cpf" styleClass="centralizarTexto">
+				<h:outputText value="#{cli.cpf}" />
+			</p:column>
+
+			<p:column headerText="Cidade" styleClass="centralizarTexto">
+				<h:outputText value="#{cli.endereco.cidade}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
+			</p:column>
+
+			<div>
+				<p:column headerText="Editar" styleClass="centralizarTexto">
+					<p:link id="linkEditProd" outcome="edit_clientes.xhtml"
+						value="Editar">
+						<f:param name="id" value="#{cli.id}"></f:param>
+					</p:link>
+				</p:column>
+			</div>
+			<p:column headerText="Excluir" styleClass="centralizarTexto">
+
+				<h:form>
+
+					<p:commandLink value="Excluir"
+						actionListener="#{clienteLista.excluir(cli)}"
+						update=":tabelaClientes">
+						<p:confirm header="Atenção"
+							message="Tem certeza que deseja excluir #{cli.nome}?"
+							icon="ui-icon-alert" />
+					</p:commandLink>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Sim" type="button"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Não" type="button"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</h:form>
+
+
+			</p:column>
+		</p:dataTable>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>

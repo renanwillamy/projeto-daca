@@ -45,7 +45,7 @@ public class ClienteService {
         return listCliente;
     }
     
-    public List<Cliente> list(String where) throws Exception{
+    private List<Cliente> list(String where) throws Exception{
         List<Cliente> listCliente= null;
           listCliente = dao.list(where);
         return listCliente;
@@ -56,5 +56,9 @@ public class ClienteService {
         cliente =  dao.getById(id);
         return cliente;
     }
+
+	public List<Cliente> listaClientePorNome(String nome) throws Exception {		
+		return dao.listaClientePorNome(nome);
+	}
     
 }

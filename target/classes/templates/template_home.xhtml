@@ -26,7 +26,11 @@
 				<p:menubar style="width : 100%;">
 					<p:submenu label="Cadastros" icon="ui-icon-document">
 						<p:menuitem icon="ui-icon-person" value=" Usuários" url="#" />
-						<p:menuitem icon="ui-icon-person" value=" Clientes" url="#" />						
+						
+						<p:submenu icon="ui-icon-person" label=" Clientes">
+							<p:menuitem value="Inserir" url="/clientes/insert_cliente.xhtml" />
+							<p:menuitem value="Consultar" url="/clientes/lista_clientes.xhtml" />
+						</p:submenu>
 						
 						<p:submenu icon="ui-icon-suitcase" label=" Fornecedores">
 							<p:menuitem value="Inserir" url="/fornecedores/insert_fornecedor.xhtml" />

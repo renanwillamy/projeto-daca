@@ -152,4 +152,10 @@ public class ClienteDao implements IDAO<Cliente> {
 
     }
 
+
+	public List<Cliente> listaClientePorNome(String nome) throws Exception {
+		String where = "where e.nome like '%"+nome+"%'";
+		return list(where);
+	}
+
 }
