@@ -62,4 +62,10 @@ public class UsuarioService {
         return usuario;
     }
     
+    public Usuario autenticaUsuario(String login,String senha) throws Exception {
+    	Usuario usuario = null;
+        usuario =  dao.autenticaUsuario(login, senha);
+        return usuario;
+    }
+    
 }

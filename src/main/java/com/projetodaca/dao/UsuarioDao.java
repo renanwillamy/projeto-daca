@@ -97,6 +97,19 @@ public class UsuarioDao implements IDAO<Usuario> {
 
         return usuario;
     }
+    
+    public Usuario autenticaUsuario(String login,String senha) throws Exception {
+       Usuario usuario = null;
+                 
+            String where = "where e.login = '"+login+"' AND e.senha = '"+senha+"'";
+            ArrayList<Usuario> lista = (ArrayList<Usuario>) list(where);
+            if(lista!=null && !lista.isEmpty()){
+            	usuario = lista.get(0);
+            }         
+       
+
+        return usuario;
+    }
 
     
     public void update(Usuario usuario) throws Exception {

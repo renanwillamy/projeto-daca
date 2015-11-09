@@ -177,89 +177,95 @@ public class Fachada implements Serializable {
 		List<Fornecedor> lista = service.listaFornecedorPorNomeFantasia(nomeFantasia);
 		return lista;
 	}
-	
-	 /**Persiste cliente no banco de dados
-     * 
-     * @param cliente 
-     */
-    public Cliente saveCliente(Cliente cliente) throws Exception{
-    	ClienteService service = new ClienteService();
-    	cliente = service.save(cliente);
-    	service = null;
-    	return cliente;
-    }
-    
-    public void updateCliente(Cliente cliente) throws Exception{
-    	ClienteService service = new ClienteService();
-    	service.update(cliente);
-    	service = null;
-    }
-    
-    public void deleteCliente(Cliente cliente) throws Exception{
-    	ClienteService service = new ClienteService();
-    	service.delete(cliente);
-    	service = null;
-    }
-    
-    public List<Cliente> listCliente() throws Exception{
-    	ClienteService service = new ClienteService();
-    	List<Cliente> lista = service.list();
-    	service = null;
-    	return lista;
-    }
-    
-    public List<Cliente> listaClientePorNome(String nome) throws Exception{
-    	ClienteService service = new ClienteService();
-    	List<Cliente> lista = service.listaClientePorNome(nome);
-    	service = null;
-    	return lista;
-    }
-    
-    public Cliente getClienteById(int id) throws Exception{
-    	ClienteService service = new ClienteService();
-    	Cliente cliente = service.getById(id);
-    	service = null;
-    	return cliente;
-    }
+
+	/**
+	 * Persiste cliente no banco de dados
+	 * 
+	 * @param cliente
+	 */
+	public Cliente saveCliente(Cliente cliente) throws Exception {
+		ClienteService service = new ClienteService();
+		cliente = service.save(cliente);
+		service = null;
+		return cliente;
+	}
+
+	public void updateCliente(Cliente cliente) throws Exception {
+		ClienteService service = new ClienteService();
+		service.update(cliente);
+		service = null;
+	}
+
+	public void deleteCliente(Cliente cliente) throws Exception {
+		ClienteService service = new ClienteService();
+		service.delete(cliente);
+		service = null;
+	}
+
+	public List<Cliente> listCliente() throws Exception {
+		ClienteService service = new ClienteService();
+		List<Cliente> lista = service.list();
+		service = null;
+		return lista;
+	}
+
+	public List<Cliente> listaClientePorNome(String nome) throws Exception {
+		ClienteService service = new ClienteService();
+		List<Cliente> lista = service.listaClientePorNome(nome);
+		service = null;
+		return lista;
+	}
+
+	public Cliente getClienteById(int id) throws Exception {
+		ClienteService service = new ClienteService();
+		Cliente cliente = service.getById(id);
+		service = null;
+		return cliente;
+	}
 
 	public Usuario saveUsuario(Usuario usuario) throws Exception {
 		UsuarioService service = new UsuarioService();
 		usuario = service.save(usuario);
 		service = null;
-		return usuario;		
-	}
-
-	  public void updateUsuario(Usuario usuario) throws Exception{
-		  UsuarioService service = new UsuarioService();
-			service.update(usuario);
-			service = null;
-	  }
-
-	  public void deleteUsuario(Usuario usuario) throws Exception{
-		  UsuarioService service = new UsuarioService();
-			service.delete(usuario);
-			service = null;
-	  }
-	  
-	  public List<Usuario> listUsuario() throws Exception{
-		  UsuarioService service = new UsuarioService();
-		  List<Usuario> lista = service.list();
-		  service = null;
-		  return lista;
-	  }
-	  
-	  public List<Usuario>listaUsuarioPorNome(String nome) throws Exception{
-		  UsuarioService service = new UsuarioService();
-		  List<Usuario> lista = service.listaUsuarioPorNome(nome);
-		  service = null;
-		  return lista;
-	  }
-
-	public Usuario getUsuarioById(int id) throws Exception {
-		  UsuarioService service = new UsuarioService();
-		  Usuario usuario = service.getById(id);
 		return usuario;
 	}
-	  
-	  
+
+	public void updateUsuario(Usuario usuario) throws Exception {
+		UsuarioService service = new UsuarioService();
+		service.update(usuario);
+		service = null;
+	}
+
+	public void deleteUsuario(Usuario usuario) throws Exception {
+		UsuarioService service = new UsuarioService();
+		service.delete(usuario);
+		service = null;
+	}
+
+	public List<Usuario> listUsuario() throws Exception {
+		UsuarioService service = new UsuarioService();
+		List<Usuario> lista = service.list();
+		service = null;
+		return lista;
+	}
+
+	public List<Usuario> listaUsuarioPorNome(String nome) throws Exception {
+		UsuarioService service = new UsuarioService();
+		List<Usuario> lista = service.listaUsuarioPorNome(nome);
+		service = null;
+		return lista;
+	}
+
+	public Usuario getUsuarioById(int id) throws Exception {
+		UsuarioService service = new UsuarioService();
+		Usuario usuario = service.getById(id);
+		return usuario;
+	}
+
+	public Usuario autenticaUsuario(String login, String senha) throws Exception {
+		UsuarioService service = new UsuarioService();
+		Usuario usuario = service.autenticaUsuario(login, senha);
+		return usuario;
+	}
+
 }
