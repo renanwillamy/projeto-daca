@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template_home.xhtml">
+
+	<ui:define name="title">Cadastro de usuarios</ui:define>
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Cadastro de usuarios" style="margin-top:20px;">
+
+			<h:form>
+				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+					closable="true"></p:messages>
+				<p:panelGrid columns="2">
+					<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
+					<p:inputText label="Nome" id="nome" required="true"
+						value="#{usuarioInsert.usuario.nome}"></p:inputText>
+
+					<p:outputLabel for="login">Login:</p:outputLabel>
+					<p:inputText id="login" label="Login" required="true"
+						value="#{usuarioInsert.usuario.login}"></p:inputText>
+
+
+					<p:outputLabel for="senha1">Senha:</p:outputLabel>
+					<p:password id="senha1" value="#{usuarioInsert.usuario.senha}"
+						feedback="false" match="senha2" validatorMessage="As senhas não coincidem" label="Senha" required="true" />
+
+					<p:outputLabel for="senha2">Confirme a Senha:</p:outputLabel>
+					<p:password id="senha2" value="#{usuarioInsert.usuario.senha}"
+						feedback="false" label="Confirme a Senha" required="true" />
+
+
+					<p:outputLabel></p:outputLabel>
+					<p:commandButton value="Salvar" id="submit"
+						action="#{usuarioInsert.insertUsuario}"></p:commandButton>
+
+				</p:panelGrid>
+			</h:form>
+		</p:fieldset>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>

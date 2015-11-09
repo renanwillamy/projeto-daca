@@ -12,7 +12,8 @@
 
 	<ui:define name="content">
 		<h:form>
-			<p:messages id="messageInsert" showDetail="true" autoUpdate="true" closable="true" />
+			<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+				closable="true" />
 			<p:panelGrid columns="3" style=" margin : 0 auto;margin-top : 30px;">
 				<p:outputLabel>Filtrar:</p:outputLabel>
 				<p:inputText value="#{fornecedorLista.filtro}" size="35"
@@ -21,7 +22,9 @@
 					action="#{fornecedorLista.filtrar}"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
-		<p:dataTable id="tabelaFornecedores"
+		<p:dataTable id="tabelaFornecedores" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15"
 			style="padding-bottom:30px; padding-top:10px;" var="forn"
 			value="#{fornecedorLista.fornecedores}">
 			<p:column headerText="Id" styleClass="centralizarTexto">

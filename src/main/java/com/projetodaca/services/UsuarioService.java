@@ -45,10 +45,15 @@ public class UsuarioService {
         return listUsuario;
     }
     
-    public List<Usuario> list(String where) throws Exception{
+    private List<Usuario> list(String where) throws Exception{
         List<Usuario> listUsuario= null;
           listUsuario = dao.list(where);
         return listUsuario;
+    }
+    
+    public List<Usuario>listaUsuarioPorNome(String nome) throws Exception{
+    	String where = "where e.nome like '%"+nome+"%'";
+    	return list(where);
     }
     
     public Usuario getById(int id) throws Exception{

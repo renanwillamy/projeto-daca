@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template_home.xhtml">
+
+	<f:metadata>
+		<f:viewParam name="id" value="#{usuarioEdit.usuario}"
+			converterMessage="Bad request. Unknown usuario"
+			>
+			<f:converter converterId="usuarioConverter" />
+		</f:viewParam>
+	</f:metadata>
+
+
+	<ui:define name="title">Alterar usuario</ui:define>
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Alteração de usuarios" style="margin-top:20px;">
+			<h:form>
+				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+					closable="true"></p:messages>
+				<p:panelGrid columns="2">
+
+					<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
+					<p:inputText label="Nome" id="nome" required="true"
+						value="#{usuarioEdit.usuario.nome}"></p:inputText>
+
+					<p:outputLabel for="login">Login:</p:outputLabel>
+					<p:inputText id="login" label="Login" required="true"
+						value="#{usuarioEdit.usuario.login}"></p:inputText>
+
+
+					<p:outputLabel for="senha1">Senha:</p:outputLabel>
+					<p:password id="senha1" value="#{usuarioEdit.usuario.senha}"
+						feedback="false" match="senha2"
+						validatorMessage="As senhas não coincidem" label="Senha"
+						required="true" redisplay = "true" />
+
+					<p:outputLabel for="senha2">Confirme a Senha:</p:outputLabel>
+					<p:password id="senha2" value="#{usuarioEdit.usuario.senha}"
+						feedback="false" label="Confirme a Senha" required="true" redisplay = "true" />
+
+					<p:separator></p:separator>
+					<p:commandButton value="Alterar" id="submit"
+						action="#{usuarioEdit.updateUsuario}"></p:commandButton>
+
+				</p:panelGrid>
+			</h:form>
+		</p:fieldset>
+	</ui:define>
+
+
+</ui:composition>
+
+</html>

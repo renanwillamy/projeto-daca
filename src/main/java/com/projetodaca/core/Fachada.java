@@ -8,11 +8,13 @@ import com.projetodaca.entities.Cliente;
 import com.projetodaca.entities.Contato;
 import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Produto;
+import com.projetodaca.entities.Usuario;
 import com.projetodaca.services.CategoriaService;
 import com.projetodaca.services.ClienteService;
 import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
 import com.projetodaca.services.ProdutoService;
+import com.projetodaca.services.UsuarioService;
 
 public class Fachada implements Serializable {
 
@@ -220,5 +222,44 @@ public class Fachada implements Serializable {
     	return cliente;
     }
 
+	public Usuario saveUsuario(Usuario usuario) throws Exception {
+		UsuarioService service = new UsuarioService();
+		usuario = service.save(usuario);
+		service = null;
+		return usuario;		
+	}
 
+	  public void updateUsuario(Usuario usuario) throws Exception{
+		  UsuarioService service = new UsuarioService();
+			service.update(usuario);
+			service = null;
+	  }
+
+	  public void deleteUsuario(Usuario usuario) throws Exception{
+		  UsuarioService service = new UsuarioService();
+			service.delete(usuario);
+			service = null;
+	  }
+	  
+	  public List<Usuario> listUsuario() throws Exception{
+		  UsuarioService service = new UsuarioService();
+		  List<Usuario> lista = service.list();
+		  service = null;
+		  return lista;
+	  }
+	  
+	  public List<Usuario>listaUsuarioPorNome(String nome) throws Exception{
+		  UsuarioService service = new UsuarioService();
+		  List<Usuario> lista = service.listaUsuarioPorNome(nome);
+		  service = null;
+		  return lista;
+	  }
+
+	public Usuario getUsuarioById(int id) throws Exception {
+		  UsuarioService service = new UsuarioService();
+		  Usuario usuario = service.getById(id);
+		return usuario;
+	}
+	  
+	  
 }

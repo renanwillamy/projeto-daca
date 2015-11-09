@@ -8,64 +8,40 @@
 
 <ui:composition template="/templates/template_home.xhtml">
 
-	<ui:define name="title">Consulta de produtos</ui:define>
+	<ui:define name="title">Consulta de usuarios</ui:define>
 
 	<ui:define name="content">
 		<h:form>
 			<p:panelGrid columns="3" style=" margin : 0 auto; margin-top : 30px;">
 				<p:outputLabel>Filtrar:</p:outputLabel>
-				<p:inputText value="#{produtoLista.filtro}"
-					placeholder="Digite o nome do produto"></p:inputText>
-				<p:commandButton icon="ui-icon-search" update=":tabelaProdutos"
-					action="#{produtoLista.filtrar}"></p:commandButton>
+				<p:inputText value="#{usuarioLista.filtro}"
+					placeholder="Digite o nome do usuario"></p:inputText>
+				<p:commandButton icon="ui-icon-search" update=":tabelaUsuarios"
+					action="#{usuarioLista.filtrar}"></p:commandButton>
 			</p:panelGrid>
 		</h:form>
-		<p:dataTable id="tabelaProdutos" rows="10" paginator="true"
+		<p:dataTable id="tabelaUsuarios" rows="10" paginator="true"
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5,10,15" 
-			style="padding-bottom:30px; padding-top:10px;" var="prod"
-			value="#{produtoLista.produtos}">
+			style="padding-bottom:30px; padding-top:10px;" var="usu"
+			value="#{usuarioLista.usuarios}">
 			<p:column headerText="Id" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.id}" />
+				<h:outputText value="#{usu.id}" />
 			</p:column>
 
 			<p:column headerText="Descrição" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.nome}" />
+				<h:outputText value="#{usu.nome}" />
 			</p:column>
 
 			<p:column headerText="Unidade" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.und}" />
+				<h:outputText value="#{usu.login}" />
 			</p:column>
 
-			<p:column headerText="Preço de custo" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.precoCusto}">
-					<f:convertNumber type="currency" />
-				</h:outputText>
-			</p:column>
-			<p:column headerText="Preço de venda" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.precoVenda}">
-					<f:convertNumber type="currency" />
-				</h:outputText>
-			</p:column>
-
-			<p:column headerText="Ativo" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.ativo}"
-					converter="produtoAtivoConverter" />
-			</p:column>
-
-			<p:column headerText="Fornecedor" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.fornecedor.nomeFantasia}">
-				</h:outputText>
-			</p:column>
-
-			<p:column headerText="Categoria" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.categoria.nome}">
-				</h:outputText>
-			</p:column>
+			
 			<div>
 				<p:column headerText="Editar" styleClass="centralizarTexto">
-					<p:link id="linkEditProd" outcome="edit_prod.xhtml" value="Editar">
-						<f:param name="id" value="#{prod.id}"></f:param>
+					<p:link id="linkEditProd" outcome="edit_usu.xhtml" value="Editar">
+						<f:param name="id" value="#{usu.id}"></f:param>
 					</p:link>
 				</p:column>
 			</div>
@@ -74,10 +50,10 @@
 				<h:form>
 
 					<p:commandLink value="Excluir"
-						actionListener="#{produtoLista.excluir(prod)}"
-						update=":tabelaProdutos">
+						actionListener="#{usuarioLista.excluir(usu)}"
+						update=":tabelaUsuarios">
 						<p:confirm header="Atenção"
-							message="Tem certeza que deseja excluir #{prod.nome}?"
+							message="Tem certeza que deseja excluir #{usu.nome}?"
 							icon="ui-icon-alert" />
 					</p:commandLink>
 
