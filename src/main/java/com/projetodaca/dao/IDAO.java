@@ -24,10 +24,6 @@ public interface IDAO<T> {
 
     public void delete(T object) throws Exception;
 
-    public void beginTransaction();
-
-    public void commitTransaction();
-
-    public void rollBack();    
+   
 
 }

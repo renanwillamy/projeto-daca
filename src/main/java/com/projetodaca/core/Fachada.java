@@ -3,6 +3,8 @@ package com.projetodaca.core;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Cliente;
 import com.projetodaca.entities.Contato;
@@ -17,6 +19,9 @@ import com.projetodaca.services.ProdutoService;
 import com.projetodaca.services.UsuarioService;
 
 public class Fachada implements Serializable {
+
+	@Inject
+	private UsuarioService usuService;
 
 	/**
 	 * Persiste produto no banco de dados
@@ -224,47 +229,43 @@ public class Fachada implements Serializable {
 	}
 
 	public Usuario saveUsuario(Usuario usuario) throws Exception {
-		UsuarioService service = new UsuarioService();
-		usuario = service.save(usuario);
-		service = null;
+		usuario = usuService.save(usuario);
 		return usuario;
 	}
 
 	public void updateUsuario(Usuario usuario) throws Exception {
-		UsuarioService service = new UsuarioService();
-		service.update(usuario);
-		service = null;
+		usuService.update(usuario);
+
 	}
 
 	public void deleteUsuario(Usuario usuario) throws Exception {
-		UsuarioService service = new UsuarioService();
-		service.delete(usuario);
-		service = null;
+		usuService.delete(usuario);
+
 	}
 
 	public List<Usuario> listUsuario() throws Exception {
-		UsuarioService service = new UsuarioService();
-		List<Usuario> lista = service.list();
-		service = null;
+
+		List<Usuario> lista = usuService.list();
+
 		return lista;
 	}
 
 	public List<Usuario> listaUsuarioPorNome(String nome) throws Exception {
-		UsuarioService service = new UsuarioService();
-		List<Usuario> lista = service.listaUsuarioPorNome(nome);
-		service = null;
+
+		List<Usuario> lista = usuService.listaUsuarioPorNome(nome);
+
 		return lista;
 	}
 
 	public Usuario getUsuarioById(int id) throws Exception {
-		UsuarioService service = new UsuarioService();
-		Usuario usuario = service.getById(id);
+
+		Usuario usuario = usuService.getById(id);
 		return usuario;
 	}
 
 	public Usuario autenticaUsuario(String login, String senha) throws Exception {
-		UsuarioService service = new UsuarioService();
-		Usuario usuario = service.autenticaUsuario(login, senha);
+
+		Usuario usuario = usuService.autenticaUsuario(login, senha);
 		return usuario;
 	}
 

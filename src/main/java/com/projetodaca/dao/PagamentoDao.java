@@ -28,11 +28,10 @@ import com.projetodaca.entities.TipoPagto;
 public class PagamentoDao implements IDAO<Pagamento> {
 
     private EntityManager manager;
-    private Conexao con;
+   
 
     public PagamentoDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+       
     }
 
     
@@ -344,7 +343,7 @@ public class PagamentoDao implements IDAO<Pagamento> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+        
         manager.getTransaction().begin();
     }
 

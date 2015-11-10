@@ -20,11 +20,10 @@ import com.projetodaca.entities.Empresa;
 public class EmpresaDao implements IDAO<Empresa> {
 
     private EntityManager manager;
-    private Conexao con;
+    
 
     public EmpresaDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+       
     }
 
     
@@ -131,7 +130,7 @@ public class EmpresaDao implements IDAO<Empresa> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+     
         manager.getTransaction().begin();
     }
 

@@ -21,11 +21,10 @@ import com.projetodaca.entities.PontoDeRecebimento;
 public class PontoDeRecebimentoDao implements IDAO<PontoDeRecebimento> {
 
     private EntityManager manager;
-    private Conexao con;
+   
 
     public PontoDeRecebimentoDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+       
     }
 
     
@@ -136,8 +135,7 @@ public class PontoDeRecebimentoDao implements IDAO<PontoDeRecebimento> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
-        manager.getTransaction().begin();
+       
     }
 
     

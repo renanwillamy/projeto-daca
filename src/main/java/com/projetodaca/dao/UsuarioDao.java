@@ -17,30 +17,22 @@ import com.projetodaca.entities.Usuario;
  *
  * @author renan
  */
-public class UsuarioDao implements IDAO<Usuario> {
-
-    private EntityManager manager;
-    private Conexao con;
+public class UsuarioDao extends AbstractDao<Usuario> {
 
     public UsuarioDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+      
     }
 
     
     public void insert(Usuario usuario) throws Exception {
         try {
-            beginTransaction();
+           
             manager.persist(usuario);
             manager.refresh(usuario);
-            commitTransaction();
+            
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
     }
 
@@ -48,16 +40,12 @@ public class UsuarioDao implements IDAO<Usuario> {
     public List<Usuario> list() throws Exception {
         List<Usuario> list = new ArrayList<Usuario>();        
         try {
-            beginTransaction();
+           
             list = (List<Usuario>) manager.createQuery("SELECT e FROM Usuario e", Usuario.class).getResultList();
-            commitTransaction();
+            
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
         return list;
     }
@@ -65,16 +53,12 @@ public class UsuarioDao implements IDAO<Usuario> {
     public List<Usuario> list(String where) throws Exception {
         List<Usuario> list = new ArrayList<Usuario>();
         try {
-            beginTransaction();
+           
             list = (List<Usuario>) manager.createQuery("SELECT e FROM Usuario e " + where, Usuario.class).getResultList();
-            commitTransaction();
+            
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
         return list;
     }
@@ -83,16 +67,12 @@ public class UsuarioDao implements IDAO<Usuario> {
     public Usuario getById(int id) throws Exception {
         Usuario usuario = null;
         try {
-            beginTransaction();
+           
             usuario = manager.find(Usuario.class, id);
-            commitTransaction();
+            
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
 
         return usuario;
@@ -114,50 +94,26 @@ public class UsuarioDao implements IDAO<Usuario> {
     
     public void update(Usuario usuario) throws Exception {
         try {
-            beginTransaction();             
+                        
             manager.merge(usuario);
-            commitTransaction();
+            
         } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
             throw new Exception(ex);
-        }finally{
-            manager.close();
         }
     }
 
     
     public void delete(Usuario usuario) throws Exception {
         try {
-            beginTransaction();
+           
             manager.remove(manager.getReference(Usuario.class, usuario.getId()));
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
+        } catch (Exception ex) {  
             throw new Exception(ex);
-        }finally{
-            manager.close();
         }
     }
-
-    
-    public void beginTransaction() {
-        manager = con.getEntityManager();
-        manager.getTransaction().begin();
-    }
-
-    
-    public void commitTransaction() {
-        manager.getTransaction().commit();
-    }
-
-    
-    public void rollBack() {
-        manager.getTransaction().rollback();
-
-    }
+  
+   
 
 }

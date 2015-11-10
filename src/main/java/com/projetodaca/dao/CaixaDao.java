@@ -21,11 +21,10 @@ import com.projetodaca.entities.Caixa;
 public class CaixaDao implements IDAO<Caixa> {
 
     private EntityManager manager;
-    private Conexao con;
+   
 
-    public CaixaDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+    public CaixaDao() {    
+      
     }
 
     
@@ -157,7 +156,7 @@ public class CaixaDao implements IDAO<Caixa> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+   
         manager.getTransaction().begin();
     }
 

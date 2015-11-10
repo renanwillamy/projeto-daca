@@ -19,11 +19,11 @@ import com.projetodaca.entities.ItensDoPedido;
 public class ItensDoPedidoDao implements IDAO<ItensDoPedido> {
 
     private EntityManager manager;
-    private Conexao con;
+   
 
     public ItensDoPedidoDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+       
+        
     }
 
     
@@ -131,8 +131,7 @@ public class ItensDoPedidoDao implements IDAO<ItensDoPedido> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
-        manager.getTransaction().begin();
+       
     }
 
     

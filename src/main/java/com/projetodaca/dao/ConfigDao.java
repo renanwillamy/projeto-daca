@@ -19,10 +19,7 @@ import com.projetodaca.entities.Config;
 public class ConfigDao implements IDAO<Config> {
 
     private EntityManager manager;
-    private Conexao con;
     public ConfigDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
     }
 
     public void insert(Config config) throws Exception {
@@ -112,7 +109,6 @@ public class ConfigDao implements IDAO<Config> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
         manager.getTransaction().begin();
     }
 

@@ -25,11 +25,9 @@ import com.projetodaca.entities.Cliente;
 public class ClienteDao implements IDAO<Cliente> {
 
     private EntityManager manager;
-    private Conexao con;
-
+   
     public ClienteDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+    
     }
 
     
@@ -137,7 +135,7 @@ public class ClienteDao implements IDAO<Cliente> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+       
         manager.getTransaction().begin();
     }
 
