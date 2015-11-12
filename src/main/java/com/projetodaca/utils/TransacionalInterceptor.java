@@ -1,4 +1,4 @@
-package com.projetodaca.core;
+package com.projetodaca.utils;
 
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 /**
- * Outra implementacao XXX:
+ * Outra implementa��o XXX:
  * 
  * <pre>
  * http://github.com/matzew/hbase-jpa-jsf/blob/master/src/main/java/net/wessendorf/cdi/transactional/TransactionalInterceptor.java

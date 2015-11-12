@@ -25,10 +25,11 @@ public class UsuarioDao extends AbstractDao<Usuario> {
 
     
     public void insert(Usuario usuario) throws Exception {
-        try {
+    	EntityManager em = getEntityManager();
+    	try {
            
-            manager.persist(usuario);
-            manager.refresh(usuario);
+            em.persist(usuario);
+            em.refresh(usuario);
             
         } catch (Exception e) {
             
@@ -38,10 +39,11 @@ public class UsuarioDao extends AbstractDao<Usuario> {
 
     
     public List<Usuario> list() throws Exception {
+    	EntityManager em = getEntityManager();
         List<Usuario> list = new ArrayList<Usuario>();        
         try {
            
-            list = (List<Usuario>) manager.createQuery("SELECT e FROM Usuario e", Usuario.class).getResultList();
+            list = (List<Usuario>) em.createQuery("SELECT e FROM Usuario e", Usuario.class).getResultList();
             
         } catch (Exception e) {
             
@@ -51,10 +53,11 @@ public class UsuarioDao extends AbstractDao<Usuario> {
     }
 
     public List<Usuario> list(String where) throws Exception {
+    	EntityManager em = getEntityManager();
         List<Usuario> list = new ArrayList<Usuario>();
         try {
            
-            list = (List<Usuario>) manager.createQuery("SELECT e FROM Usuario e " + where, Usuario.class).getResultList();
+            list = (List<Usuario>) em.createQuery("SELECT e FROM Usuario e " + where, Usuario.class).getResultList();
             
         } catch (Exception e) {
             
@@ -66,9 +69,10 @@ public class UsuarioDao extends AbstractDao<Usuario> {
     
     public Usuario getById(int id) throws Exception {
         Usuario usuario = null;
+        EntityManager em = getEntityManager();
         try {
            
-            usuario = manager.find(Usuario.class, id);
+            usuario = em.find(Usuario.class, id);
             
         } catch (Exception e) {
             
@@ -93,9 +97,10 @@ public class UsuarioDao extends AbstractDao<Usuario> {
 
     
     public void update(Usuario usuario) throws Exception {
+    	EntityManager em = getEntityManager();
         try {
                         
-            manager.merge(usuario);
+            em.merge(usuario);
             
         } catch (Exception ex) {
             
@@ -105,9 +110,10 @@ public class UsuarioDao extends AbstractDao<Usuario> {
 
     
     public void delete(Usuario usuario) throws Exception {
+    	EntityManager em = getEntityManager();
         try {
            
-            manager.remove(manager.getReference(Usuario.class, usuario.getId()));
+            em.remove(em.getReference(Usuario.class, usuario.getId()));
             
         } catch (Exception ex) {  
             throw new Exception(ex);

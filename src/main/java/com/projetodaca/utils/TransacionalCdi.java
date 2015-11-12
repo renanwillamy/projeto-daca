@@ -1,4 +1,4 @@
-package com.projetodaca.core;
+package com.projetodaca.utils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

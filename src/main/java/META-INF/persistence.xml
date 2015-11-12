@@ -2,11 +2,11 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="AutomacaoPU" transaction-type="JTA">
+	<persistence-unit name="AutomacaoPU" transaction-type="RESOURCE_LOCAL">
 	
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
-	<jta-data-source>jdbc/AutomacaoPU</jta-data-source>
+	<non-jta-data-source>jdbc/AutomacaoPU</non-jta-data-source>
 	
 		
 		<class>com.projetodaca.entities.Produto</class>
@@ -36,10 +36,7 @@
 			<property name="javax.persistence.jdbc.user" value="renan" /> -->
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.transaction.jta.platform"
-				value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform" />
-			<property name="hibernate.classloading.use_current_tccl_as_parent"
-				value="false" />
+		
 		</properties>
 
 

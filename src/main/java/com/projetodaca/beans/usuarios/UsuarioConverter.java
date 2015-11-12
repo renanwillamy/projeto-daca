@@ -4,6 +4,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Usuario;
@@ -11,10 +12,11 @@ import com.projetodaca.entities.Usuario;
 
 @FacesConverter(value = "usuarioConverter")
 public class UsuarioConverter implements Converter {
+	@Inject
 	private Fachada fachada;
 
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
-		fachada = new Fachada();
+		
 		
 		if (value == null || (value.trim().length() == 0)) {
 			return null;

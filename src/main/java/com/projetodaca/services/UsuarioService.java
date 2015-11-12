@@ -9,9 +9,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.projetodaca.core.TransacionalCdi;
+
 import com.projetodaca.dao.UsuarioDao;
 import com.projetodaca.entities.Usuario;
+import com.projetodaca.utils.TransacionalCdi;
 
 /**
  *
@@ -34,21 +35,21 @@ public class UsuarioService {
             dao.insert(usuario);
             return usuario;
     }
-    
+    @TransacionalCdi
     public void update(Usuario usuario) throws Exception{
             dao.update(usuario);
     }
-    
+    @TransacionalCdi
     public void delete(Usuario usuario) throws Exception{
             dao.delete(usuario);
     }
-    
+    @TransacionalCdi
     public List<Usuario> list() throws Exception{
         List<Usuario> listUsuario= null;
           listUsuario = dao.list();
         return listUsuario;
     }
-    
+    @TransacionalCdi
     private List<Usuario> list(String where) throws Exception{
         List<Usuario> listUsuario= null;
           listUsuario = dao.list(where);
@@ -59,13 +60,13 @@ public class UsuarioService {
     	String where = "where e.nome like '%"+nome+"%'";
     	return list(where);
     }
-    
+    @TransacionalCdi
     public Usuario getById(int id) throws Exception{
         Usuario usuario = null;
         usuario =  dao.getById(id);
         return usuario;
     }
-    
+    @TransacionalCdi
     public Usuario autenticaUsuario(String login,String senha) throws Exception {
     	Usuario usuario = null;
         usuario =  dao.autenticaUsuario(login, senha);
