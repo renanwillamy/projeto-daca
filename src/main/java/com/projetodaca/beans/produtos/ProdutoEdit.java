@@ -1,12 +1,15 @@
 package com.projetodaca.beans.produtos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
@@ -14,12 +17,21 @@ import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Produto;
 
-@ManagedBean
-public class ProdutoEdit extends AbstractManageBean {
+@SessionScoped
+@Named
+public class ProdutoEdit extends AbstractManageBean implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6454798260855830293L;
+	@Inject
 	private Fachada fachada;
+	@Inject
 	private Produto produto;
 	private List<Categoria> categorias;
+	@Inject
 	private Fornecedor fornecedor;
+	@Inject
 	private Categoria categoria;
 	private List<Fornecedor> fornecedores;
 	private List<SelectItem> selectList;
@@ -27,10 +39,7 @@ public class ProdutoEdit extends AbstractManageBean {
 	
 	@PostConstruct
 	public void start() {
-		fachada = new Fachada();
-		if(produto==null){
-			produto = new Produto();
-		}
+		
 		try {
 			fornecedores = fachada.listFornecedor();
 			categorias = fachada.listCategoria();

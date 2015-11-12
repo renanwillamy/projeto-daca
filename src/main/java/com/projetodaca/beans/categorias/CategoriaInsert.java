@@ -5,17 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
-import org.hibernate.JDBCException;
-import org.hibernate.exception.ConstraintViolationException;
+import org.primefaces.context.RequestContext;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Fornecedor;
+import com.projetodaca.entities.Produto;
 
 @ViewScoped
 @ManagedBean
@@ -27,62 +29,50 @@ public class CategoriaInsert extends AbstractManageBean implements Serializable 
 	private static final long serialVersionUID = -8559018315064616512L;
 	
 	private Fachada fachada;
-	private Categoria categoria;
+	private Produto produto;
 	private List<Categoria> categorias;
+	private Fornecedor fornecedor;
+	private Categoria categoria;
+	private List<Fornecedor> fornecedores;
+	private List<SelectItem> selectList;
+	private List<SelectItem> selectListCat;
 
 	@PostConstruct
 	public void start() {
 		fachada = new Fachada();
-		categoria = new Categoria();
-		listaCategorias();
-	}
+		produto = new Produto();
 
-	private void listaCategorias() {
 		try {
+			fornecedores = fachada.listFornecedor();
 			categorias = fachada.listCategoria();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 
-	public String insertCategoria() {
+	public String insertProduto() {
 
 		try {
 
-			fachada.saveCategoria(categoria);
-			showFlashMessageInfo("Categoria Salva!");			
+			fachada.saveProduto(produto);
+			showFlashMessageInfo("Produto Salvo!");
 		} catch (Exception e) {
-			if(e.toString().contains("ConstraintViolationException")){
-				showFlashMessageError("Essa Categoria já existe!");
-			}else{
-			showFlashMessageError("Erro ao tentar salvar categoria!");
-			}
+			System.out.println("Erro");
 			e.printStackTrace();
-			
+			showFlashMessageError("Erro ao tentar salvar produto!");
+			return "insert_prod";
 		}
 	
-		return "insert_cat?faces-redirect=true";
+		return "/index?faces-redirect=true";
 	}
 
-	public void excluir(Categoria categoria){
-		try {
-			fachada.deleteCategoria(categoria);
-			showFlashMessageInfo("Categoria Excluida!");	
-			listaCategorias();
-		} catch (Exception e) {
-			showFlashMessageError("Erro ao tentar excluir categoria!");
-			e.printStackTrace();
-		}
-	}
-	
-	public Categoria getCategoria() {
-		return categoria;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public List<Categoria> getCategorias() {
@@ -93,5 +83,62 @@ public class CategoriaInsert extends AbstractManageBean implements Serializable 
 		this.categorias = categorias;
 	}
 
+	public List<Fornecedor> getFornecedores() {
+		return fornecedores;
+	}
+
+	public void setFornecedores(List<Fornecedor> fornecedores) {
+		this.fornecedores = fornecedores;
+	}
+
+	public Fornecedor getFornecedor() {
+		return fornecedor;
+	}
+
+	public void setFornecedor(Fornecedor fornecedor) {
+		this.fornecedor = fornecedor;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public List<SelectItem> getSelectList() {
+		if (selectList == null) {
+			selectList = new ArrayList<SelectItem>();
+
+			if (fornecedores != null) {
+				SelectItem item;
+				for (Fornecedor forn : fornecedores) {
+					item = new SelectItem(forn, forn.getNomeFantasia());
+					selectList.add(item);
+				}
+			}
+
+		}
+
+		return selectList;
+	}
+
+	public List<SelectItem> getSelectListCat() {
+		if (selectListCat == null) {
+			selectListCat = new ArrayList<SelectItem>();
+
+			if (categorias != null) {
+				SelectItem item;
+				for (Categoria cat : categorias) {
+					item = new SelectItem(cat, cat.getNome());
+					selectListCat.add(item);
+				}
+			}
+
+		}
+
+		return selectListCat;
+	}
 
 }

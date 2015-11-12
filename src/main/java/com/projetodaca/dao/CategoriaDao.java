@@ -17,140 +17,83 @@ import com.projetodaca.entities.Categoria;
  *
  * @author renan
  */
-public class CategoriaDao implements IDAO<Categoria> {
+public class CategoriaDao extends AbstractDao<Categoria>{       
 
-    private EntityManager manager;
-   
-
-    public CategoriaDao() {
-      
-    }
-
-    
-    public void insert(Categoria categoria) throws Exception {        
-        try {
-            beginTransaction();
+     
+    public void insert(Categoria categoria) throws Exception {   
+    	EntityManager manager = getEntityManager();
+        try {           
             manager.persist(categoria);
             manager.refresh(categoria);
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
+        } catch (Exception e) {           
             throw new Exception(e);
-        }finally{
-            manager.close();
-        } 
+        }
 
     }
 
     
     public List<Categoria> list() throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Categoria> lista = null;
-        try {
-            beginTransaction();
-            lista = manager.createQuery("SELECT e FROM Categoria e", Categoria.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        try {            
+            lista = manager.createQuery("SELECT e FROM Categoria e", Categoria.class).getResultList();           
+        } catch (Exception e) {           
             throw new Exception(e);
-        }finally{
-            manager.close();
-        } 
+        }
 
         return lista;
     }
 
     public List<Categoria> list(String where) throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Categoria> list = new ArrayList<Categoria>();
-        try {
-            beginTransaction();
+        try {           
             list = (List<Categoria>) manager.createQuery("SELECT e FROM Categoria e " + where, Categoria.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
-
         return list;
     }
 
     
     public Categoria getById(int id) throws Exception {
+    	EntityManager manager = getEntityManager();
         Categoria categoria = null;
-        try {
-            beginTransaction();
-            categoria = manager.find(Categoria.class, id);
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        try {           
+            categoria = manager.find(Categoria.class, id);           
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
-        } 
-
+        }
         return categoria;
     }
 
     
     public void update(Categoria categoria) throws Exception {
+    	EntityManager manager = getEntityManager();
         try {
-            Categoria cat = getById(categoria.getId());
-            beginTransaction();
+            Categoria cat = getById(categoria.getId());      
             Query query =  manager.createQuery("UPDATE Categoria cat set cat.categoriaPai = :catPai , cat.nome = :nome where cat.id =:id");
             query.setParameter("catPai", categoria.getCategoriaPai());
             query.setParameter("nome", categoria.getNome());
             query.setParameter("id", categoria.getId());
             query.executeUpdate();            
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
+        } catch (Exception ex) {            
             throw new Exception(ex);
-        }finally{
-            manager.close();
-        } 
+        }
     }
 
     
     public void delete(Categoria categoria) throws Exception {
-        try {
-            beginTransaction();
-            manager.remove(manager.getReference(Categoria.class, categoria.getId()));
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+    	EntityManager manager = getEntityManager();
+        try {            
+            manager.remove(manager.getReference(Categoria.class, categoria.getId()));           
+        } catch (Exception ex) {            
             throw new Exception(ex);
-        }finally{
-            manager.close();
-        }          
-    }
-
-    
-    public void beginTransaction() {
+        }        
+    }  
    
-        manager.getTransaction().begin();
-    }
-
-    
-    public void commitTransaction() {
-        manager.getTransaction().commit();
-    }
-
-    
-    public void rollBack() {
-        manager.getTransaction().rollback();
-    }
 
 }

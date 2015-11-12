@@ -26,6 +26,10 @@ public class Fachada implements Serializable {
 	private ClienteService cliService;
 	@Inject
 	private FornecedorService fornService;
+	@Inject
+	private ProdutoService prodService;
+	@Inject
+	private CategoriaService catService;
 
 
 	/**
@@ -33,89 +37,53 @@ public class Fachada implements Serializable {
 	 * 
 	 * @param produto
 	 */
-	public Produto saveProduto(Produto produto) throws Exception {
-		ProdutoService service = new ProdutoService();
-		Produto prod = service.save(produto);
-		service = null;
-		return prod;
+	public Produto saveProduto(Produto produto) throws Exception {			
+		return prodService.save(produto);
 	}
 
-	public void updateProduto(Produto produto) throws Exception {
-		ProdutoService service = new ProdutoService();
-		service.update(produto);
-		service = null;
+	public void updateProduto(Produto produto) throws Exception {		
+		prodService.update(produto);		
 	}
 
-	public void deleteProduto(Produto produto) throws Exception {
-		ProdutoService service = new ProdutoService();
-		service.delete(produto);
-		service = null;
+	public void deleteProduto(Produto produto) throws Exception {		
+		prodService.delete(produto);		
 	}
 
-	public List<Produto> listProduto() throws Exception {
-		List<Produto> listProduto = null;
-		ProdutoService service = new ProdutoService();
-		listProduto = service.list();
-		service = null;
-		return listProduto;
+	public List<Produto> listProduto() throws Exception {		
+		return prodService.list();
 	}
 
-	public List<Produto> listProdutoPorNome(String nome) throws Exception {
-		List<Produto> listProduto = null;
-		ProdutoService service = new ProdutoService();
-		listProduto = service.listaProdutoPorNome(nome);
-		return listProduto;
+	public List<Produto> listProdutoPorNome(String nome) throws Exception {			
+		 
+		return prodService.listaProdutoPorNome(nome);
 	}
 
-	public Produto getProdutoById(int id) throws Exception {
-		Produto produto = null;
-		ProdutoService service = new ProdutoService();
-		produto = service.getById(id);
-		service = null;
-		return produto;
+	public Produto getProdutoById(int id) throws Exception {	
+		return prodService.getById(id);
 	}
 
-	public Categoria saveCategoria(Categoria categoria) throws Exception {
-		CategoriaService service = new CategoriaService();
-		Categoria cat = service.save(categoria);
-		service = null;
-		return cat;
+	public Categoria saveCategoria(Categoria categoria) throws Exception {	
+		return catService.save(categoria);
 	}
 
-	public void updateCategoria(Categoria categoria) throws Exception {
-		CategoriaService service = new CategoriaService();
-		service.update(categoria);
-		service = null;
+	public void updateCategoria(Categoria categoria) throws Exception {		
+		catService.update(categoria);	
 	}
 
-	public void deleteCategoria(Categoria categoria) throws Exception {
-		CategoriaService service = new CategoriaService();
-		service.delete(categoria);
-		service = null;
+	public void deleteCategoria(Categoria categoria) throws Exception {		
+		catService.delete(categoria);	
 	}
 
-	public List<Categoria> listCategoria() throws Exception {
-		List<Categoria> listCategoria = null;
-		CategoriaService service = new CategoriaService();
-		listCategoria = service.list();
-		service = null;
-		return listCategoria;
+	public List<Categoria> listCategoria() throws Exception {			
+		return catService.list();
 	}
 
-	public List<Categoria> listCategoria(String where) throws Exception {
-
-		List<Categoria> listCategoria = null;
-		CategoriaService service = new CategoriaService();
-		listCategoria = service.list(where);
-		service = null;
-		return listCategoria;
+	public List<Categoria> listCategoria(String where) throws Exception {	
+		return catService.list(where);
 	}
 
-	public Categoria getCategoriaById(int id) throws Exception {
-		CategoriaService service = new CategoriaService();
-		Categoria cat = service.getById(id);
-		service = null;
-		return cat;
+	public Categoria getCategoriaById(int id) throws Exception {			
+		return catService.getById(id);
 	}
 
 	/**
@@ -153,24 +121,23 @@ public class Fachada implements Serializable {
 	public Contato save(Contato contato) throws Exception {
 		ContatoService service = new ContatoService();
 		contato = service.save(contato);
-		service = null;
+	
 		return contato;
 	}
 
 	public void update(Contato contato) throws Exception {
 		ContatoService service = new ContatoService();
 		service.update(contato);
-		service = null;
+	
 	}
 
 	public void delete(Contato contato) throws Exception {
 		ContatoService service = new ContatoService();
 		service.delete(contato);
-		service = null;
+	
 	}
 
-	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {		
-		 
+	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {			 
 		return fornService.listaFornecedorPorNomeFantasia(nomeFantasia);
 	}
 

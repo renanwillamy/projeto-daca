@@ -7,9 +7,11 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.primefaces.context.RequestContext;
 
@@ -20,7 +22,7 @@ import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Produto;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class ProdutoInsert extends AbstractManageBean implements Serializable {
 
 	/**
@@ -28,19 +30,21 @@ public class ProdutoInsert extends AbstractManageBean implements Serializable {
 	 */
 	private static final long serialVersionUID = -8559018315064616512L;
 	
+	@Inject
 	private Fachada fachada;
+	@Inject
 	private Produto produto;
 	private List<Categoria> categorias;
+	@Inject
 	private Fornecedor fornecedor;
+	@Inject
 	private Categoria categoria;
 	private List<Fornecedor> fornecedores;
 	private List<SelectItem> selectList;
 	private List<SelectItem> selectListCat;
 
 	@PostConstruct
-	public void start() {
-		fachada = new Fachada();
-		produto = new Produto();
+	public void start() {		
 
 		try {
 			fornecedores = fachada.listFornecedor();
@@ -64,7 +68,7 @@ public class ProdutoInsert extends AbstractManageBean implements Serializable {
 			return "insert_prod";
 		}
 	
-		return "/index?faces-redirect=true";
+		return "lista_prod?faces-redirect=true";
 	}
 
 	public Produto getProduto() {

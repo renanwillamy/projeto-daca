@@ -4,30 +4,36 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.glassfish.api.admin.AccessRequired;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Produto;
 
-@ManagedBean
+@RequestScoped
+@Named
 public class ProdutoLista extends AbstractManageBean implements Serializable{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6405394078384105388L;
+	@Inject
 	private Produto produtoSelecionado;
 	private List<Produto> produtos;
+	@Inject
 	private Fachada fachada;
 	private String filtro;
 
 	@PostConstruct
 	public void start() {
-		//
-		fachada = new Fachada();
 		filtrar();
 	}
 

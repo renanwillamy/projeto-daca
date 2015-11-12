@@ -24,26 +24,22 @@ public class EnderecoDao extends AbstractDao<Endereco> {
 	
        
     public void insert(Endereco endereco) throws Exception {
-        try {
-           
+    	EntityManager manager = getEntityManager();
+        try {           
             manager.persist(endereco);
-            manager.refresh(endereco);
-            
-        } catch (Exception e) {
-          
+            manager.refresh(endereco);            
+        } catch (Exception e) {          
             throw new Exception(e.getMessage());
         }
     }
 
     
     public List<Endereco> list() throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Endereco> list = new ArrayList<Endereco>();
-        try {
-          
-            list = (List<Endereco>) manager.createQuery("SELECT e FROM Endereco e", Endereco.class).getResultList();
-            
-        } catch (Exception e) {
-           
+        try {          
+            list = (List<Endereco>) manager.createQuery("SELECT e FROM Endereco e", Endereco.class).getResultList();            
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
         }
         return list;
@@ -51,44 +47,37 @@ public class EnderecoDao extends AbstractDao<Endereco> {
 
     
     public Endereco getById(int id) throws Exception {
+    	EntityManager manager = getEntityManager();
         Endereco endereco = null;
-        try {
-            
+        try {            
             endereco = manager.find(Endereco.class, id);
             
         } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
-
         return endereco;
     }
 
     
     public void update(Endereco endereco) throws Exception {
-        try {
-           
-            manager.merge(endereco);
-         
-        } catch (Exception ex) {
-            
+    	EntityManager manager = getEntityManager();
+        try {           
+            manager.merge(endereco);         
+        } catch (Exception ex) {            
             throw new Exception(ex);
         } 
     }
 
     
     public void delete(Endereco endereco) throws Exception {
-        try {
-           
-            manager.remove(manager.getReference(Endereco.class, endereco.getId()));
-            
+    	EntityManager manager = getEntityManager();
+        try {           
+            manager.remove(manager.getReference(Endereco.class, endereco.getId()));            
         } catch (Exception ex) {
             
             throw new Exception(ex);
-        } finally {
-            manager.close();
-        }
+        } 
+
     }
     
     

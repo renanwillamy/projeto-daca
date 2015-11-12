@@ -36,7 +36,9 @@
 				</p:selectOneMenu>
 
 				<p:outputLabel>Quantidade em estoque:</p:outputLabel>
-				<p:inputText label="Quantidade em estoque" value="#{produtoInsert.produto.quantidade}"></p:inputText>
+				<p:inputText label="Quantidade em estoque" value="#{produtoInsert.produto.quantidade}">
+				<f:convertNumber locale="pt_BR" />	
+				</p:inputText>
 
 				<p:outputLabel for="Fornecedor">Fornecedor:</p:outputLabel>
 				<p:selectOneMenu label="Fornecedor" id="Fornecedor"
