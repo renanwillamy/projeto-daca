@@ -7,6 +7,8 @@ package com.projetodaca.services;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.projetodaca.dao.UsuarioDao;
 import com.projetodaca.entities.Usuario;
 
@@ -15,11 +17,11 @@ import com.projetodaca.entities.Usuario;
  * @author renan
  */
 public class UsuarioService {
-    
+    @Inject
     private UsuarioDao dao;
 
     public UsuarioService() {
-       dao = new UsuarioDao();
+       
     }
     
     /**Persiste usuario no banco de dados

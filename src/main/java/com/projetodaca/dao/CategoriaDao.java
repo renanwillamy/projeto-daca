@@ -20,11 +20,10 @@ import com.projetodaca.entities.Categoria;
 public class CategoriaDao implements IDAO<Categoria> {
 
     private EntityManager manager;
-    private Conexao con;
+   
 
     public CategoriaDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+      
     }
 
     
@@ -140,7 +139,7 @@ public class CategoriaDao implements IDAO<Categoria> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+   
         manager.getTransaction().begin();
     }
 

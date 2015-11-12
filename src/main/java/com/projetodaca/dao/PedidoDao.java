@@ -28,11 +28,9 @@ import com.projetodaca.entities.Produto;
 public class PedidoDao implements IDAO<Pedido> {
 
     private EntityManager manager;
-    private Conexao con;
-
+   
     public PedidoDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+       
     }
 
     
@@ -295,7 +293,7 @@ public class PedidoDao implements IDAO<Pedido> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+        
         manager.getTransaction().begin();
     }
 

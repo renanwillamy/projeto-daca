@@ -20,11 +20,10 @@ import com.projetodaca.entities.Fornecedor;
 public class FornecedorDao implements IDAO<Fornecedor> {
 
 	private EntityManager manager;
-	private Conexao con;
+
 
 	public FornecedorDao() {
-		con = new Conexao();
-		manager = con.getEntityManager();
+	
 	}
 
 	public void insert(Fornecedor fornecedor) throws Exception {
@@ -139,7 +138,7 @@ public class FornecedorDao implements IDAO<Fornecedor> {
 	}
 
 	public void beginTransaction() {
-		manager = con.getEntityManager();
+		
 		manager.getTransaction().begin();
 	}
 

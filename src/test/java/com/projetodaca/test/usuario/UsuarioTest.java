@@ -16,7 +16,7 @@ public class UsuarioTest {
 	@Test
 	public void test() throws Exception {
 		
-		Usuario usuario = service.autenticaUsuario("rw23", "222");
+		Usuario usuario = service.autenticaUsuario("admin", "admin");
 		boolean actual = false;
 		boolean expected = true;
 		

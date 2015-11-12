@@ -9,6 +9,7 @@ package com.projetodaca.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import com.projetodaca.entities.Contato;
@@ -20,11 +21,10 @@ import com.projetodaca.entities.Contato;
 public class ContatoDao implements IDAO<Contato> {
 
     private EntityManager manager;
-    private Conexao con;
+   
 
-    public ContatoDao() {
-        con = new Conexao();
-        manager = con.getEntityManager();
+    public ContatoDao() {        
+       
     }
 
     
@@ -117,7 +117,7 @@ public class ContatoDao implements IDAO<Contato> {
 
     
     public void beginTransaction() {
-        manager = con.getEntityManager();
+       
         manager.getTransaction().begin();
     }
 

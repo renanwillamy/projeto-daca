@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Usuario;
 
-@ManagedBean
+@SessionScoped
+@Named
 public class UsuarioLista extends AbstractManageBean implements Serializable{
 
 	/**
@@ -20,13 +21,13 @@ public class UsuarioLista extends AbstractManageBean implements Serializable{
 	 */
 	private static final long serialVersionUID = -8463593762461424182L;
 	private List<Usuario> usuarios;
+	@Inject
 	private Fachada fachada;
 	private String filtro;
 
 	@PostConstruct
 	public void start() {
-		//
-		fachada = new Fachada();
+	
 		filtrar();
 	}
 
