@@ -25,7 +25,12 @@ import javax.persistence.OneToMany;
 @Entity
 public class Pedido implements Serializable {
 
-    public Pedido() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7490242955195386526L;
+
+	public Pedido() {
     }
     
     @Id

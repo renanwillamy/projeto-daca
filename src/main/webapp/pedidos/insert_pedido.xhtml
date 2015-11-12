@@ -27,6 +27,36 @@
 				</p:panelGrid>
 			</h:form>
 			
+			<p:panel> 
+			<p:outputLabel>Produtos</p:outputLabel>
+			</p:panel>
+			
+			<p:dataTable var="prod" value="#{pedidoInsert.produtos}">
+				<p:column headerText="Id" styleClass="centralizarTexto">
+				<h:outputText value="#{prod.id}" />
+			</p:column>
+
+			<p:column headerText="Descrição" styleClass="centralizarTexto">
+				<h:outputText value="#{prod.nome}" />
+			</p:column>
+
+			<p:column headerText="Unidade" styleClass="centralizarTexto">
+				<h:outputText value="#{prod.und}" />
+			</p:column>
+
+			<p:column headerText="Preço de custo" styleClass="centralizarTexto">
+				<h:outputText value="#{prod.precoCusto}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Preço de venda" styleClass="centralizarTexto">
+				<h:outputText value="#{prod.precoVenda}">
+					<f:convertNumber type="currency" />
+				</h:outputText>
+			</p:column>
+			
+			</p:dataTable>
+			
 		</p:fieldset>
 
 	</ui:define>

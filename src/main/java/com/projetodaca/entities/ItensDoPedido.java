@@ -19,7 +19,12 @@ import javax.persistence.OneToOne;
 @Entity
 public class ItensDoPedido implements Serializable{
 
-    public ItensDoPedido() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -8578257335697980864L;
+
+	public ItensDoPedido() {
     }
     
     @Id

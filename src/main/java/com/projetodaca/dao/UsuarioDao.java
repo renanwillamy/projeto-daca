@@ -55,12 +55,10 @@ public class UsuarioDao extends AbstractDao<Usuario> {
     public List<Usuario> list(String where) throws Exception {
     	EntityManager em = getEntityManager();
         List<Usuario> list = new ArrayList<Usuario>();
-        try {
-           
+        try {           
             list = (List<Usuario>) em.createQuery("SELECT e FROM Usuario e " + where, Usuario.class).getResultList();
             
-        } catch (Exception e) {
-            
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
         }
         return list;
@@ -70,12 +68,9 @@ public class UsuarioDao extends AbstractDao<Usuario> {
     public Usuario getById(int id) throws Exception {
         Usuario usuario = null;
         EntityManager em = getEntityManager();
-        try {
-           
-            usuario = em.find(Usuario.class, id);
-            
-        } catch (Exception e) {
-            
+        try {           
+            usuario = em.find(Usuario.class, id);            
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
         }
 

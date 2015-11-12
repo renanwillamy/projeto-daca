@@ -27,7 +27,12 @@ import javax.persistence.OneToOne;
 @Entity
 public class Cliente implements Serializable{
 
-    public Cliente() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1150241586222316155L;
+
+	public Cliente() {
     }
 
     public Cliente(String nome, String cpf, String RG, String sexo, String informacoes, double limiteCredito, boolean bloqueado, Endereco endereco, ArrayList<Contato> contatos, ArrayList<Pedido> pedidos) {

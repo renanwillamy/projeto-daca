@@ -3,43 +3,33 @@ package com.projetodaca.beans.pedidos;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
-import com.projetodaca.entities.Fornecedor;
-import com.projetodaca.entities.Pedido;
 import com.projetodaca.entities.Produto;
 
-@ViewScoped
+@RequestScoped
 @Named
 public class PedidoInsert extends AbstractManageBean implements Serializable {
 
-	
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 257948894955858807L;
+	private static final long serialVersionUID = 7084789732538455286L;
 	@Inject
 	private Fachada fachada;
 	@Inject
 	private Produto produto;
-	@Inject
-	private Pedido pedido;
+	private List<Produto> produtos;
 
 
-
-	@PostConstruct
-	public void start() {
-		
-	}
 	
 	public String buscaProduto(){
-		return "/lista_prod?faces-redirect=true";
-		
+		return "/produtos/lista_prod?faces-redirect=true";		
 	}
 
 	public String insertPedido() {
@@ -70,16 +60,22 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 		this.produto = produto;
 	}
 
+	public List<Produto> getProdutos() {
+		try {
+			produtos = fachada.listProduto();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return produtos;
+	}
 
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
 	
 
-	public Pedido getPedido() {
-		return pedido;
-	}
 
-	public void setPedido(Pedido pedido) {
-		this.pedido = pedido;
-	}
 	
 
 
