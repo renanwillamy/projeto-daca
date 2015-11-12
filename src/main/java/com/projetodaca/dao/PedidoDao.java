@@ -25,18 +25,13 @@ import com.projetodaca.entities.Produto;
  *
  * @author renan
  */
-public class PedidoDao implements IDAO<Pedido> {
+public class PedidoDao extends AbstractDao<Pedido> {
 
-    private EntityManager manager;
-   
-    public PedidoDao() {
-       
-    }
-
-    
+     
     public void insert(Pedido pedido) throws Exception {
+    	EntityManager manager = getEntityManager();
         try {
-            beginTransaction();
+            
             List<ItensDoPedido> listItens = pedido.getItensDoPedido();
             for (ItensDoPedido item : listItens) {
                 Produto prod = item.getProduto();
@@ -45,21 +40,16 @@ public class PedidoDao implements IDAO<Pedido> {
                 manager.merge(prod);
             }
             manager.persist(pedido);
-            manager.refresh(pedido);
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            manager.refresh(pedido);           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
     public void insert(Pedido pedido, List<Pagamento> listPagamento) throws Exception {
-        try {
-            beginTransaction();
+    	EntityManager manager = getEntityManager();
+    	try {
+            
             List<ItensDoPedido> listItens = pedido.getItensDoPedido();
             for (ItensDoPedido item : listItens) {
                 Produto prod = item.getProduto();
@@ -74,97 +64,69 @@ public class PedidoDao implements IDAO<Pedido> {
                 manager.persist(pag);
                 manager.refresh(pag);
             }
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+          
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
     
     public List<Pedido> list() throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Pedido> list = new ArrayList<Pedido>();
         try {
-            beginTransaction();
+          
             list = (List<Pedido>) manager.createQuery("SELECT e FROM Pedido e", Pedido.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
         return list;
     }
 
     public List<Pedido> list(String where) throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Pedido> list = new ArrayList<Pedido>();
-        try {
-            beginTransaction();
+        try {            
             list = (List<Pedido>) manager.createQuery("SELECT e FROM Pedido e " + where, Pedido.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+           
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
-
+        } 
         return list;
     }
 
     public List<Pedido> listWhereData(Date dataInicial, Date dataFinal) throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Pedido> list = new ArrayList<Pedido>();
-        try {
-            beginTransaction();
+        try {           
             // TypedQuery<Pedido> query =  manager.createQuery("SELECT e FROM Pedido e where e.dataDoPedido >= :dataInicial and e.dataDoPedido <= :dataFinal " , Pedido.class);
             TypedQuery<Pedido> query = manager.createQuery("SELECT e FROM Pedido e where e.dataDoPedido BETWEEN :dataInicial and  :dataFinal ", Pedido.class);
             query.setParameter("dataInicial", dataInicial, TemporalType.DATE);
             query.setParameter("dataFinal", dataFinal, TemporalType.DATE);
-            list = query.getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            list = query.getResultList();           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
-
+        } 
         return list;
     }
 
     
     public Pedido getById(int id) throws Exception {
         Pedido pedido = null;
-        try {
-            beginTransaction();
-            pedido = manager.find(Pedido.class, id);
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        EntityManager manager = getEntityManager();
+        try {           
+            pedido = manager.find(Pedido.class, id);           
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
         return pedido;
     }
 
     
     public void update(Pedido pedido) throws Exception {
-        try {
-            beginTransaction();
+    	EntityManager manager = getEntityManager();
+    	try {           
             ItensDoPedidoDao itensDao = new ItensDoPedidoDao();
             List<ItensDoPedido> novaLista = new ArrayList<ItensDoPedido>();
             List<ItensDoPedido> listItens = pedido.getItensDoPedido();
@@ -197,20 +159,16 @@ public class PedidoDao implements IDAO<Pedido> {
             pedido.setItensDoPedido(novaLista);
             manager.merge(pedido);
             itensDao = null;
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        
+        } catch (Exception ex) {        
             throw new Exception(ex);
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
     public void update(Pedido pedido, List<Pagamento> listPagamento) throws Exception {
+    	EntityManager manager = getEntityManager();
         try {
-            beginTransaction();
+           
             Query query = manager.createQuery("DELETE Pagamento e where e.pedido.id = :idPedido");
             query.setParameter("idPedido", pedido.getId());
             query.executeUpdate();
@@ -252,21 +210,16 @@ public class PedidoDao implements IDAO<Pedido> {
             pedido.setItensDoPedido(novaLista);
             manager.merge(pedido);
             itensDao = null;
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+         
+        } catch (Exception ex) {          
             throw new Exception(ex);
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
     
     public void delete(Pedido pedido) throws Exception {
-        try {
-            beginTransaction();
+    	EntityManager manager = getEntityManager();
+        try {            
             Query query = manager.createQuery("DELETE Pagamento e where e.pedido.id = :idPedido");
             query.setParameter("idPedido", pedido.getId());
             query.executeUpdate();
@@ -280,31 +233,12 @@ public class PedidoDao implements IDAO<Pedido> {
             }
             manager.remove(manager.getReference(Pedido.class, pedido.getId()));
             itensDao = null;
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+           
+        } catch (Exception ex) {           
             throw new Exception(ex);
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
-    
-    public void beginTransaction() {
-        
-        manager.getTransaction().begin();
-    }
 
-    
-    public void commitTransaction() {
-        manager.getTransaction().commit();
-    }
-
-    
-    public void rollBack() {
-        manager.getTransaction().rollback();
-    }
 
 }

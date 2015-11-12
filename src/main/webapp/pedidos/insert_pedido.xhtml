@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template_home.xhtml">
+
+	<ui:define name="title">Pedido Interno</ui:define>
+
+	<ui:define name="content">
+
+		<p:fieldset legend="Pedido Interno"
+			style="margin-top:20px; width:800px">
+			<h:form>
+				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
+					closable="true"></p:messages>
+				<p:panelGrid columns="3" style="width:600px;">
+					<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
+					<p:inputText label="Nome do produto" id="nome" 
+						value="#{pedidoInsert.produto.nome}" size="40"></p:inputText>
+					<p:outputLabel></p:outputLabel>
+					<p:commandButton value="Salvar" id="submit" 
+						action="#{pedidoInsert.buscaProduto}" ></p:commandButton>
+				</p:panelGrid>
+			</h:form>
+			
+		</p:fieldset>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>
