@@ -22,9 +22,8 @@ import com.projetodaca.entities.Cliente;
  *
  * @author renan
  */
-public class ClienteDao implements IDAO<Cliente> {
-
-    private EntityManager manager;
+public class ClienteDao extends AbstractDao<Cliente>{
+   
    
     public ClienteDao() {
     
@@ -32,70 +31,57 @@ public class ClienteDao implements IDAO<Cliente> {
 
     
     public void insert(Cliente cliente) throws Exception {
+    	EntityManager em = getEntityManager();
         try {
-            beginTransaction();
-            manager.persist(cliente);
-            manager.refresh(cliente);
-            commitTransaction();
+   
+            em.persist(cliente);
+            em.refresh(cliente);
+ 
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
     }
 
     
     public List<Cliente> list() throws Exception {
+    	EntityManager em = getEntityManager();
         List<Cliente> list = new ArrayList<Cliente>();        
         try {
-            beginTransaction();
-            list = (List<Cliente>) manager.createQuery("SELECT e FROM Cliente e", Cliente.class).getResultList();
-            commitTransaction();
+         
+            list = (List<Cliente>) em.createQuery("SELECT e FROM Cliente e", Cliente.class).getResultList();
+     
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+          
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
         return list;
     }
 
     public List<Cliente> list(String where) throws Exception {
+    	EntityManager em = getEntityManager();
         List<Cliente> list = new ArrayList<Cliente>();
         try {
-            beginTransaction();
-            list = (List<Cliente>) manager.createQuery("SELECT e FROM Cliente e " + where, Cliente.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+
+            list = (List<Cliente>) em.createQuery("SELECT e FROM Cliente e " + where, Cliente.class).getResultList();
+      
+        } catch (Exception e) {          
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
         return list;
     }
 
     
     public Cliente getById(int id) throws Exception {
+    	EntityManager em = getEntityManager();
         Cliente cliente = null;
         try {
-            beginTransaction();
-            cliente = manager.find(Cliente.class, id);
-            commitTransaction();
+         
+            cliente = em.find(Cliente.class, id);
+  
         } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+         
             throw new Exception(e.getMessage());
-        }finally{
-            manager.close();
         }
 
         return cliente;
@@ -103,51 +89,27 @@ public class ClienteDao implements IDAO<Cliente> {
 
     
     public void update(Cliente cliente) throws Exception {
+    	EntityManager em = getEntityManager();
         try {
-            beginTransaction();             
-            manager.merge(cliente);
-            commitTransaction();
+                     
+            em.merge(cliente);
+     
         } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        
             throw new Exception(ex);
-        }finally{
-            manager.close();
         }
     }
 
     
     public void delete(Cliente cliente) throws Exception {
+    	EntityManager em = getEntityManager();
         try {
-            beginTransaction();
-            manager.remove(manager.getReference(Cliente.class, cliente.getId()));
-            commitTransaction();
+
+            em.remove(em.getReference(Cliente.class, cliente.getId()));
+  
         } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
-            throw new Exception(ex);
-        }finally{
-            manager.close();
+              throw new Exception(ex);
         }
-    }
-
-    
-    public void beginTransaction() {
-       
-        manager.getTransaction().begin();
-    }
-
-    
-    public void commitTransaction() {
-        manager.getTransaction().commit();
-    }
-
-    
-    public void rollBack() {
-        manager.getTransaction().rollback();
-
     }
 
 

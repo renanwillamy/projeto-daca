@@ -1,39 +1,35 @@
 package com.projetodaca.beans.clientes;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
+import com.projetodaca.entities.Cliente;
 import com.projetodaca.entities.Contato;
 import com.projetodaca.entities.Endereco;
-import com.projetodaca.entities.Cliente;
 
-@ViewScoped
-@ManagedBean
+@SessionScoped
+@Named
 public class ClienteEdit extends AbstractManageBean implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3854803910581636710L;
+	@Inject
 	private Fachada fachada;
+	@Inject
 	private Cliente cliente;
+	@Inject
 	private Endereco endereco;
+	@Inject
 	private Contato contato;
 
-	@PostConstruct
-	public void start() {
-		fachada = new Fachada();
-		if (cliente == null)
-			cliente = new Cliente();
-		endereco = new Endereco();
-
-	}
-
+	
 	public String updateCliente() {
 		try {				
 

@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
@@ -14,7 +15,7 @@ import com.projetodaca.entities.Endereco;
 import com.projetodaca.entities.Cliente;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class ClienteInsert extends AbstractManageBean implements Serializable {
 
 	
@@ -22,20 +23,15 @@ public class ClienteInsert extends AbstractManageBean implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 158806803289219795L;
-	private Fachada fachada;		
+	@Inject
+	private Fachada fachada;	
+	@Inject
 	private Cliente cliente;
+	@Inject
 	private Endereco endereco;
+	@Inject
 	private Contato contato;
 
-
-	@PostConstruct
-	public void start() {
-		fachada = new Fachada();
-		cliente = new Cliente();
-		contato = new Contato();
-		endereco = new Endereco();
-		
-	}
 
 	public String insertCliente() {
 
@@ -55,7 +51,7 @@ public class ClienteInsert extends AbstractManageBean implements Serializable {
 			return "insert_cliente";
 		}
 	
-		return "/index?faces-redirect=true";
+		return "insert_cliente?faces-redirect=true";
 	}
 
 	public Cliente getCliente() {

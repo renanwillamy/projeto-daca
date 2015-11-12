@@ -22,6 +22,9 @@ public class Fachada implements Serializable {
 
 	@Inject
 	private UsuarioService usuService;
+	@Inject
+	private ClienteService cliService;
+
 
 	/**
 	 * Persiste produto no banco de dados
@@ -189,43 +192,28 @@ public class Fachada implements Serializable {
 	 * @param cliente
 	 */
 	public Cliente saveCliente(Cliente cliente) throws Exception {
-		ClienteService service = new ClienteService();
-		cliente = service.save(cliente);
-		service = null;
-		return cliente;
+		return cliService.save(cliente);			
 	}
 
-	public void updateCliente(Cliente cliente) throws Exception {
-		ClienteService service = new ClienteService();
-		service.update(cliente);
-		service = null;
+	public void updateCliente(Cliente cliente) throws Exception {		
+		cliService.update(cliente);		
 	}
 
-	public void deleteCliente(Cliente cliente) throws Exception {
-		ClienteService service = new ClienteService();
-		service.delete(cliente);
-		service = null;
+	public void deleteCliente(Cliente cliente) throws Exception {		
+		cliService.delete(cliente);		
 	}
 
-	public List<Cliente> listCliente() throws Exception {
-		ClienteService service = new ClienteService();
-		List<Cliente> lista = service.list();
-		service = null;
-		return lista;
+	public List<Cliente> listCliente() throws Exception {		
+		return cliService.list();				
 	}
 
-	public List<Cliente> listaClientePorNome(String nome) throws Exception {
-		ClienteService service = new ClienteService();
-		List<Cliente> lista = service.listaClientePorNome(nome);
-		service = null;
-		return lista;
+	public List<Cliente> listaClientePorNome(String nome) throws Exception {		
+		return cliService.listaClientePorNome(nome);	
 	}
 
-	public Cliente getClienteById(int id) throws Exception {
-		ClienteService service = new ClienteService();
-		Cliente cliente = service.getById(id);
-		service = null;
-		return cliente;
+	public Cliente getClienteById(int id) throws Exception {		
+		return  cliService.getById(id);		
+
 	}
 
 	public Usuario saveUsuario(Usuario usuario) throws Exception {
