@@ -26,7 +26,12 @@ import javax.persistence.OneToMany;
 @Entity
 public class Categoria implements Serializable{
     
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1622533837795723724L;
+
+	@Id
     @GeneratedValue
     private int id;
     

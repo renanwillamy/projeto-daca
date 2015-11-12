@@ -5,13 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 
-import org.primefaces.context.RequestContext;
+import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
@@ -20,51 +18,64 @@ import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Produto;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class CategoriaInsert extends AbstractManageBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8559018315064616512L;
-	
+	@Inject
 	private Fachada fachada;
+	@Inject
 	private Produto produto;
 	private List<Categoria> categorias;
+	@Inject
 	private Fornecedor fornecedor;
+	@Inject
 	private Categoria categoria;
-	private List<Fornecedor> fornecedores;
-	private List<SelectItem> selectList;
-	private List<SelectItem> selectListCat;
 
 	@PostConstruct
 	public void start() {
-		fachada = new Fachada();
-		produto = new Produto();
+		try {			
+			atualiza();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	public String insertCategoria() {
 		try {
-			fornecedores = fachada.listFornecedor();
-			categorias = fachada.listCategoria();
+
+			fachada.saveCategoria(categoria);		
+			atualiza();
+			showFlashMessageInfo("Categoria Salva!");
+		} catch (Exception e) {			
+			e.printStackTrace();
+			if(e.toString().contains("ConstraintViolationException")){
+				showFlashMessageError("Essa Categoria já existe!");
+			}else{
+			showFlashMessageError("Erro ao tentar salvar a categoria!");
+			}
+			return "insert_cat";
+		}	
+		return "/insert_cat?faces-redirect=true";
+	}
+	
+	public void excluir(Categoria categoria){
+		try {
+			fachada.deleteCategoria(categoria);
+			atualiza();
+			showFlashMessageInfo("Categoria excluida!");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public String insertProduto() {
-
-		try {
-
-			fachada.saveProduto(produto);
-			showFlashMessageInfo("Produto Salvo!");
-		} catch (Exception e) {
-			System.out.println("Erro");
-			e.printStackTrace();
-			showFlashMessageError("Erro ao tentar salvar produto!");
-			return "insert_prod";
-		}
-	
-		return "/index?faces-redirect=true";
+	private void atualiza() throws Exception {
+		categorias = fachada.listCategoria();
+		
 	}
 
 	public Produto getProduto() {
@@ -82,14 +93,7 @@ public class CategoriaInsert extends AbstractManageBean implements Serializable 
 	public void setCategorias(List<Categoria> categorias) {
 		this.categorias = categorias;
 	}
-
-	public List<Fornecedor> getFornecedores() {
-		return fornecedores;
-	}
-
-	public void setFornecedores(List<Fornecedor> fornecedores) {
-		this.fornecedores = fornecedores;
-	}
+	
 
 	public Fornecedor getFornecedor() {
 		return fornecedor;
@@ -106,39 +110,7 @@ public class CategoriaInsert extends AbstractManageBean implements Serializable 
 	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
+	
 
-	public List<SelectItem> getSelectList() {
-		if (selectList == null) {
-			selectList = new ArrayList<SelectItem>();
-
-			if (fornecedores != null) {
-				SelectItem item;
-				for (Fornecedor forn : fornecedores) {
-					item = new SelectItem(forn, forn.getNomeFantasia());
-					selectList.add(item);
-				}
-			}
-
-		}
-
-		return selectList;
-	}
-
-	public List<SelectItem> getSelectListCat() {
-		if (selectListCat == null) {
-			selectListCat = new ArrayList<SelectItem>();
-
-			if (categorias != null) {
-				SelectItem item;
-				for (Categoria cat : categorias) {
-					item = new SelectItem(cat, cat.getNome());
-					selectListCat.add(item);
-				}
-			}
-
-		}
-
-		return selectListCat;
-	}
 
 }

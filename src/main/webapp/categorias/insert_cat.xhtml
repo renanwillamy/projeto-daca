@@ -23,42 +23,42 @@
 						value="#{categoriaInsert.categoria.nome}" size="40"></p:inputText>
 					<p:outputLabel></p:outputLabel>
 					<p:commandButton value="Salvar" id="submit"
-						action="#{categoriaInsert.insertCategoria}"></p:commandButton>
+						action="#{categoriaInsert.insertCategoria}" update=":tabelaCategorias"></p:commandButton>
 				</p:panelGrid>
-</h:form>
-				<p:panelGrid columns="1" style="width:600px;">
-					<p:outputLabel>Categorias cadastradas</p:outputLabel>
-					<p:dataTable id="tabelaCategorias"
-						style="padding-bottom:30px; padding-top:10px;" var="cat"
-						value="#{categoriaInsert.categorias}">
-						<p:column headerText="Nome" styleClass="centralizarTexto">
-							<h:outputText value="#{cat.nome}" />
-						</p:column>
-						<p:column headerText="Ação"  styleClass="centralizarTexto">
+			</h:form>
+			<p:panelGrid columns="1" style="width:600px;">
+				<p:outputLabel>Categorias cadastradas</p:outputLabel>
+				<p:dataTable id="tabelaCategorias"
+					style="padding-bottom:30px; padding-top:10px;" var="cat"
+					value="#{categoriaInsert.categorias}">
+					<p:column headerText="Nome" styleClass="centralizarTexto">
+						<h:outputText value="#{cat.nome}" />
+					</p:column>
+					<p:column headerText="Ação" styleClass="centralizarTexto">
 
-				<h:form>
-					
-					<p:commandLink value="Excluir"
-						actionListener="#{categoriaInsert.excluir(cat)}"
-						update=":tabelaCategorias">
-						<p:confirm header="Atenção"
-							message="Tem certeza que deseja excluir #{cat.nome}?"
-							icon="ui-icon-alert" />
-					</p:commandLink>
+						<h:form>
+							<p:commandLink value="Excluir"
+								actionListener="#{categoriaInsert.excluir(cat)}"
+								update=":tabelaCategorias">
+								<p:confirm header="Atenção"
+									message="Tem certeza que deseja excluir #{cat.nome}?"
+									icon="ui-icon-alert" />
+							</p:commandLink>
 
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Sim" type="button"
-							styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-						<p:commandButton value="Não" type="button"
-							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-					</p:confirmDialog>
-				</h:form>
+							<p:confirmDialog global="true" showEffect="fade"
+								hideEffect="fade">
+								<p:commandButton value="Sim" type="button"
+									styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+								<p:commandButton value="Não" type="button"
+									styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+							</p:confirmDialog>
+						</h:form>
 
 
-			</p:column>
-					</p:dataTable>
-				</p:panelGrid>
-			
+					</p:column>
+				</p:dataTable>
+			</p:panelGrid>
+
 
 		</p:fieldset>
 
