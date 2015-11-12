@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.projetodaca.core.TransacionalCdi;
 import com.projetodaca.dao.UsuarioDao;
 import com.projetodaca.entities.Usuario;
 
@@ -28,6 +29,7 @@ public class UsuarioService {
      * 
      * @param usuario 
      */
+    @TransacionalCdi
     public Usuario save(Usuario usuario) throws Exception{
             dao.insert(usuario);
             return usuario;

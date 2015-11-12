@@ -21,7 +21,13 @@ import javax.persistence.OneToOne;
 @Entity
 public class Usuario implements Serializable{
 
-    public Usuario() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8918912589660860053L;
+
+
+	public Usuario() {
     }
 
     public Usuario(String nome, String login, String senha) {

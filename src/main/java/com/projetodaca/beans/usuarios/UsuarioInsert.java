@@ -1,44 +1,31 @@
 package com.projetodaca.beans.usuarios;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 
-import org.primefaces.context.RequestContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
-import com.projetodaca.entities.Categoria;
-import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Usuario;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class UsuarioInsert extends AbstractManageBean implements Serializable {
 
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8559018315064616512L;
-	
+	private static final long serialVersionUID = 2358902591681399695L;
+	@Inject
 	private Fachada fachada;
+	@Inject
 	private Usuario usuario;
 	
 
-	@PostConstruct
-	public void start() {
-		fachada = new Fachada();
-		usuario = new Usuario();
-		
-	}
 
 	public String insertUsuario() {
 
