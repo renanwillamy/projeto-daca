@@ -4,8 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
@@ -14,28 +15,22 @@ import com.projetodaca.entities.Endereco;
 import com.projetodaca.entities.Fornecedor;
 
 @ViewScoped
-@ManagedBean
+@Named
 public class FornecedorInsert extends AbstractManageBean implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8559018315064616512L;
-	
-	private Fachada fachada;		
+	@Inject
+	private Fachada fachada;	
+	@Inject
 	private Fornecedor fornecedor;
+	@Inject
 	private Endereco endereco;
+	@Inject
 	private Contato contato;
 
-
-	@PostConstruct
-	public void start() {
-		fachada = new Fachada();
-		fornecedor = new Fornecedor();
-		contato = new Contato();
-		endereco = new Endereco();
-		
-	}
 
 	public String insertFornecedor() {
 

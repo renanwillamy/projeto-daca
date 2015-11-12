@@ -7,55 +7,60 @@ package com.projetodaca.services;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import com.projetodaca.dao.FornecedorDao;
 import com.projetodaca.entities.Fornecedor;
+import com.projetodaca.utils.TransacionalCdi;
 
 /**
  *
  * @author renan
  */
 public class FornecedorService {
-    
-     
-    private FornecedorDao dao;
 
-    public FornecedorService() {
-       dao = new FornecedorDao();
-    }
-    
-    /**Persiste fornecedor no banco de dados
-     * 
-     * @param fornecedor 
-     */
-    public Fornecedor save(Fornecedor fornecedor) throws Exception{
-            dao.insert(fornecedor);
-            return fornecedor;
-    }
-    
-    public void update(Fornecedor fornecedor) throws Exception{
-            dao.update(fornecedor);
-    }
-    
-    public void delete(Fornecedor fornecedor) throws Exception{
-            dao.delete(fornecedor);
-    }
-    
-    public List<Fornecedor> list() throws Exception{
-        List<Fornecedor> listFornecedor= null;
-          listFornecedor = dao.list();
-        return listFornecedor;
-    }
-    
-    public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception{
-        List<Fornecedor> listFonecedor= null;
-          listFonecedor = dao.listaFornecedorPorNomeFantasia(nomeFantasia);
-        return listFonecedor;
-    }
-    
-    public Fornecedor getById(int id) throws Exception{
-        Fornecedor fornecedor = null;
-        fornecedor =  dao.getById(id);
-        return fornecedor;
-    }
-    
+	@Inject
+	private FornecedorDao dao;
+
+	public FornecedorService() {
+		dao = new FornecedorDao();
+	}
+
+	/**
+	 * Persiste fornecedor no banco de dados
+	 * 
+	 * @param fornecedor
+	 */
+	@TransacionalCdi
+	public Fornecedor save(Fornecedor fornecedor) throws Exception {
+		dao.insert(fornecedor);
+		return fornecedor;
+	}
+	@TransacionalCdi
+	public void update(Fornecedor fornecedor) throws Exception {
+		dao.update(fornecedor);
+	}
+	@TransacionalCdi
+	public void delete(Fornecedor fornecedor) throws Exception {
+		dao.delete(fornecedor);
+	}
+	@TransacionalCdi
+	public List<Fornecedor> list() throws Exception {
+		List<Fornecedor> listFornecedor = null;
+		listFornecedor = dao.list();
+		return listFornecedor;
+	}
+	@TransacionalCdi
+	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {
+		List<Fornecedor> listFonecedor = null;
+		listFonecedor = dao.listaFornecedorPorNomeFantasia(nomeFantasia);
+		return listFonecedor;
+	}
+	@TransacionalCdi
+	public Fornecedor getById(int id) throws Exception {
+		Fornecedor fornecedor = null;
+		fornecedor = dao.getById(id);
+		return fornecedor;
+	}
+
 }

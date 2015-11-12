@@ -1,10 +1,12 @@
 package com.projetodaca.beans.fornecedores;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import com.projetodaca.beans.AbstractManageBean;
 import com.projetodaca.core.Fachada;
@@ -12,27 +14,24 @@ import com.projetodaca.entities.Contato;
 import com.projetodaca.entities.Endereco;
 import com.projetodaca.entities.Fornecedor;
 
-@ViewScoped
-@ManagedBean
-public class FornecedorEdit extends AbstractManageBean {
+@SessionScoped
+@Named
+public class FornecedorEdit extends AbstractManageBean implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4134744186371788146L;
+	@Inject
 	private Fachada fachada;
+	@Inject
 	private Fornecedor fornecedor;
+	@Inject
 	private Endereco endereco;
+	@Inject
 	private Contato contato;
-
-	@PostConstruct
-	public void start() {
-		fachada = new Fachada();
-		if (fornecedor == null)
-			fornecedor = new Fornecedor();
-		endereco = new Endereco();
-
-	}
-
+	
 	public String updateFornecedor() {
-		try {
-				
-
+		try {			
 			fachada.updateFornecedor(fornecedor);
 			showFlashMessageInfo("Fornecedor Alterado!");
 		} catch (Exception e) {
@@ -56,8 +55,7 @@ public class FornecedorEdit extends AbstractManageBean {
 		return endereco;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		System.out.println(endereco.toString());
+	public void setEndereco(Endereco endereco) {		
 		this.endereco = endereco;
 	}
 

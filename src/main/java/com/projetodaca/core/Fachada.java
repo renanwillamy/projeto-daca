@@ -24,6 +24,8 @@ public class Fachada implements Serializable {
 	private UsuarioService usuService;
 	@Inject
 	private ClienteService cliService;
+	@Inject
+	private FornecedorService fornService;
 
 
 	/**
@@ -121,39 +123,26 @@ public class Fachada implements Serializable {
 	 * 
 	 * @param fornecedor
 	 */
-	public Fornecedor saveFornecedor(Fornecedor fornecedor) throws Exception {
-		FornecedorService service = new FornecedorService();
-		fornecedor = service.save(fornecedor);
-		service = null;
+	public Fornecedor saveFornecedor(Fornecedor fornecedor) throws Exception {	
+		fornecedor = fornService.save(fornecedor);		
 		return fornecedor;
 	}
 
-	public void updateFornecedor(Fornecedor fornecedor) throws Exception {
-		FornecedorService service = new FornecedorService();
-		service.update(fornecedor);
-		service = null;
+	public void updateFornecedor(Fornecedor fornecedor) throws Exception {		
+		fornService.update(fornecedor);		
 	}
 
-	public void deleteFornecedor(Fornecedor fornecedor) throws Exception {
-		FornecedorService service = new FornecedorService();
-		service.delete(fornecedor);
-		service = null;
+	public void deleteFornecedor(Fornecedor fornecedor) throws Exception {		
+		fornService.delete(fornecedor);	
 	}
 
-	public List<Fornecedor> listFornecedor() throws Exception {
-		List<Fornecedor> listFornecedor = null;
-		FornecedorService service = new FornecedorService();
-		listFornecedor = service.list();
-		service = null;
-		return listFornecedor;
+	public List<Fornecedor> listFornecedor() throws Exception {	
+		return fornService.list();
 	}
 
-	public Fornecedor getFornecedorById(int id) throws Exception {
-		Fornecedor fornecedor = null;
-		FornecedorService service = new FornecedorService();
-		fornecedor = service.getById(id);
-		service = null;
-		return fornecedor;
+	public Fornecedor getFornecedorById(int id) throws Exception {		
+		
+		return fornService.getById(id);
 	}
 
 	/**
@@ -180,10 +169,9 @@ public class Fachada implements Serializable {
 		service = null;
 	}
 
-	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {
-		FornecedorService service = new FornecedorService();
-		List<Fornecedor> lista = service.listaFornecedorPorNomeFantasia(nomeFantasia);
-		return lista;
+	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {		
+		 
+		return fornService.listaFornecedorPorNomeFantasia(nomeFantasia);
 	}
 
 	/**

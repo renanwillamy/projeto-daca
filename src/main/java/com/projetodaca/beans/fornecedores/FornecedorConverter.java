@@ -4,6 +4,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
 
 import com.projetodaca.core.Fachada;
 import com.projetodaca.entities.Fornecedor;
@@ -11,11 +12,11 @@ import com.projetodaca.entities.Fornecedor;
 
 @FacesConverter(value = "fornecedorConverter")
 public class FornecedorConverter implements Converter {
+	@Inject
 	private Fachada fachada;
 
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
-		fachada = new Fachada();
-		
+				
 		if (value == null || (value.trim().length() == 0)||value.equals("Selecione")) {
 			return null;
 		}
