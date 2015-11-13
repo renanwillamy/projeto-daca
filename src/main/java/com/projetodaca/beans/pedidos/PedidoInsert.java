@@ -29,7 +29,12 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 
 	
 	public String buscaProduto(){
-		return "/produtos/lista_prod?faces-redirect=true";		
+		
+		
+		showFlashMessageInfo(produto.getNome());
+		
+	//	return "/produtos/lista_prod?faces-redirect=true";
+		return "insert_pedido";
 	}
 
 	public String insertPedido() {

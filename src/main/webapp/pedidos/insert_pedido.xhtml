@@ -14,49 +14,49 @@
 
 		<p:fieldset legend="Pedido Interno"
 			style="margin-top:20px; width:800px">
-			<h:form>
+			<h:form id="form1">
 				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
 					closable="true"></p:messages>
 				<p:panelGrid columns="3" style="width:600px;">
-					<p:outputLabel for="nome" indicateRequired="true">Nome:</p:outputLabel>
-					<p:inputText label="Nome do produto" id="nome" 
-						value="#{pedidoInsert.produto.nome}" size="40"></p:inputText>
-					<p:outputLabel></p:outputLabel>
-					<p:commandButton value="Salvar" id="submit" 
-						action="#{pedidoInsert.buscaProduto}" ></p:commandButton>
-				</p:panelGrid>
-			</h:form>
-			
-			<p:panel> 
-			<p:outputLabel>Produtos</p:outputLabel>
+					<p:outputLabel for="nome"  indicateRequired="true">Nome do Produto:</p:outputLabel>
+					<p:inputText disabled="true" placeholder="selecione um produto na tabela" label="Nome do produto" id="nome"
+						value="#{pedidoInsert.produto.nome}" size="40"></p:inputText>						
+				</p:panelGrid>		
+
+			<p:panel>
+				<p:outputLabel>Produtos</p:outputLabel>
 			</p:panel>
-			
-			<p:dataTable var="prod" value="#{pedidoInsert.produtos}">
-				<p:column headerText="Id" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.id}" />
-			</p:column>
+		
+				<p:dataTable var="prod" value="#{pedidoInsert.produtos}"
+					selectionMode="single" selection="#{pedidoInsert.produto}"
+					rowKey="#{prod.id}" scrollable="true" scrollHeight="150">
+					<p:column headerText="Id" styleClass="centralizarTexto">
+						<h:outputText value="#{prod.id}" />
+					</p:column>
 
-			<p:column headerText="Descrição" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.nome}" />
-			</p:column>
+					<p:column headerText="Descrição" styleClass="centralizarTexto">
+						<h:outputText value="#{prod.nome}" />
+					</p:column>
 
-			<p:column headerText="Unidade" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.und}" />
-			</p:column>
+					<p:column headerText="Unidade" styleClass="centralizarTexto">
+						<h:outputText value="#{prod.und}" />
+					</p:column>
 
-			<p:column headerText="Preço de custo" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.precoCusto}">
-					<f:convertNumber type="currency" />
-				</h:outputText>
-			</p:column>
-			<p:column headerText="Preço de venda" styleClass="centralizarTexto">
-				<h:outputText value="#{prod.precoVenda}">
-					<f:convertNumber type="currency" />
-				</h:outputText>
-			</p:column>
-			
-			</p:dataTable>
-			
+					<p:column headerText="Preço de custo" styleClass="centralizarTexto">
+						<h:outputText value="#{prod.precoCusto}">
+							<f:convertNumber type="currency" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Preço de venda" styleClass="centralizarTexto">
+						<h:outputText value="#{prod.precoVenda}">
+							<f:convertNumber type="currency" />
+						</h:outputText>
+					</p:column>
+
+				</p:dataTable>
+				<p:commandButton value="Selecionar produto" id="submit"
+						action="#{pedidoInsert.buscaProduto}" update="form1:nome"></p:commandButton>
+			</h:form>
 		</p:fieldset>
 
 	</ui:define>
