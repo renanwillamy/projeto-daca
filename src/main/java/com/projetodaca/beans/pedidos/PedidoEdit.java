@@ -46,6 +46,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 	private Pedido pedido;
 	@Inject
 	private Avista avista;
+	
 
 	public void selecionaProduto() {
 		showFlashMessageInfo(produto.getNome());
@@ -54,27 +55,25 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 
 	public void selecionaCliente() {
 
-		showFlashMessageInfo(cliente.getNome());
+		showFlashMessageInfo(getCliente().getNome());
 	}
 
 	public void removeItem() {
 		showFlashMessageInfo(itemSelecionado.getProduto().getNome() + " removido");
 
-		itensDoPedido.remove(itemSelecionado);
+		pedido.getItensDoPedido().remove(itemSelecionado);
 		getValorTotal();
 	}
 
 	public String updatePedido() {
 		try {
 
-			if(cliente.getId()==0)
+			if(getCliente().getId()==0)
 				throw new Exception("Selecione um cliente");
-			if(itensDoPedido.size()==0)
-				throw new Exception("O pedido está vazio!");
+			if(pedido.getItensDoPedido().size()==0)
+				throw new Exception("O pedido está vazio!");			
 			
-			pedido.setItensDoPedido(getItensDoPedido());
-			pedido.setDataDoPedido(new Date());
-			pedido.setCliente(cliente);		
+			pedido.setDataDoPedido(new Date());			
 			avista.setValorPagamento(valorTotal);
 			avista.setValorPago(valorTotal);
 			pedido.setValorTotal(valorTotal);
@@ -93,7 +92,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 			return null;
 		//	return "insert_pedido?faces-redirect=true";
 		}
-		return "/index?faces-redirect=true";
+		return "lista_pedidos?faces-redirect=true";
 	}
 
 	public Produto getProduto() {
@@ -133,7 +132,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 	}
 
 	public Cliente getCliente() {		
-		return cliente;
+		return pedido.getCliente();
 	}
 
 	public void setCliente(Cliente cliente) {
@@ -146,15 +145,12 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 	}
 
 	public List<ItensDoPedido> getItensDoPedido() {
-		if (itensDoPedido == null) {
-			itensDoPedido = new ArrayList<>();
-		}
 		
-		for(ItensDoPedido item:itensDoPedido){
+		for(ItensDoPedido item:pedido.getItensDoPedido()){
 			item.setValorTotal(item.getProduto().getPrecoVenda()*item.getQuantidade());
 		}
 		
-		return itensDoPedido;
+		return pedido.getItensDoPedido();
 	}
 
 	
@@ -168,18 +164,23 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 	}
 
 	private void addProduto() {
-		if (itensDoPedido == null) {
-			itensDoPedido = new ArrayList<>();
-		}
+		
 		ItensDoPedido it = new ItensDoPedido();
 		it.setProduto(produto);
 		it.setPedido(pedido);
 		it.setValor(produto.getPrecoVenda());
 		it.setQuantidade(1);
-		if (!itensDoPedido.contains(it)) {
-			itensDoPedido.add(it);
+		boolean contem = false;
+		
+		for (ItensDoPedido item : pedido.getItensDoPedido()) {
+			if (it.getProduto().getId() == item.getProduto().getId()) {
+				contem = true;
+			}
+		}		
+		if (!contem) {
+			pedido.getItensDoPedido().add(it);
 		}else{
-			for (ItensDoPedido item : getItensDoPedido()) {
+			for (ItensDoPedido item : pedido.getItensDoPedido()) {
 				if (it.getProduto().getId() == item.getProduto().getId()) {
 					item.setQuantidade(item.getQuantidade()+1);
 				}
@@ -190,7 +191,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 
 	public double getValorTotal() {
 		valorTotal = 0;
-		for (ItensDoPedido item : getItensDoPedido()) {
+		for (ItensDoPedido item : pedido.getItensDoPedido()) {
 			valorTotal += item.getValor()*item.getQuantidade();
 		}
 
@@ -224,7 +225,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 				((ItensDoPedido) event.getObject()).getProduto().getNome());
 
 		ItensDoPedido item = ((ItensDoPedido) event.getObject());
-		for (ItensDoPedido it : getItensDoPedido()) {
+		for (ItensDoPedido it : pedido.getItensDoPedido()) {
 			if (it.getProduto().getId() == item.getProduto().getId()) {
 				it = item;
 			}
@@ -239,7 +240,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 	}
 
 	public void setItensDoPedido(List<ItensDoPedido> itensDoPedido) {
-		this.itensDoPedido = itensDoPedido;
+		pedido.setItensDoPedido(itensDoPedido);
 	}
 	
 	

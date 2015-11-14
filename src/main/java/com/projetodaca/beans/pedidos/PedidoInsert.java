@@ -47,14 +47,13 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 	@Inject
 	private Avista avista;
 
-	public void selecionaProduto() {
-		showFlashMessageInfo(produto.getNome());
+	public void selecionaProduto() {		
 		addProduto();
 	}
 
 	public void selecionaCliente() {
 
-		showFlashMessageInfo(cliente.getNome());
+		showFlashMessageInfo(cliente.getNome()+" selecionado");
 	}
 
 	public void removeItem() {
@@ -93,7 +92,7 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 			return null;
 		//	return "insert_pedido?faces-redirect=true";
 		}
-		return "/index?faces-redirect=true";
+		return "lista_pedidos?faces-redirect=true";
 	}
 
 	public Produto getProduto() {

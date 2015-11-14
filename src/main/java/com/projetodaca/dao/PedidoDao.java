@@ -123,39 +123,8 @@ public class PedidoDao extends AbstractDao<Pedido> {
 
 	public void update(Pedido pedido) throws Exception {
 		EntityManager manager = getEntityManager();
-		try {
-			ItensDoPedidoDao itensDao = new ItensDoPedidoDao();
-			List<ItensDoPedido> novaLista = new ArrayList<ItensDoPedido>();
-			List<ItensDoPedido> listItens = pedido.getItensDoPedido();
-
-			// adiciona itens do pedido na nova lista
-			for (ItensDoPedido item : listItens) {
-				novaLista.add(item);
-			}
-
-			ProdutoDao prodDao = new ProdutoDao();
-			List<ItensDoPedido> listaItens = itensDao.list("where e.pedido.id =" + pedido.getId());
-			for (ItensDoPedido item : listaItens) {
-				Produto prod = item.getProduto();
-				prod.setQuantidade(prod.getQuantidade() + item.getQuantidade());
-				manager.merge(prod);
-			}
-			pedido.getItensDoPedido().clear();
-			manager.merge(pedido);
-			for (ItensDoPedido item : novaLista) {
-				Produto prod = item.getProduto();
-				item.setPedido(pedido);
-				prod.setQuantidade(prod.getQuantidade() - item.getQuantidade());
-				for (ItensDoPedido item2 : listaItens) {
-					if (item.getProduto().getId() == item2.getProduto().getId()) {
-						prod.setQuantidade(item2.getProduto().getQuantidade() - item.getQuantidade());
-					}
-				}
-				manager.merge(prod);
-			}
-			pedido.setItensDoPedido(novaLista);
-			manager.merge(pedido);
-			itensDao = null;
+		try {			
+			manager.merge(pedido);			
 
 		} catch (Exception ex) {
 			throw new Exception(ex);

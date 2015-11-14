@@ -33,7 +33,7 @@
 
 
 					<p:dataTable id="tabelaItens" var="item" editable="true"
-						value="#{pedidoEdit.pedido.itensDoPedido}" selectionMode="single"
+						value="#{pedidoEdit.itensDoPedido}" selectionMode="single"
 						selection="#{pedidoEdit.itemSelecionado}"
 						rowKey="#{item.pedido.id}" scrollable="true" scrollHeight="150">
 
@@ -98,10 +98,10 @@
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
-			<!-- Pedidos -->
+			<!-- Produtos -->
 			<h:form id="form1" style="margin-top:20px">
 				<p:panel>
-					<p:outputLabel>Pedidos</p:outputLabel>
+					<p:outputLabel>Produtos</p:outputLabel>
 
 
 					<p:dataTable var="prod" value="#{pedidoEdit.produtos}"
@@ -152,7 +152,7 @@
 					</p:panelGrid>
 
 					<p:dataTable var="cli" value="#{pedidoEdit.clientes}"
-						selectionMode="single" selection="#{pedidoEdit.cliente}"
+						selectionMode="single" selection="#{pedidoEdit.pedido.cliente}"
 						rowKey="#{cli.id}" scrollable="true" scrollHeight="150">
 						<p:column headerText="Id" styleClass="centralizarTexto">
 							<h:outputText value="#{cli.id}" />
