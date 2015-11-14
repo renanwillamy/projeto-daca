@@ -9,12 +9,16 @@ import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Cliente;
 import com.projetodaca.entities.Contato;
 import com.projetodaca.entities.Fornecedor;
+import com.projetodaca.entities.Pagamento;
+import com.projetodaca.entities.Pedido;
 import com.projetodaca.entities.Produto;
+import com.projetodaca.entities.Promissoria;
 import com.projetodaca.entities.Usuario;
 import com.projetodaca.services.CategoriaService;
 import com.projetodaca.services.ClienteService;
 import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
+import com.projetodaca.services.PedidoService;
 import com.projetodaca.services.ProdutoService;
 import com.projetodaca.services.UsuarioService;
 
@@ -30,6 +34,8 @@ public class Fachada implements Serializable {
 	private ProdutoService prodService;
 	@Inject
 	private CategoriaService catService;
+	@Inject
+	private PedidoService pedService;
 
 
 	/**
@@ -60,6 +66,10 @@ public class Fachada implements Serializable {
 
 	public Produto getProdutoById(int id) throws Exception {	
 		return prodService.getById(id);
+	}
+	
+	public List<Produto> listaProdutosAtivos() throws Exception {
+		return prodService.listaProdutoAtivos();
 	}
 
 	public Categoria saveCategoria(Categoria categoria) throws Exception {	
@@ -210,6 +220,37 @@ public class Fachada implements Serializable {
 
 		Usuario usuario = usuService.autenticaUsuario(login, senha);
 		return usuario;
+	}
+	
+	 public Pedido savePedido(Pedido pedido) throws Exception{
+		return pedService.save(pedido);		 
+	 }
+	 
+	 public void updatePedido(Pedido pedido) throws Exception{
+		 pedService.update(pedido);
+	 }
+	 
+	 public void deletePedido(Pedido pedido) throws Exception{
+		 pedService.delete(pedido);
+	 }
+	 public List<Pedido> listPedidos() throws Exception{
+		return pedService.list();
+	 }
+	 
+	 public Pedido getPedidoById(int id) throws Exception{
+		 return pedService.getById(id);
+	 }
+
+	public void savePedido(Pedido pedido, Pagamento pagamento) throws Exception {		
+		pedService.save(pedido,pagamento);	
+	}
+
+	public List<Pedido> listPedidoPorId(String filtro) throws Exception {		
+		return pedService.listaPedidoPorId(filtro);
+	}
+	
+	public void updatePedido(Pedido pedido, Pagamento pagamento) throws Exception {
+		pedService.update(pedido, pagamento);
 	}
 
 }

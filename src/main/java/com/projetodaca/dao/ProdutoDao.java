@@ -56,6 +56,11 @@ public class ProdutoDao extends AbstractDao<Produto> {
 		String where = "WHERE e.nome like '%" + nome + "%'";
 		return list(where);
 	}
+	
+	public List<Produto> listaProdutoAtivos() throws Exception {
+		String where = "WHERE e.ativo = 1";
+		return list(where);
+	}
 
 	public Produto getById(int id) throws Exception {
 		EntityManager manager = getEntityManager();

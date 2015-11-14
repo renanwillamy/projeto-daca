@@ -8,6 +8,14 @@
 
 <ui:composition template="/templates/template_home.xhtml">
 
+<f:metadata>
+		<f:viewParam name="id" value="#{pedidoEdit.pedido}"
+			converterMessage="Bad request. Unknown pedido" 
+			>
+			<f:converter converterId="pedidoConverter" />
+		</f:viewParam>
+	</f:metadata>
+
 	<ui:define name="title">Pedido Interno</ui:define>
 
 	<ui:define name="content">
@@ -25,14 +33,14 @@
 
 
 					<p:dataTable id="tabelaItens" var="item" editable="true"
-						value="#{pedidoInsert.itensDoPedido}" selectionMode="single"
-						selection="#{pedidoInsert.itemSelecionado}"
-						rowKey="#{item.produto.id}" scrollable="true" scrollHeight="150">
+						value="#{pedidoEdit.pedido.itensDoPedido}" selectionMode="single"
+						selection="#{pedidoEdit.itemSelecionado}"
+						rowKey="#{item.pedido.id}" scrollable="true" scrollHeight="150">
 
-						<p:ajax event="rowEdit" listener="#{pedidoInsert.onRowEdit}"
+						<p:ajax event="rowEdit" listener="#{pedidoEdit.onRowEdit}"
 							update="formItens:msgs formItens:valorTotal" />
 						<p:ajax event="rowEditCancel"
-							listener="#{pedidoInsert.onRowCancel}"
+							listener="#{pedidoEdit.onRowCancel}"
 							update="formItens:msgs formItens:valorTotal" />
 
 
@@ -81,23 +89,23 @@
 					</p:dataTable>
 					<p:panelGrid columns="3">
 						<p:commandButton value="Remover item" id="submit"
-							action="#{pedidoInsert.removeItem}"
+							action="#{pedidoEdit.removeItem}"
 							update="formItens:valorTotal formItens:tabelaItens"></p:commandButton>
 						<p:outputLabel>Valor total: </p:outputLabel>
-						<p:outputLabel id="valorTotal" value="#{pedidoInsert.valorTotal}">
+						<p:outputLabel id="valorTotal" value="#{pedidoEdit.valorTotal}">
 							<f:convertNumber type="currency" />
 						</p:outputLabel>
 					</p:panelGrid>
 				</p:panel>
 			</h:form>
-			<!-- Produtos -->
+			<!-- Pedidos -->
 			<h:form id="form1" style="margin-top:20px">
 				<p:panel>
-					<p:outputLabel>Produtos</p:outputLabel>
+					<p:outputLabel>Pedidos</p:outputLabel>
 
 
-					<p:dataTable var="prod" value="#{pedidoInsert.produtos}"
-						selectionMode="single" selection="#{pedidoInsert.produto}"
+					<p:dataTable var="prod" value="#{pedidoEdit.produtos}"
+						selectionMode="single" selection="#{pedidoEdit.produto}"
 						rowKey="#{prod.id}" scrollable="true" scrollHeight="150">
 						<p:column headerText="Id" styleClass="centralizarTexto">
 							<h:outputText value="#{prod.id}" />
@@ -125,8 +133,8 @@
 						</p:column>
 
 					</p:dataTable>
-					<p:commandButton value="Selecionar produto" id="submit"
-						action="#{pedidoInsert.selecionaProduto}"
+					<p:commandButton value="Selecionar pedido" id="submit"
+						action="#{pedidoEdit.selecionaProduto}"
 						update="formItens:tabelaItens formItens:valorTotal"></p:commandButton>
 				</p:panel>
 			</h:form>
@@ -140,11 +148,11 @@
 						<p:inputText onclick="PF('dlg1').show();"
 							placeholder="selecione um cliente na tabela"
 							label="Nome do cliente" id="nomeCliente"
-							value="#{pedidoInsert.cliente.nome}" size="40"></p:inputText>
+							value="#{pedidoEdit.pedido.cliente.nome}" size="40"></p:inputText>
 					</p:panelGrid>
 
-					<p:dataTable var="cli" value="#{pedidoInsert.clientes}"
-						selectionMode="single" selection="#{pedidoInsert.cliente}"
+					<p:dataTable var="cli" value="#{pedidoEdit.clientes}"
+						selectionMode="single" selection="#{pedidoEdit.cliente}"
 						rowKey="#{cli.id}" scrollable="true" scrollHeight="150">
 						<p:column headerText="Id" styleClass="centralizarTexto">
 							<h:outputText value="#{cli.id}" />
@@ -164,7 +172,7 @@
 
 					</p:dataTable>
 					<p:commandButton value="Selecionar cliente" id="submit"
-						action="#{pedidoInsert.selecionaCliente}"
+						action="#{pedidoEdit.selecionaCliente}"
 						update="form2:nomeCliente"></p:commandButton>
 				</p:panel>
 				<p:dialog header="Atenção" widgetVar="dlg1" minHeight="40">
@@ -173,8 +181,8 @@
 			</h:form>
 
 			<h:form style="margin-top:20px; margin-left:50%; margin-right:50%">
-				<p:commandButton value="Salvar Pedido" id="submit"
-					action="#{pedidoInsert.salvaPedido}"></p:commandButton>
+				<p:commandButton value="Editar Pedido" id="submit"
+					action="#{pedidoEdit.updatePedido}"></p:commandButton>
 			</h:form>
 		</p:fieldset>
 

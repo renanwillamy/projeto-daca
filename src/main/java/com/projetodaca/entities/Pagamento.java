@@ -44,7 +44,12 @@ import javax.persistence.Transient;
 @DiscriminatorValue("PG")
 public class Pagamento implements Serializable {
 
-    public Pagamento() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1715685912800884140L;
+
+	public Pagamento() {
         setStatus(status.ABERTO);
     }
 

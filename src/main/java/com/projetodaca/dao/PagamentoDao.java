@@ -25,91 +25,62 @@ import com.projetodaca.entities.TipoPagto;
  *
  * @author renan
  */
-public class PagamentoDao implements IDAO<Pagamento> {
+public class PagamentoDao extends AbstractDao<Pagamento> {
 
-    private EntityManager manager;
    
-
-    public PagamentoDao() {
-       
-    }
-
     
     public void insert(Pagamento pagamento) throws Exception {
-        try {
-            beginTransaction();
+    	EntityManager manager = getEntityManager();
+        try {        
             manager.persist(pagamento);
-            manager.refresh(pagamento);
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            manager.refresh(pagamento);          
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
         }
     }
 
     
     public List<Pagamento> list() throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Pagamento> list = new ArrayList<Pagamento>();
-        try {
-            beginTransaction();
-            list = (List<Pagamento>) manager.createQuery("SELECT e FROM Pagamento e", Pagamento.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        try {           
+            list = (List<Pagamento>) manager.createQuery("SELECT e FROM Pagamento e", Pagamento.class).getResultList();            
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
         }
         return list;
     }
 
     public List<Pagamento> listPorIdPedido(int idPedido) throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Pagamento> list = new ArrayList<Pagamento>();
-        try {
-            beginTransaction();
+        try {           
             Query query = manager.createQuery("SELECT e FROM Pagamento e WHERE e.pedido.id = :idPedido", Pagamento.class);
             query.setParameter("idPedido", idPedido);
-            list = query.getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            list = query.getResultList();           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
         return list;
     }
 
     public List<Pagamento> list(String where) throws Exception {
+    	EntityManager manager = getEntityManager();
         List<Pagamento> list = new ArrayList<Pagamento>();
-        try {
-            beginTransaction();
+        try {           
             list = (List<Pagamento>) manager.createQuery("SELECT e FROM Pagamento e " + where, Pagamento.class).getResultList();
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
         return list;
     }
 
     public List<Pagamento> listPor(Date dataInicial, Date dataFinal, Date dataPagamentoInicial, Date dataPagamentoFinal, String nomeCliente, int idPedido, Status status, TipoPagto tipoPagto, double valorDoPagamentoInicial, double valorDoPagamentoFinal) throws Exception {
-        List<Pagamento> list = new ArrayList<Pagamento>();
+    	EntityManager manager = getEntityManager();
+    	List<Pagamento> list = new ArrayList<Pagamento>();        
         try {
-            beginTransaction();
-            String jpql = "";
+                     String jpql = "";
             if (dataInicial != null) {
                 jpql += "WHERE date(e.dataInicial) >= :dataInicial";
             }
@@ -224,17 +195,10 @@ public class PagamentoDao implements IDAO<Pagamento> {
             if (valorDoPagamentoFinal > 0) {
                 query.setParameter("valorDoPagamentoFinal", valorDoPagamentoFinal);
             }
-            list = query.getResultList();
-
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            list = query.getResultList();          
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
+        } 
         return list;
     }
 
@@ -243,7 +207,7 @@ public class PagamentoDao implements IDAO<Pagamento> {
      * inferior a data atual e atualiza a situação do cliente como bloqueado
      */
     public void atualizaPagamento() throws Exception {
-       
+    	EntityManager manager = getEntityManager();
 
             Calendar calend = GregorianCalendar.getInstance();
             Calendar calend2 = GregorianCalendar.getInstance();
@@ -252,7 +216,7 @@ public class PagamentoDao implements IDAO<Pagamento> {
             Date dataOntem = new Date(calend2.getTimeInMillis());
             List<Pagamento> listPagto = listPor(dataAnterior, dataOntem, null, null, null, 0, null, null, 0, 0);
             try {
-            beginTransaction();
+           
             for (Pagamento pag : listPagto) {
                 if (pag.getStatus() != Status.LIQUIDADO) {
                     Cliente cliente = pag.getPedido().getCliente();
@@ -261,100 +225,55 @@ public class PagamentoDao implements IDAO<Pagamento> {
                     manager.merge(pag);
                 }
             }
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+           
+        } catch (Exception e) {           
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
-
+        } 
     }
 
     
     public Pagamento getById(int id) throws Exception {
+    	EntityManager manager = getEntityManager();
         Pagamento pagamento = null;
-        try {
-            beginTransaction();
-            pagamento = manager.find(Pagamento.class, id);
-            commitTransaction();
-        } catch (Exception e) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+        try {      
+            pagamento = manager.find(Pagamento.class, id);           
+        } catch (Exception e) {            
             throw new Exception(e.getMessage());
-        } finally {
-            manager.close();
-        }
-
+        } 
         return pagamento;
     }
 
     
     public void update(Pagamento pagamento) throws Exception {
-        try {
-            beginTransaction();
-            manager.merge(pagamento);
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+    	EntityManager manager = getEntityManager();
+        try {           
+            manager.merge(pagamento);            
+        } catch (Exception ex) {            
             throw new Exception(ex);
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
     
     public void delete(Pagamento pagamento) throws Exception {
-        try {
-            beginTransaction();            
-            manager.remove(manager.getReference(Pagamento.class, pagamento.getId()));
-            commitTransaction();
+    	EntityManager manager = getEntityManager();
+        try {          
+            manager.remove(manager.getReference(Pagamento.class, pagamento.getId()));           
         } catch (Exception ex) {  
-            if (manager.getTransaction().isActive()) {
-            }
-            ex.printStackTrace();
+                       ex.printStackTrace();
             throw new Exception(ex);            
-        } finally {
-            manager.close();
-        }
+        } 
     }
 
     public void deleteTodosPorIdPedido(int idPedido) throws Exception {
-        try {
-            beginTransaction();
+    	EntityManager manager = getEntityManager();
+        try {            
             Query query = manager.createQuery("DELETE Pagamento e where e.pedido.id = :idPedido");
             query.setParameter("idPedido", idPedido);
-            query.executeUpdate();
-            commitTransaction();
-        } catch (Exception ex) {
-            if (manager.getTransaction().isActive()) {
-                rollBack();
-            }
+            query.executeUpdate();            
+        } catch (Exception ex) {           
             throw new Exception(ex);
-        } finally {
-            manager.close();
-        }
-    }
-
-    
-    public void beginTransaction() {
-        
-        manager.getTransaction().begin();
-    }
-
-    
-    public void commitTransaction() {
-        manager.getTransaction().commit();
-    }
-
-    
-    public void rollBack() {
-        manager.getTransaction().rollback();
-    }
+        } 
+    }   
+   
 
 }

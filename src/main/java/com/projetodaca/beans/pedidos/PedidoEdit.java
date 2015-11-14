@@ -24,7 +24,7 @@ import com.projetodaca.entities.Promissoria;
 
 @ViewScoped
 @Named
-public class PedidoInsert extends AbstractManageBean implements Serializable {
+public class PedidoEdit extends AbstractManageBean implements Serializable {
 
 	/**
 	 * 
@@ -64,7 +64,7 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 		getValorTotal();
 	}
 
-	public String salvaPedido() {
+	public String updatePedido() {
 		try {
 
 			if(cliente.getId()==0)
@@ -78,7 +78,7 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 			avista.setValorPagamento(valorTotal);
 			avista.setValorPago(valorTotal);
 			pedido.setValorTotal(valorTotal);
-			fachada.savePedido(pedido, avista);
+			fachada.updatePedido(pedido, avista);
 
 			showFlashMessageInfo("Pedido Salvo!");
 		} catch (Exception e) {
@@ -132,7 +132,7 @@ public class PedidoInsert extends AbstractManageBean implements Serializable {
 		this.produtos = produtos;
 	}
 
-	public Cliente getCliente() {
+	public Cliente getCliente() {		
 		return cliente;
 	}
 

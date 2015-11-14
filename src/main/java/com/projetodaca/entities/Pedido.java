@@ -43,6 +43,8 @@ public class Pedido implements Serializable {
     
     private double descontoPorCento;    
     
+    private double valorTotal;
+    
     @OneToMany(fetch =FetchType.EAGER,mappedBy = "pedido",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<ItensDoPedido>itensDoPedido;    
     
@@ -97,8 +99,18 @@ public class Pedido implements Serializable {
     public void setItensDoPedido(List<ItensDoPedido> itensDoPedido) {
         this.itensDoPedido = itensDoPedido;
     }
+    
+    
 
-    @Override
+    public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.id;

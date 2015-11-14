@@ -5,6 +5,7 @@
  */
 package com.projetodaca.entities;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -18,9 +19,13 @@ import javax.persistence.Entity;
  */
 @Entity
 @DiscriminatorValue("PR")
-public class Promissoria extends Pagamento {
+public class Promissoria extends Pagamento implements Serializable {
     
-    private int prazo;//dias para vencimento
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4647355801003312889L;
+	private int prazo;//dias para vencimento
 
     public Promissoria() {
         setTipoDePgto(TipoPagto.PROMISSORIA);

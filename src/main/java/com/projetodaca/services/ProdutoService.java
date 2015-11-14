@@ -59,5 +59,12 @@ public class ProdutoService {
         produto =  dao.getById(id);
         return produto;
     }
+    @TransacionalCdi
+	public List<Produto> listaProdutoAtivos() throws Exception {
+    	   List<Produto> listProduto= null;
+           listProduto = dao.listaProdutoAtivos();
+         return listProduto;
+    	
+	}
     
 }

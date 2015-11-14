@@ -35,6 +35,8 @@ public class ItensDoPedido implements Serializable{
     
     private double valorCusto;
     
+    private double valorTotal;
+    
     private double desconto;
     
     private double quantidade;
@@ -112,7 +114,15 @@ public class ItensDoPedido implements Serializable{
     }
     
 
-    @Override
+    public double getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(double valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.id;
