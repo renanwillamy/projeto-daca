@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import com.projetodaca.entities.Avista;
 import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Cliente;
 import com.projetodaca.entities.Contato;
@@ -18,6 +19,7 @@ import com.projetodaca.services.CategoriaService;
 import com.projetodaca.services.ClienteService;
 import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
+import com.projetodaca.services.PagamentoService;
 import com.projetodaca.services.PedidoService;
 import com.projetodaca.services.ProdutoService;
 import com.projetodaca.services.UsuarioService;
@@ -36,7 +38,8 @@ public class Fachada implements Serializable {
 	private CategoriaService catService;
 	@Inject
 	private PedidoService pedService;
-
+	@Inject
+	private PagamentoService pagService;
 
 	/**
 	 * Persiste produto no banco de dados
@@ -252,5 +255,13 @@ public class Fachada implements Serializable {
 	public void updatePedido(Pedido pedido, Pagamento pagamento) throws Exception {
 		pedService.update(pedido, pagamento);
 	}
+	
+	 public List<Pagamento> listPagamentos() throws Exception{
+		return pagService.list();
+		 
+	 }
+	 public List<Avista> listPagamentosAvista() throws Exception {
+		 return pagService.listAvista();
+	 }
 
 }

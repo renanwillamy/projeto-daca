@@ -21,7 +21,12 @@ import javax.persistence.Enumerated;
 @DiscriminatorValue("CH")
 public class Cheque extends Pagamento {
 
-    private String banco;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 329937007691322787L;
+
+	private String banco;
 
     private String agencia;
 

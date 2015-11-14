@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<ui:composition template="/templates/template_home.xhtml">
+
+	<ui:define name="title">Consulta de pagamentos</ui:define>
+
+	<ui:define name="content">
+		<h:form>
+			<p:panelGrid columns="3" style=" margin : 0 auto; margin-top : 30px;">
+				<p:outputLabel>Filtrar:</p:outputLabel>
+				<p:inputText value="#{pagamentoLista.filtro}"
+					placeholder="Digite o número do pagamento"></p:inputText>
+				<p:commandButton icon="ui-icon-search" update=":tabelaPagamentos"
+					action="#{pagamentoLista.filtrar}"></p:commandButton>
+			</p:panelGrid>
+		</h:form>
+		<p:dataTable id="tabelaPagamentos" rows="10" paginator="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5,10,15" 
+			style="padding-bottom:30px; padding-top:10px;" var="pag"
+			value="#{pagamentoLista.pagamentos}">
+			<p:column headerText="Id do Pedido" styleClass="centralizarTexto">
+				<h:outputText value="#{pag.pedido.id}" />
+			</p:column>
+
+			<p:column headerText="Nome do cliente" styleClass="centralizarTexto">
+				<h:outputText value="#{pag.pedido.cliente.nome}" />
+			</p:column>
+
+			<p:column headerText="Data do pagamento" styleClass="centralizarTexto">
+				<h:outputText value="#{pag.dataPagamento}" />
+			</p:column>		
+			
+			<p:column headerText="Valor do Pagamento" styleClass="centralizarTexto">
+				<h:outputText value="#{pag.valorPago}" >
+				<f:convertNumber type="currency" />
+				</h:outputText>
+			</p:column>				
+		</p:dataTable>
+
+	</ui:define>
+
+
+</ui:composition>
+
+</html>

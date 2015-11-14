@@ -16,6 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TemporalType;
 
+import com.projetodaca.entities.Avista;
 import com.projetodaca.entities.Cliente;
 import com.projetodaca.entities.Pagamento;
 import com.projetodaca.entities.Status;
@@ -49,6 +50,24 @@ public class PagamentoDao extends AbstractDao<Pagamento> {
             throw new Exception(e.getMessage());
         }
         return list;
+    }
+    
+    public List<Avista> listAvista() throws Exception {
+    	EntityManager manager = getEntityManager();
+        List<Pagamento> list = new ArrayList<Pagamento>();
+        List<Avista> listAvista = new ArrayList<Avista>();
+        try {           
+            list = (List<Pagamento>) manager.createQuery("SELECT e FROM Pagamento e WHERE e.tipoDePgto = 'AVISTA'", Pagamento.class).getResultList();            
+            for(Pagamento pag:list){
+            	if(pag instanceof Avista){
+            		listAvista.add((Avista)pag);
+            	}
+            }
+           
+        } catch (Exception e) {           
+            throw new Exception(e.getMessage());
+        }
+        return listAvista;
     }
 
     public List<Pagamento> listPorIdPedido(int idPedido) throws Exception {
@@ -273,7 +292,7 @@ public class PagamentoDao extends AbstractDao<Pagamento> {
         } catch (Exception ex) {           
             throw new Exception(ex);
         } 
-    }   
+    }
    
 
 }

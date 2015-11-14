@@ -73,7 +73,7 @@ public class PedidoEdit extends AbstractManageBean implements Serializable {
 			if(pedido.getItensDoPedido().size()==0)
 				throw new Exception("O pedido está vazio!");			
 			
-			pedido.setDataDoPedido(new Date());			
+			pedido.setDataDoPedido(new Date());				
 			avista.setValorPagamento(valorTotal);
 			avista.setValorPago(valorTotal);
 			pedido.setValorTotal(valorTotal);

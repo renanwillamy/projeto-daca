@@ -104,7 +104,8 @@ public class PedidoService {
 	public void update(Pedido pedido, Pagamento pagamento) throws Exception {
 		dao.update(pedido);
 		pagamento.setPedido(pedido);
-		pagDao.update(pagamento);
+		pagDao.deleteTodosPorIdPedido(pedido.getId());
+		pagDao.insert(pagamento);
 	}
 
 	public List<Pedido> listaPedidoPorId(String filtro) throws Exception {
