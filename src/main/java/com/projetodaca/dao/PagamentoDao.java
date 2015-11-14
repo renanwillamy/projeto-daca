@@ -293,6 +293,30 @@ public class PagamentoDao extends AbstractDao<Pagamento> {
             throw new Exception(ex);
         } 
     }
+    
+    public List<Avista> listAvistaPorId(String id) throws Exception {
+    	EntityManager manager = getEntityManager();
+        List<Pagamento> list = new ArrayList<Pagamento>();
+        List<Avista> listAvista = new ArrayList<Avista>();
+        String query = "SELECT e FROM Pagamento e WHERE e.tipoDePgto = 'AVISTA' AND e.pedido.id = "+id;
+        if(id.isEmpty()||id.length()<1){
+        	query = "SELECT e FROM Pagamento e WHERE e.tipoDePgto = 'AVISTA'";
+        }
+
+        try {           
+            list = (List<Pagamento>) manager.createQuery(query, Pagamento.class).getResultList();            
+            for(Pagamento pag:list){
+            	if(pag instanceof Avista){
+            		listAvista.add((Avista)pag);
+            	}
+            }
+           
+        } catch (Exception e) {           
+            throw new Exception(e.getMessage());
+        }
+        return listAvista;
+    }
+
    
 
 }

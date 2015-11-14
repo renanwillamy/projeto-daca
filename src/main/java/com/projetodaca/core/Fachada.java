@@ -264,4 +264,8 @@ public class Fachada implements Serializable {
 		 return pagService.listAvista();
 	 }
 
+	public List<Avista> listPagamentosAvistaPorId(String id) throws Exception {
+		return pagService.listAvistaPorId(id);
+	}
+
 }

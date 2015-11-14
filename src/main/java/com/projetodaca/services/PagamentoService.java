@@ -93,4 +93,10 @@ public class PagamentoService {
          listPagamento = dao.listAvista();
        return listPagamento;
     }
+    @TransacionalCdi
+	public List<Avista> listAvistaPorId(String id) throws Exception {
+		 List<Avista> listPagamento= null;
+         listPagamento = dao.listAvistaPorId(id);
+       return listPagamento;
+	}
 }

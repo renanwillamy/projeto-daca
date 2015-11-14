@@ -55,8 +55,8 @@ public class PagamentoLista extends AbstractManageBean implements Serializable{
 			if (filtro == null)
 				filtro = "";
 			
-		// pagamentos = fachada.listPagamentoPorId(filtro);
-		pagamentos = fachada.listPagamentosAvista();
+		//pagamentos = fachada.listPagamentoPorId(filtro);
+		pagamentos = fachada.listPagamentosAvistaPorId(filtro);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -50,7 +50,7 @@ public class FornecedorInsert extends AbstractManageBean implements Serializable
 			return "insert_fornecedor";
 		}
 	
-		return "/index?faces-redirect=true";
+		return "insert_fornecedor?faces-redirect=true";
 	}
 
 	public Fornecedor getFornecedor() {

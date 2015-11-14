@@ -15,7 +15,7 @@
 			<p:panelGrid columns="3" style=" margin : 0 auto; margin-top : 30px;">
 				<p:outputLabel>Filtrar:</p:outputLabel>
 				<p:inputText value="#{pagamentoLista.filtro}"
-					placeholder="Digite o número do pagamento"></p:inputText>
+					placeholder="Digite o número do pedido" size="40"></p:inputText>
 				<p:commandButton icon="ui-icon-search" update=":tabelaPagamentos"
 					action="#{pagamentoLista.filtrar}"></p:commandButton>
 			</p:panelGrid>
@@ -34,7 +34,9 @@
 			</p:column>
 
 			<p:column headerText="Data do pagamento" styleClass="centralizarTexto">
-				<h:outputText value="#{pag.dataPagamento}" />
+				<h:outputText value="#{pag.dataPagamento}" >
+					<f:convertDateTime locale="pt_BR" timeStyle="short" pattern="dd/MM/yyyy 'às' HH:mm"/>
+				</h:outputText>
 			</p:column>		
 			
 			<p:column headerText="Valor do Pagamento" styleClass="centralizarTexto">
