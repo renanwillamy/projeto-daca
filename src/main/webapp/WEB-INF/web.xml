@@ -72,7 +72,7 @@
 			<description />			
 			<url-pattern>/index.xhtml</url-pattern>	
 			<url-pattern>/produtos/lista_prod.xhtml</url-pattern>	
-			<url-pattern>/fornecedores/lista_fornecedore.xhtml</url-pattern>	
+			<url-pattern>/fornecedores/lista_fornecedores.xhtml</url-pattern>	
 			<url-pattern>/clientes/lista_clientes.xhtml</url-pattern>				
 			<http-method>GET</http-method>			
 			<http-method>HEAD</http-method>

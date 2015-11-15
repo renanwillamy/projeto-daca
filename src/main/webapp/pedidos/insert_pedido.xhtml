@@ -13,7 +13,7 @@
 	<ui:define name="content">
 
 		<p:fieldset legend="Pedido Interno" style="margin-top:20px;">
-			<h:form id="formItens">
+			<h:form id="formItens" onkeypress="if (event.keyCode == 13) { return false; }">
 				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
 					closable="true"></p:messages>
 				<p:growl id="msgs" showDetail="true" />

@@ -22,7 +22,8 @@
 
 	<ui:define name="content">
 
-		<p:fieldset legend="Alteração de fornecedores" style="margin-top:20px;">
+		<p:fieldset legend="Alteração de fornecedores"
+			style="margin-top:20px;">
 			<h:form>
 				<p:messages id="messageInsert" showDetail="true" autoUpdate="true"
 					closable="true"></p:messages>
@@ -32,23 +33,30 @@
 						value="#{fornecedorEdit.fornecedor.razaoSocial}"></p:inputText>
 
 					<p:outputLabel for="nomeFantasia">Nome Fantasia:</p:outputLabel>
-					<p:inputText id="nomeFantasia" label="Nome Fantasia"  value="#{fornecedorEdit.fornecedor.nomeFantasia}" required="true"></p:inputText>
+					<p:inputText id="nomeFantasia" label="Nome Fantasia"
+						value="#{fornecedorEdit.fornecedor.nomeFantasia}" required="true"></p:inputText>
 
 					<p:outputLabel for="cnpj">Cnpj:</p:outputLabel>
-					<p:inputText id="cnpj" label="CNPJ" value="#{fornecedorEdit.fornecedor.cnpj}" required="true"></p:inputText>
+					<p:inputMask id="cnpj" label="CNPJ"
+						value="#{fornecedorEdit.fornecedor.cnpj}" required="true"
+						mask="99.999.999/9999-99"></p:inputMask>
 
 					<p:outputLabel for="logradouro">Logradouro:</p:outputLabel>
-					<p:inputText id="logradouro" label="Logradouro" value="#{fornecedorEdit.endereco.logradouro}" required="true"></p:inputText>
+					<p:inputText id="logradouro" label="Logradouro"
+						value="#{fornecedorEdit.endereco.logradouro}" required="true"></p:inputText>
 
 					<p:outputLabel for="numero">Número:</p:outputLabel>
-					<p:inputText id="numero" label="Número" value="#{fornecedorEdit.endereco.numResidencia}" required="true"></p:inputText>
+					<p:inputText id="numero" label="Número"
+						value="#{fornecedorEdit.endereco.numResidencia}" required="true"></p:inputText>
 
 					<p:outputLabel for="bairro">Bairro:</p:outputLabel>
-					<p:inputText label="Bairro" id="bairro" value="#{fornecedorEdit.endereco.bairro}" required="true"></p:inputText>
+					<p:inputText label="Bairro" id="bairro"
+						value="#{fornecedorEdit.endereco.bairro}" required="true"></p:inputText>
 
 					<p:outputLabel for="cep">Cep:</p:outputLabel>
-					<p:inputText id="cep" label="Cep" value="#{fornecedorEdit.endereco.cep}" required="true"></p:inputText>
-
+					<p:inputMask id="cep" label="Cep"
+						value="#{fornecedorEdit.endereco.cep}" required="true"
+						mask="99999-999"></p:inputMask>
 					<p:outputLabel for="estado">Estado:</p:outputLabel>
 					<p:selectOneMenu id="estado" label="Estado" required="true"
 						value="#{fornecedorEdit.endereco.estado}">
@@ -84,17 +92,23 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel for="cidade">Cidade:</p:outputLabel>
-					<p:inputText id="cidade" label="Cidade" value="#{fornecedorEdit.endereco.cidade}" required="true" ></p:inputText>
-					
+					<p:inputText id="cidade" label="Cidade"
+						value="#{fornecedorEdit.endereco.cidade}" required="true"></p:inputText>
+
 					<p:outputLabel for="email">Email:</p:outputLabel>
-					<p:inputText id="email" label="Email" value="#{fornecedorEdit.contato.email}"></p:inputText>
-					
+					<p:inputText id="email" label="Email"
+						value="#{fornecedorEdit.contato.email}"></p:inputText>
+
 					<p:outputLabel for="celular">Celular:</p:outputLabel>
-					<p:inputText id="celular" label="Celular" value="#{fornecedorEdit.contato.celular}" required="true"></p:inputText>
-					
+					<p:inputMask id="celular" label="Celular"
+						value="#{fornecedorEdit.contato.celular}" mask="(99)99999-9999"
+						required="true"></p:inputMask>
+
 					<p:outputLabel for="telefone">Telefone:</p:outputLabel>
-					<p:inputText id="telefone" label="Telefone" value="#{fornecedorEdit.contato.telefone}"></p:inputText>
-									
+					<p:inputMask id="telefone" label="Telefone"
+						value="#{fornecedorEdit.contato.telefone}" mask="(99)9999-9999"></p:inputMask>
+
+
 
 					<p:separator></p:separator>
 					<p:commandButton value="Alterar" id="submit"

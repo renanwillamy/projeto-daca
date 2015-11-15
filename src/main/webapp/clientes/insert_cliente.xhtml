@@ -26,7 +26,7 @@
 					<p:inputText id="rg" label="RG" value="#{clienteInsert.cliente.RG}" required="true"></p:inputText>
 					
 					<p:outputLabel for="cpf">Cpf:</p:outputLabel>
-					<p:inputText id="cpf" label="Cpf" value="#{clienteInsert.cliente.cpf}" required="true"></p:inputText>
+					<p:inputMask id="cpf" label="Cpf" value="#{clienteInsert.cliente.cpf}" required="true" mask="999.999.999-99"></p:inputMask>
 					
 					<p:outputLabel for="sexo">Sexo:</p:outputLabel>
 					<p:selectOneMenu id="sexo" label="Sexo" required="true"
@@ -46,7 +46,7 @@
 					<p:inputText label="Bairro" id="bairro" value="#{clienteInsert.endereco.bairro}" required="true"></p:inputText>
 
 					<p:outputLabel for="cep">Cep:</p:outputLabel>
-					<p:inputText id="cep" label="Cep" value="#{clienteInsert.endereco.cep}" required="true"></p:inputText>
+					<p:inputMask id="cep" label="Cep" value="#{clienteInsert.endereco.cep}" required="true" mask="99999-999"></p:inputMask>
 
 					<p:outputLabel for="estado">Estado:</p:outputLabel>
 					<p:selectOneMenu id="estado" label="Estado" required="true"
@@ -89,10 +89,10 @@
 					<p:inputText id="email" label="Email" value="#{clienteInsert.contato.email}"></p:inputText>
 					
 					<p:outputLabel for="celular">Celular:</p:outputLabel>
-					<p:inputText id="celular" label="Celular" value="#{clienteInsert.contato.celular}" required="true"></p:inputText>
+					<p:inputMask id="celular" label="Celular" value="#{clienteInsert.contato.celular}" required="true" mask="(99)99999-9999"></p:inputMask>
 					
 					<p:outputLabel for="telefone">Telefone:</p:outputLabel>
-					<p:inputText id="telefone" label="Telefone" value="#{clienteInsert.contato.telefone}"></p:inputText>
+					<p:inputMask id="telefone" label="Telefone" value="#{clienteInsert.contato.telefone}" mask="(99)9999-9999"></p:inputMask>
 									
 
 					<p:separator></p:separator>
