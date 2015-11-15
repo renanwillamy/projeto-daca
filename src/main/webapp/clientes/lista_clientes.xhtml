@@ -63,6 +63,7 @@
 
 					<p:commandLink value="Excluir"
 						actionListener="#{clienteLista.excluir(cli)}"
+						rendered="#{request.isUserInRole('admin')}"
 						update=":tabelaClientes">
 						<p:confirm header="Atenção"
 							message="Tem certeza que deseja excluir #{cli.nome}?"

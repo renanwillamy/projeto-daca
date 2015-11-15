@@ -44,6 +44,7 @@ public class Usuario implements Serializable{
     private String nome;
     private String login;
     private String senha;
+    private String acesso;
     
     @OneToOne
     private Endereco endereco;
@@ -101,8 +102,17 @@ public class Usuario implements Serializable{
     }
     
     
+    
 
-    @Override
+    public String getAcesso() {
+		return acesso;
+	}
+
+	public void setAcesso(String acesso) {
+		this.acesso = acesso;
+	}
+
+	@Override
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + this.id;

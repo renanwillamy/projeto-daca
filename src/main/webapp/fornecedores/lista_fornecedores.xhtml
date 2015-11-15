@@ -63,6 +63,7 @@
 
 					<p:commandLink value="Excluir"
 						actionListener="#{fornecedorLista.excluir(forn)}"
+						rendered="#{request.isUserInRole('admin')}"
 						update=":tabelaFornecedores">
 						<p:confirm header="Atenção"
 							message="Tem certeza que deseja excluir #{forn.nomeFantasia}?"

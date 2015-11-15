@@ -12,22 +12,20 @@
 
 <h:body>
 
-	<h:form>
+	<h:form  id="formLogin" prependId="false" onsubmit="action='j_security_check';" >
 		<p:messages id="messagesInfo" closable="true" autoUpdate="true"></p:messages>
 		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
 
 		<p:panelGrid columns="2" cellpadding="5" style="margin-top:300px; margin-left:auto; margin-right:auto;">
-			<p:outputLabel for="login" value="Login:" />
-			<p:inputText id="login" value="#{login.login}" required="true"
-				label="Login" />
-
-			<p:outputLabel for="senha" value="Senha" />
-			<p:password id="senha" value="#{login.senha}" required="true"
-				label="Senha" />
-
-			<p:outputLabel></p:outputLabel>
-			<p:commandButton value="Login" update="growl"
-				action="#{login.autentica}" />
+						
+				<h:outputLabel for="j_username" value="Login:" />
+					<h:inputText id="j_username" />
+						
+					<h:outputLabel for="j_password" value="Senha:" />
+					<h:inputSecret id="j_password" />
+						
+					<p:commandButton id="btnLogin" value="Login" ajax="false" />
+					<p:commandButton id="btnReset" value="Reset" ajax="false" type="reset" />
 
 		</p:panelGrid>
 

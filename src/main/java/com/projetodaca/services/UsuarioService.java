@@ -5,14 +5,18 @@
  */
 package com.projetodaca.services;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.inject.Inject;
-
+import javax.transaction.Transactional;
 
 import com.projetodaca.dao.UsuarioDao;
 import com.projetodaca.entities.Usuario;
-import com.projetodaca.utils.TransacionalCdi;
+
 
 /**
  *
@@ -30,47 +34,78 @@ public class UsuarioService {
      * 
      * @param usuario 
      */
-    @TransacionalCdi
+    @Transactional
     public Usuario save(Usuario usuario) throws Exception{
+    		usuario.setSenha(criptografarSenha(usuario.getSenha()));
             dao.insert(usuario);
             return usuario;
     }
-    @TransacionalCdi
+    @Transactional
     public void update(Usuario usuario) throws Exception{
             dao.update(usuario);
     }
-    @TransacionalCdi
+    @Transactional
     public void delete(Usuario usuario) throws Exception{
             dao.delete(usuario);
     }
-    @TransacionalCdi
+    @Transactional
     public List<Usuario> list() throws Exception{
         List<Usuario> listUsuario= null;
           listUsuario = dao.list();
         return listUsuario;
     }
-    @TransacionalCdi
+    @Transactional
     private List<Usuario> list(String where) throws Exception{
         List<Usuario> listUsuario= null;
           listUsuario = dao.list(where);
         return listUsuario;
     }
-    
+   
     public List<Usuario>listaUsuarioPorNome(String nome) throws Exception{
     	String where = "where e.nome like '%"+nome+"%'";
     	return list(where);
     }
-    @TransacionalCdi
+    @Transactional
     public Usuario getById(int id) throws Exception{
         Usuario usuario = null;
         usuario =  dao.getById(id);
         return usuario;
     }
-    @TransacionalCdi
+    @Transactional
     public Usuario autenticaUsuario(String login,String senha) throws Exception {
     	Usuario usuario = null;
         usuario =  dao.autenticaUsuario(login, senha);
         return usuario;
     }
+    
+    /**
+	 * Método que criptografa uma dada senha usando o método hash SHA-256.
+	 * 
+	 * @param password
+	 *            senha a ser criptografada
+	 * @return senha criptografada
+	 * @throws DacaServiceException
+	 *             lançada caso ocorra algum erro durante o processo
+	 */
+	public  String criptografarSenha(String password) throws Exception {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(password.getBytes("UTF-8"));
+			byte[] digest = md.digest();
+			BigInteger bigInt = new BigInteger(1, digest);
+			String output = bigInt.toString(16);
+			return output;
+		} catch (NoSuchAlgorithmException e) {
+			throw new Exception("Não foi possível criptografar a senha!");
+		} catch (UnsupportedEncodingException e) {
+			throw new Exception("Não foi possível criptografar a senha!");
+		}
+	}
+
+	public Usuario getUsuarioPorLogin(String login) throws Exception {
+		Usuario usuario = dao.getUsuarioPorLogin(login);
+		return usuario;
+	}
     
 }

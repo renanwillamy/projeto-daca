@@ -9,13 +9,14 @@ import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import com.projetodaca.dao.PagamentoDao;
 import com.projetodaca.dao.PedidoDao;
 import com.projetodaca.entities.Pagamento;
 import com.projetodaca.entities.Pedido;
 import com.projetodaca.entities.Promissoria;
-import com.projetodaca.utils.TransacionalCdi;
+
 
 /**
  *
@@ -32,7 +33,7 @@ public class PedidoService {
 	 * 
 	 * @param pedido
 	 */
-	@TransacionalCdi
+	@Transactional
 	public Pedido save(Pedido pedido) throws Exception {
 		dao.insert(pedido);
 		return pedido;
@@ -43,71 +44,71 @@ public class PedidoService {
 	 * 
 	 * @param pedido
 	 */
-	@TransacionalCdi
+	@Transactional
 	public Pedido save(Pedido pedido, List<Pagamento> listPagamento) throws Exception {
 		dao.insert(pedido, listPagamento);
 		return pedido;
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public void update(Pedido pedido) throws Exception {
 		dao.update(pedido);
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public void update(Pedido pedido, List<Pagamento> listPagamento) throws Exception {
 		dao.update(pedido, listPagamento);
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public void delete(Pedido pedido) throws Exception {
 		pagDao.deleteTodosPorIdPedido(pedido.getId());
 		dao.delete(pedido);
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public List<Pedido> list() throws Exception {
 		List<Pedido> listPedido = null;
 		listPedido = dao.list();
 		return listPedido;
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public List<Pedido> listWhereData(Date dataInicial, Date dataFinal) throws Exception {
 		List<Pedido> listPedido = null;
 		listPedido = dao.listWhereData(dataInicial, dataFinal);
 		return listPedido;
 	}
 
-	@TransacionalCdi
+	@Transactional
 	private List<Pedido> list(String where) throws Exception {
 		List<Pedido> listPedido = null;
 		listPedido = dao.list(where);
 		return listPedido;
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public Pedido getById(int id) throws Exception {
 		Pedido pedido = null;
 		pedido = dao.getById(id);
 		return pedido;
 	}
 
-	@TransacionalCdi
+	@Transactional
 	public void save(Pedido pedido, Pagamento pagamento) throws Exception {
 		dao.insert(pedido);
 		pagamento.setPedido(pedido);
 		pagDao.insert(pagamento);
 	}
 	
-	@TransacionalCdi
+	@Transactional
 	public void update(Pedido pedido, Pagamento pagamento) throws Exception {
 		dao.update(pedido);
 		pagamento.setPedido(pedido);
 		pagDao.deleteTodosPorIdPedido(pedido.getId());
 		pagDao.insert(pagamento);
 	}
-
+	@Transactional
 	public List<Pedido> listaPedidoPorId(String filtro) throws Exception {
 		List<Pedido> listPedido = null;
 		listPedido = dao.listPedidoPorId(filtro);

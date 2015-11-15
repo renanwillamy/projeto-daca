@@ -58,6 +58,7 @@
 
 					<p:commandLink value="Excluir"
 						actionListener="#{pedidoLista.excluir(ped)}"
+						rendered="#{request.isUserInRole('admin')}"
 						update=":tabelaPedidos">
 						<p:confirm header="Atenção"
 							message="Tem certeza que deseja excluir o pedido #{ped.id}?"

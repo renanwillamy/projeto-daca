@@ -8,10 +8,11 @@ package com.projetodaca.services;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import com.projetodaca.dao.ProdutoDao;
 import com.projetodaca.entities.Produto;
-import com.projetodaca.utils.TransacionalCdi;
+
 
 /**
  *
@@ -26,26 +27,26 @@ public class ProdutoService {
      * 
      * @param produto 
      */
-    @TransacionalCdi
+    @Transactional
     public Produto save(Produto produto) throws Exception{
             dao.insert(produto);
             return produto;
     }
-    @TransacionalCdi
+    @Transactional
     public void update(Produto produto) throws Exception{
             dao.update(produto);
     }
-    @TransacionalCdi
+    @Transactional
     public void delete(Produto produto) throws Exception{
             dao.delete(produto);
     }
-    @TransacionalCdi
+    @Transactional
     public List<Produto> list() throws Exception{
         List<Produto> listProduto= null;
           listProduto = dao.list();
         return listProduto;
     }   
-    @TransacionalCdi
+    @Transactional
     public List<Produto> listaProdutoPorNome(String nome) throws Exception{
         List<Produto> listProduto= null;
           listProduto = dao.listaProdutoPorNome(nome);
@@ -53,13 +54,13 @@ public class ProdutoService {
     }   
    
     
-    @TransacionalCdi
+    @Transactional
     public Produto getById(int id) throws Exception{
         Produto produto = null;
         produto =  dao.getById(id);
         return produto;
     }
-    @TransacionalCdi
+    @Transactional
 	public List<Produto> listaProdutoAtivos() throws Exception {
     	   List<Produto> listProduto= null;
            listProduto = dao.listaProdutoAtivos();

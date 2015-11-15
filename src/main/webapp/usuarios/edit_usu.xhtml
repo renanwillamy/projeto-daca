@@ -11,8 +11,8 @@
 
 	<f:metadata>
 		<f:viewParam name="id" value="#{usuarioEdit.usuario}"
-			converterMessage="Bad request. Unknown usuario"
-			>
+			converterMessage="Bad request. Unknown usuario">
+			 <f:viewAction action="#{usuarioEdit.onLoad}" />
 			<f:converter converterId="usuarioConverter" />
 		</f:viewParam>
 	</f:metadata>
@@ -46,6 +46,14 @@
 					<p:outputLabel for="senha2">Confirme a Senha:</p:outputLabel>
 					<p:password id="senha2" value="#{usuarioEdit.usuario.senha}"
 						feedback="false" label="Confirme a Senha" required="true" redisplay = "true" />
+						
+						<p:outputLabel>Acesso</p:outputLabel>
+					<p:selectOneMenu id="acesso" label="Acesso" required="true"
+						value="#{usuarioEdit.usuario.acesso}">
+						<f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
+						<f:selectItem itemLabel="Administrador" itemValue="admin"></f:selectItem>	
+						<f:selectItem itemLabel="Visitante" itemValue="visitante"></f:selectItem>		
+					</p:selectOneMenu>
 
 					<p:separator></p:separator>
 					<p:commandButton value="Alterar" id="submit"

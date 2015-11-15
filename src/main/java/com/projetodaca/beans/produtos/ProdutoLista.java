@@ -60,8 +60,8 @@ public class ProdutoLista extends AbstractManageBean implements Serializable{
 				fachada.deleteProduto(produto);
 				filtrar();
 				showFlashMessageInfo("Produto excluido!");
-			} catch (Exception e) {
-				showFlashMessageError("Ocorreu um erro ao tentar excluir o produto!");
+			} catch (Exception e) {	
+				showFlashMessageError("Ocorreu um erro ao tentar excluir o produto!");	
 				e.printStackTrace();
 			}
 		}

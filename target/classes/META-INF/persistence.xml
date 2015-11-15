@@ -2,11 +2,10 @@
 <persistence version="2.1"
 	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="AutomacaoPU" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="AutomacaoPU" transaction-type="JTA">
 	
 	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-	
-	<non-jta-data-source>jdbc/AutomacaoPU</non-jta-data-source>
+	<jta-data-source>jdbc/projetoDaca</jta-data-source>
 	
 		
 		<class>com.projetodaca.entities.Produto</class>
@@ -34,8 +33,10 @@
 			<property name="javax.persistence.jdbc.password" value="123" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.user" value="renan" /> -->
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.default_schema" value="bancoAC"/>
+			<property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.SunOneJtaPlatform"/>
+			<property name="hibernate.classloading.use_current_tccl_as_parent" value="false"/>
 		
 		</properties>
 

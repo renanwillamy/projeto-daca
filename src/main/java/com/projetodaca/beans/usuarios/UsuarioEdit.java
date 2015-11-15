@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.model.SelectItem;
@@ -17,7 +19,7 @@ import com.projetodaca.entities.Categoria;
 import com.projetodaca.entities.Fornecedor;
 import com.projetodaca.entities.Usuario;
 
-@SessionScoped
+@ViewScoped
 @Named
 public class UsuarioEdit extends AbstractManageBean implements Serializable {
 	/**
@@ -28,8 +30,13 @@ public class UsuarioEdit extends AbstractManageBean implements Serializable {
 	private Fachada fachada;
 	@Inject
 	private Usuario usuario;
+	
+	private String senhaAntiga;
 
 	
+	public void onLoad(){
+		senhaAntiga = usuario.getSenha();
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -40,7 +47,10 @@ public class UsuarioEdit extends AbstractManageBean implements Serializable {
 	}
 	
 	public String updateUsuario(){
-		try {
+		try {		
+			if(!senhaAntiga.equals(usuario.getSenha())){
+				usuario.setSenha(fachada.criptografaSenha(usuario.getSenha()));
+			}
 			fachada.updateUsuario(usuario);
 			showFlashMessageInfo("Usuário Alterado!");
 		} catch (Exception e) {

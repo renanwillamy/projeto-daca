@@ -8,10 +8,11 @@ package com.projetodaca.services;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 import com.projetodaca.dao.CategoriaDao;
 import com.projetodaca.entities.Categoria;
-import com.projetodaca.utils.TransacionalCdi;
+
 
 
 
@@ -24,32 +25,32 @@ public class CategoriaService {
 	@Inject
     private CategoriaDao dao;    
     
-	@TransacionalCdi
+	@Transactional
     public Categoria save(Categoria categoria) throws Exception{
             dao.insert(categoria);
             return categoria;
     }
-	@TransacionalCdi
+	@Transactional
     public void update(Categoria categoria) throws Exception{
             dao.update(categoria);
     }
-	@TransacionalCdi
+	@Transactional
     public void delete(Categoria categoria) throws Exception{
     	dao.delete(categoria);
     }
-	@TransacionalCdi
+	@Transactional
     public List<Categoria> list() throws Exception{
         List<Categoria> listCategoria= null;
           listCategoria = dao.list();
         return listCategoria;
     }
-	@TransacionalCdi
+	@Transactional
     public List<Categoria> list(String where) throws Exception{
         List<Categoria> listCategoria= null;
           listCategoria = dao.list(where);
         return listCategoria;
     }
-	@TransacionalCdi
+	@Transactional
     public Categoria getById(int id) throws Exception{
         Categoria categoria = null;
         categoria =  dao.getById(id);

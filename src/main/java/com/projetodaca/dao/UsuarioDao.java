@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import com.projetodaca.entities.Usuario;
 
@@ -51,7 +52,7 @@ public class UsuarioDao extends AbstractDao<Usuario> {
         }
         return list;
     }
-
+    
     public List<Usuario> list(String where) throws Exception {
     	EntityManager em = getEntityManager();
         List<Usuario> list = new ArrayList<Usuario>();
@@ -114,6 +115,18 @@ public class UsuarioDao extends AbstractDao<Usuario> {
             throw new Exception(ex);
         }
     }
+
+
+	public Usuario getUsuarioPorLogin(String login) throws Exception {
+		 Usuario usuario = null;
+         
+         String where = "where e.login = '"+login+"'";
+         ArrayList<Usuario> lista = (ArrayList<Usuario>) list(where);
+         if(lista!=null && !lista.isEmpty()){
+         	usuario = lista.get(0);
+         }         
+     return usuario;
+	}
   
    
 

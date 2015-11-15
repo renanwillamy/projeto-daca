@@ -17,7 +17,6 @@ import com.projetodaca.entities.Promissoria;
 import com.projetodaca.entities.Usuario;
 import com.projetodaca.services.CategoriaService;
 import com.projetodaca.services.ClienteService;
-import com.projetodaca.services.ContatoService;
 import com.projetodaca.services.FornecedorService;
 import com.projetodaca.services.PagamentoService;
 import com.projetodaca.services.PedidoService;
@@ -126,29 +125,6 @@ public class Fachada implements Serializable {
 		return fornService.getById(id);
 	}
 
-	/**
-	 * Persiste contato no banco de dados
-	 * 
-	 * @param contato
-	 */
-	public Contato save(Contato contato) throws Exception {
-		ContatoService service = new ContatoService();
-		contato = service.save(contato);
-	
-		return contato;
-	}
-
-	public void update(Contato contato) throws Exception {
-		ContatoService service = new ContatoService();
-		service.update(contato);
-	
-	}
-
-	public void delete(Contato contato) throws Exception {
-		ContatoService service = new ContatoService();
-		service.delete(contato);
-	
-	}
 
 	public List<Fornecedor> listaFornecedorPorNomeFantasia(String nomeFantasia) throws Exception {			 
 		return fornService.listaFornecedorPorNomeFantasia(nomeFantasia);
@@ -223,6 +199,15 @@ public class Fachada implements Serializable {
 
 		Usuario usuario = usuService.autenticaUsuario(login, senha);
 		return usuario;
+	}
+	
+	public Usuario getUsuarioPorLogin(String login) throws Exception {
+		Usuario usuario = usuService.getUsuarioPorLogin(login);
+		return usuario;
+	}
+	
+	public String criptografaSenha(String senha) throws Exception{
+		return usuService.criptografarSenha(senha);
 	}
 	
 	 public Pedido savePedido(Pedido pedido) throws Exception{

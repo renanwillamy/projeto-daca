@@ -36,6 +36,14 @@
 						feedback="false" label="Confirme a Senha" required="true" />
 
 
+					<p:outputLabel>Acesso</p:outputLabel>
+					<p:selectOneMenu id="acesso" label="Acesso" required="true"
+						value="#{usuarioInsert.usuario.acesso}">
+						<f:selectItem itemLabel="Selecione" itemValue=""></f:selectItem>
+						<f:selectItem itemLabel="Administrador" itemValue="admin"></f:selectItem>	
+						<f:selectItem itemLabel="Visitante" itemValue="visitante"></f:selectItem>		
+					</p:selectOneMenu>
+
 					<p:outputLabel></p:outputLabel>
 					<p:commandButton value="Salvar" id="submit"
 						action="#{usuarioInsert.insertUsuario}"></p:commandButton>
