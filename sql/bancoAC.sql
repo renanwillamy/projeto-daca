@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: 15-Nov-2015 às 04:46
+-- Tempo de geração: 15/11/2015 às 18:03
 -- Versão do servidor: 10.0.17-MariaDB
--- PHP Version: 5.5.30
+-- Versão do PHP: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,13 +17,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `bancoAC`
+-- Banco de dados: `bancoAC`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Caixa`
+-- Estrutura para tabela `Caixa`
 --
 
 CREATE TABLE `Caixa` (
@@ -40,7 +40,7 @@ CREATE TABLE `Caixa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Categoria`
+-- Estrutura para tabela `Categoria`
 --
 
 CREATE TABLE `Categoria` (
@@ -50,7 +50,7 @@ CREATE TABLE `Categoria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Categoria`
+-- Fazendo dump de dados para tabela `Categoria`
 --
 
 INSERT INTO `Categoria` (`id`, `nome`, `CategoriaPai`) VALUES
@@ -65,7 +65,18 @@ INSERT INTO `Categoria` (`id`, `nome`, `CategoriaPai`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Cliente`
+-- Estrutura para tabela `Categoria_Produto`
+--
+
+CREATE TABLE `Categoria_Produto` (
+  `Categoria_id` int(11) NOT NULL,
+  `produtos_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `Cliente`
 --
 
 CREATE TABLE `Cliente` (
@@ -81,19 +92,31 @@ CREATE TABLE `Cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Cliente`
+-- Fazendo dump de dados para tabela `Cliente`
 --
 
 INSERT INTO `Cliente` (`id`, `RG`, `bloqueado`, `cpf`, `informacoes`, `limiteCredito`, `nome`, `sexo`, `endereco_id`) VALUES
-(1, '3354633', b'0', '07747711433', NULL, 0, 'Renan Willamy', 'm', 18),
-(2, '33546512', b'0', '0554887854', NULL, 0, 'Jose Bezerra de Oliveira', 'm', 19),
-(3, '4234', b'0', '34242', NULL, 0, 'Rodrigo de Oliveira', 'm', 20),
-(5, '55461251', b'0', '02254687922', NULL, 0, 'Eliane Lima dos Santos', 'f', 22);
+(1, '3354633', b'0', '055.448.833-33', NULL, 0, 'Renan Willamy', 'm', 18),
+(2, '33546512', b'0', '088.991.899-44', NULL, 0, 'Jose Bezerra de Oliveira', 'm', 19),
+(3, '3376988', b'0', '833.544.677-65', NULL, 0, 'Rodrigo de Oliveira', 'm', 20),
+(5, '55461251', b'0', '022.546.879-22', NULL, 0, 'Eliane Lima dos Santos', 'f', 22),
+(6, '33241123', b'0', '765.488.787-87', NULL, 0, 'Emanoel de Lima Brito', 'm', 26);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Contato`
+-- Estrutura para tabela `Config`
+--
+
+CREATE TABLE `Config` (
+  `id` int(11) NOT NULL,
+  `showErrorMessages` bit(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `Contato`
 --
 
 CREATE TABLE `Contato` (
@@ -107,22 +130,24 @@ CREATE TABLE `Contato` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Contato`
+-- Fazendo dump de dados para tabela `Contato`
 --
 
 INSERT INTO `Contato` (`ID`, `celular`, `email`, `telefone`, `cliente_id`, `empresa_id`, `fornecedor_id`) VALUES
-(12, '8398546521', 'espacodigital@gmail.com', '8333515542', NULL, NULL, 17),
-(13, '(83)99921622', 'renanwillamy@gmail.com', '8333511156', 1, NULL, NULL),
-(14, '8388545478', 'jose@gmail.com', '8333542654', 2, NULL, NULL),
-(15, '34234324', 'sdfsd@fdgd.com', '4234232', 3, NULL, NULL),
-(17, '8388754547', 'eliane@gmail.com', '8333514425', 5, NULL, NULL),
-(19, '1199542145', 'magazineluiza@gmail.com', '1133546987', NULL, NULL, 18),
-(20, '44242', '', '', NULL, NULL, 19);
+(12, '(83)99888-3388', 'espacodigital@gmail.com', '(83)3351-5542', NULL, NULL, 17),
+(13, '(83)99922-9933', 'renanwillamy@gmail.com', '(83)3351-1156', 1, NULL, NULL),
+(14, '(83)99878-7888', 'jose@gmail.com', '(83)3354-2654', 2, NULL, NULL),
+(15, '(83)99923-2211', 'rodrigo@gmail.com', '', 3, NULL, NULL),
+(17, '(83)89878-7888', 'eliane@gmail.com', '(83)3351-4425', 5, NULL, NULL),
+(19, '(83)99655-4343', 'magazineluiza@gmail.com', '(11)3354-6987', NULL, NULL, 18),
+(21, '(83)99878-6777', 'mane@gmail.com', '(83)3354-7887', 6, NULL, NULL),
+(22, '(83)99779-8989', 'eletroshop@gmail.com', '(83)1189-8279', NULL, NULL, 20),
+(24, '(83)99877-4389', 'magazinelaiz@gmail.com', '(11)3352-8982', NULL, NULL, 21);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Empresa`
+-- Estrutura para tabela `Empresa`
 --
 
 CREATE TABLE `Empresa` (
@@ -138,7 +163,7 @@ CREATE TABLE `Empresa` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Endereco`
+-- Estrutura para tabela `Endereco`
 --
 
 CREATE TABLE `Endereco` (
@@ -154,22 +179,24 @@ CREATE TABLE `Endereco` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Endereco`
+-- Fazendo dump de dados para tabela `Endereco`
 --
 
 INSERT INTO `Endereco` (`id`, `bairro`, `cep`, `cidade`, `complemento`, `estado`, `logradouro`, `numResidencia`, `tipoLogradouro`) VALUES
 (17, 'Centro', '58500-000', 'Santa Rita', NULL, 'PB', 'Joao Barbosa de Oliveira', 223, NULL),
 (18, 'Centro', '58500-000', 'Monteiro', NULL, 'PB', 'José Augusto Gomes', 113, NULL),
-(19, 'Centro', '58500000', 'Monteiro', NULL, 'PB', 'Joao Pereira do Nascimento', 11, NULL),
-(20, 'asdsa', '423423423', 'fsdfds', NULL, 'AC', 'dsfsd', 321, NULL),
-(22, 'Centro', '58500000', 'Monteiro', NULL, 'PB', 'Rua Sicrando do braz', 87, NULL),
-(24, 'Centro', '58642155', 'São Paulo', NULL, 'SP', 'Rua Tal', 22, NULL),
-(25, 'fsdfsf', '423423', 'fsdfsd', NULL, 'AC', 'fsdfsdf', 32424, NULL);
+(19, 'Centro', '58500-000', 'Monteiro', NULL, 'PB', 'Joao Pereira do Nascimento', 11, NULL),
+(20, 'Centro', '42342-342', 'Flores', NULL, 'AC', 'Rua tal', 321, NULL),
+(22, 'Centro', '58500-000', 'Monteiro', NULL, 'PB', 'Rua Sicrando do braz', 87, NULL),
+(24, 'Centro', '58642-155', 'São Paulo', NULL, 'SP', 'Rua Tal', 22, NULL),
+(26, 'Centro', '58500-000', 'Monteiro', NULL, 'PB', 'Rua Beltrano', 10, NULL),
+(27, 'Centro', '58500-000', 'Monteiro', NULL, 'PB', 'Rua do Braz', 102, NULL),
+(29, 'Centro', '58500-000', 'Monteiro', NULL, 'PB', 'Rua Sicrano', 22, NULL);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Fornecedor`
+-- Estrutura para tabela `Fornecedor`
 --
 
 CREATE TABLE `Fornecedor` (
@@ -183,18 +210,19 @@ CREATE TABLE `Fornecedor` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Fornecedor`
+-- Fazendo dump de dados para tabela `Fornecedor`
 --
 
 INSERT INTO `Fornecedor` (`id`, `cnpj`, `cpf`, `nomeFantasia`, `observacoes`, `razaoSocial`, `endereco_id`) VALUES
-(17, '0154215454845', NULL, 'Espaço Digital', NULL, 'Maria Cavalcante de Lima da Silva', 17),
-(18, '21210001545', NULL, 'Magazine Luiza', NULL, 'Pedro da Silva', 24),
-(19, '42423', NULL, 'werwerw', NULL, 'werew', 25);
+(17, '76.398.223/0001-76', NULL, 'Espaço Digital', NULL, 'Maria Cavalcante de Lima da Silva', 17),
+(18, '58.993.232/0001-88', NULL, 'Magazine Luiza', NULL, 'Pedro da Silva', 24),
+(20, '64.324.504/0001-98', NULL, 'Eletroshop', NULL, 'Gabriel Ferreira de Melo', 27),
+(21, '48.654.654/0001-33', NULL, 'Magazine Laiz', NULL, 'Fulano de Tal', 29);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `ItensDoPedido`
+-- Estrutura para tabela `ItensDoPedido`
 --
 
 CREATE TABLE `ItensDoPedido` (
@@ -210,7 +238,7 @@ CREATE TABLE `ItensDoPedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `ItensDoPedido`
+-- Fazendo dump de dados para tabela `ItensDoPedido`
 --
 
 INSERT INTO `ItensDoPedido` (`id`, `desconto`, `quantidade`, `und`, `valor`, `valorCusto`, `pedido_id`, `produto_id`, `valorTotal`) VALUES
@@ -223,12 +251,14 @@ INSERT INTO `ItensDoPedido` (`id`, `desconto`, `quantidade`, `und`, `valor`, `va
 (22, 0, 1, NULL, 1550, 0, 13, 11, 1550),
 (23, 0, 1, NULL, 199.99, 0, 13, 7, 199.99),
 (24, 0, 1, NULL, 1550, 0, 11, 11, 1550),
-(25, 0, 1, NULL, 2600, 0, 14, 12, 2600);
+(25, 0, 1, NULL, 2600, 0, 14, 12, 2600),
+(26, 0, 2, NULL, 10.25, 0, 15, 4, 20.5),
+(27, 0, 2, NULL, 35.99, 0, 15, 14, 71.98);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Pagamento`
+-- Estrutura para tabela `Pagamento`
 --
 
 CREATE TABLE `Pagamento` (
@@ -255,7 +285,7 @@ CREATE TABLE `Pagamento` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Pagamento`
+-- Fazendo dump de dados para tabela `Pagamento`
 --
 
 INSERT INTO `Pagamento` (`TIPO`, `id`, `dataInicial`, `dataPagamento`, `desconto`, `juros`, `status`, `tipoDePgto`, `valorPagamento`, `valorPago`, `prazo`, `agencia`, `banco`, `conta`, `numeroCheque`, `situacao`, `titular`, `caixa_ID`, `pagamento_id`, `pedido_id`) VALUES
@@ -263,12 +293,13 @@ INSERT INTO `Pagamento` (`TIPO`, `id`, `dataInicial`, `dataPagamento`, `desconto
 ('AV', 10, '2015-11-14 12:29:31', '2015-11-14 12:29:31', 0, 0, 'LIQUIDADO', 'AVISTA', 251.24, 251.24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 7),
 ('AV', 13, '2015-11-14 12:35:05', '2015-11-14 12:35:05', 0, 0, 'LIQUIDADO', 'AVISTA', 1749.99, 1749.99, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 13),
 ('AV', 15, '2015-11-14 14:12:28', '2015-11-14 14:12:28', 0, 0, 'LIQUIDADO', 'AVISTA', 1801.24, 1801.24, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 11),
-('AV', 16, '2015-11-14 16:52:12', '2015-11-14 16:52:12', 0, 0, 'LIQUIDADO', 'AVISTA', 2600, 2600, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14);
+('AV', 16, '2015-11-14 16:52:12', '2015-11-14 16:52:12', 0, 0, 'LIQUIDADO', 'AVISTA', 2600, 2600, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 14),
+('AV', 17, '2015-11-15 12:59:20', '2015-11-15 12:59:20', 0, 0, 'LIQUIDADO', 'AVISTA', 92.48, 92.48, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 15);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Pedido`
+-- Estrutura para tabela `Pedido`
 --
 
 CREATE TABLE `Pedido` (
@@ -281,7 +312,7 @@ CREATE TABLE `Pedido` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Pedido`
+-- Fazendo dump de dados para tabela `Pedido`
 --
 
 INSERT INTO `Pedido` (`id`, `dataDoPedido`, `descontoPorCento`, `descontoReais`, `cliente_id`, `valorTotal`) VALUES
@@ -289,12 +320,13 @@ INSERT INTO `Pedido` (`id`, `dataDoPedido`, `descontoPorCento`, `descontoReais`,
 (11, '2015-11-14 14:12:36', 0, 0, 3, 1801.24),
 (12, '2015-11-14 00:19:55', 0, 0, 3, 220.49),
 (13, '2015-11-14 12:36:00', 0, 0, 3, 1749.99),
-(14, '2015-11-14 16:52:57', 0, 0, 5, 2600);
+(14, '2015-11-14 16:52:57', 0, 0, 5, 2600),
+(15, '2015-11-15 13:00:22', 0, 0, 6, 92.48);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Permissoes`
+-- Estrutura para tabela `Permissoes`
 --
 
 CREATE TABLE `Permissoes` (
@@ -316,7 +348,7 @@ CREATE TABLE `Permissoes` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `PontoDeRecebimento`
+-- Estrutura para tabela `PontoDeRecebimento`
 --
 
 CREATE TABLE `PontoDeRecebimento` (
@@ -327,7 +359,7 @@ CREATE TABLE `PontoDeRecebimento` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Produto`
+-- Estrutura para tabela `Produto`
 --
 
 CREATE TABLE `Produto` (
@@ -345,23 +377,24 @@ CREATE TABLE `Produto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Produto`
+-- Fazendo dump de dados para tabela `Produto`
 --
 
 INSERT INTO `Produto` (`id`, `ativo`, `codigoDeBarras`, `estoqueMinimo`, `nome`, `precoCusto`, `precoVenda`, `quantidade`, `und`, `categoria_id`, `fornecedor_id`) VALUES
-(4, b'1', '123456789', 0, 'Dvd Samsung', 3.05, 10.25, 18.5, 'pct', 16, 17),
+(4, b'1', '123456789', 0, 'Dvd Samsung', 3.05, 10.25, 16.5, 'pct', 16, 17),
 (7, b'1', '1254212', 0, 'DVD LG', 150.99, 199.99, -1, 'und', 16, 17),
 (9, b'1', '4324423', 0, 'Notebook HP dv5', 1650, 1950, 10, 'und', 5, 17),
 (10, b'0', '4243242', 0, 'Play Station 3', 900, 1200, 0, 'pct', 17, 17),
 (11, b'1', '232434', 0, 'Tv LG 42 pl', 1200, 1550, 4, 'und', 15, 17),
 (12, b'1', '99542145412', 0, 'Atari Video game', 2000, 2600, 1, 'und', 17, 18),
 (13, b'1', '125421', 0, 'Notebook Dell ldw1', 1850, 2500, 5, 'und', 5, 18),
-(14, b'1', '12354', 0, 'Mouse Óptico', 25.99, 35.99, 30, 'und', 3, 17);
+(14, b'1', '12354', 0, 'Mouse Óptico', 25.99, 35.99, 28, 'und', 3, 17),
+(15, b'0', '110920291', 0, 'Teclado Multilaser', 20, 35.99, 20, 'und', 3, 20);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `Usuario`
+-- Estrutura para tabela `Usuario`
 --
 
 CREATE TABLE `Usuario` (
@@ -375,7 +408,7 @@ CREATE TABLE `Usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Extraindo dados da tabela `Usuario`
+-- Fazendo dump de dados para tabela `Usuario`
 --
 
 INSERT INTO `Usuario` (`id`, `login`, `nome`, `senha`, `endereco_id`, `permissoes_id`, `acesso`) VALUES
@@ -388,14 +421,15 @@ INSERT INTO `Usuario` (`id`, `login`, `nome`, `senha`, `endereco_id`, `permissoe
 (26, 'admin', 'Administrador', '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5', 17, NULL, 'admin'),
 (27, 'rgabriel', 'Ruan Gabriel', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, NULL, 'visitante'),
 (28, 'jc', 'Joel Cavalcante', '6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b', NULL, NULL, 'admin'),
-(29, 'visitante', 'Visitante', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, NULL, 'visitante');
+(29, 'visitante', 'Visitante2', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, NULL, 'visitante'),
+(30, 'rodolfo', 'Rodolfo de Oliveira', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', NULL, NULL, 'visitante');
 
 --
--- Indexes for dumped tables
+-- Índices de tabelas apagadas
 --
 
 --
--- Indexes for table `Caixa`
+-- Índices de tabela `Caixa`
 --
 ALTER TABLE `Caixa`
   ADD PRIMARY KEY (`ID`),
@@ -403,7 +437,7 @@ ALTER TABLE `Caixa`
   ADD KEY `FK_cs6s7dua9v4j22r91xulwl4o2` (`usuario_id`);
 
 --
--- Indexes for table `Categoria`
+-- Índices de tabela `Categoria`
 --
 ALTER TABLE `Categoria`
   ADD PRIMARY KEY (`id`),
@@ -411,14 +445,27 @@ ALTER TABLE `Categoria`
   ADD KEY `FK_g5eb3f2klm27ca0s040j4ry3r` (`CategoriaPai`);
 
 --
--- Indexes for table `Cliente`
+-- Índices de tabela `Categoria_Produto`
+--
+ALTER TABLE `Categoria_Produto`
+  ADD UNIQUE KEY `UK_iqd3ayo75njdhh8hpgrg747hp` (`produtos_id`),
+  ADD KEY `FK_o0tobvikmtq6py3hafmk5ne1q` (`Categoria_id`);
+
+--
+-- Índices de tabela `Cliente`
 --
 ALTER TABLE `Cliente`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_qxiooc3mm81acqe8lwcxvkbjd` (`endereco_id`);
 
 --
--- Indexes for table `Contato`
+-- Índices de tabela `Config`
+--
+ALTER TABLE `Config`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices de tabela `Contato`
 --
 ALTER TABLE `Contato`
   ADD PRIMARY KEY (`ID`),
@@ -427,27 +474,27 @@ ALTER TABLE `Contato`
   ADD KEY `FK_jndolte2ki8pv6kfmsraluwsy` (`fornecedor_id`);
 
 --
--- Indexes for table `Empresa`
+-- Índices de tabela `Empresa`
 --
 ALTER TABLE `Empresa`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_qsj0om3x0g7ww0hdxd6xt1bui` (`endereco_id`);
 
 --
--- Indexes for table `Endereco`
+-- Índices de tabela `Endereco`
 --
 ALTER TABLE `Endereco`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `Fornecedor`
+-- Índices de tabela `Fornecedor`
 --
 ALTER TABLE `Fornecedor`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_m9jk0j6dahmt3tyxb59u2lx1r` (`endereco_id`);
 
 --
--- Indexes for table `ItensDoPedido`
+-- Índices de tabela `ItensDoPedido`
 --
 ALTER TABLE `ItensDoPedido`
   ADD PRIMARY KEY (`id`),
@@ -455,7 +502,7 @@ ALTER TABLE `ItensDoPedido`
   ADD KEY `FK_68sindqgam3q84md4wax907n6` (`produto_id`);
 
 --
--- Indexes for table `Pagamento`
+-- Índices de tabela `Pagamento`
 --
 ALTER TABLE `Pagamento`
   ADD PRIMARY KEY (`id`),
@@ -464,27 +511,27 @@ ALTER TABLE `Pagamento`
   ADD KEY `FK_h83thw20w3y2oqriku8o7lntw` (`pedido_id`);
 
 --
--- Indexes for table `Pedido`
+-- Índices de tabela `Pedido`
 --
 ALTER TABLE `Pedido`
   ADD PRIMARY KEY (`id`),
   ADD KEY `FK_nmx283i28kpfbnjwln34xu8lm` (`cliente_id`);
 
 --
--- Indexes for table `Permissoes`
+-- Índices de tabela `Permissoes`
 --
 ALTER TABLE `Permissoes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `PontoDeRecebimento`
+-- Índices de tabela `PontoDeRecebimento`
 --
 ALTER TABLE `PontoDeRecebimento`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UK_qxr3p9e3huwpj17i6ygk8dn02` (`descricao`);
 
 --
--- Indexes for table `Produto`
+-- Índices de tabela `Produto`
 --
 ALTER TABLE `Produto`
   ADD PRIMARY KEY (`id`),
@@ -492,7 +539,7 @@ ALTER TABLE `Produto`
   ADD KEY `FK_lrtcw8w6lnpretansc85oml99` (`fornecedor_id`);
 
 --
--- Indexes for table `Usuario`
+-- Índices de tabela `Usuario`
 --
 ALTER TABLE `Usuario`
   ADD PRIMARY KEY (`id`),
@@ -501,104 +548,116 @@ ALTER TABLE `Usuario`
   ADD KEY `FK_h5g5t2noa73mnwuhlwbo6c1hm` (`permissoes_id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de tabelas apagadas
 --
 
 --
--- AUTO_INCREMENT for table `Caixa`
+-- AUTO_INCREMENT de tabela `Caixa`
 --
 ALTER TABLE `Caixa`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Categoria`
+-- AUTO_INCREMENT de tabela `Categoria`
 --
 ALTER TABLE `Categoria`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
--- AUTO_INCREMENT for table `Cliente`
+-- AUTO_INCREMENT de tabela `Cliente`
 --
 ALTER TABLE `Cliente`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
--- AUTO_INCREMENT for table `Contato`
+-- AUTO_INCREMENT de tabela `Config`
+--
+ALTER TABLE `Config`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de tabela `Contato`
 --
 ALTER TABLE `Contato`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
--- AUTO_INCREMENT for table `Empresa`
+-- AUTO_INCREMENT de tabela `Empresa`
 --
 ALTER TABLE `Empresa`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Endereco`
+-- AUTO_INCREMENT de tabela `Endereco`
 --
 ALTER TABLE `Endereco`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
--- AUTO_INCREMENT for table `Fornecedor`
+-- AUTO_INCREMENT de tabela `Fornecedor`
 --
 ALTER TABLE `Fornecedor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
--- AUTO_INCREMENT for table `ItensDoPedido`
+-- AUTO_INCREMENT de tabela `ItensDoPedido`
 --
 ALTER TABLE `ItensDoPedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
--- AUTO_INCREMENT for table `Pagamento`
+-- AUTO_INCREMENT de tabela `Pagamento`
 --
 ALTER TABLE `Pagamento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
--- AUTO_INCREMENT for table `Pedido`
+-- AUTO_INCREMENT de tabela `Pedido`
 --
 ALTER TABLE `Pedido`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `Permissoes`
+-- AUTO_INCREMENT de tabela `Permissoes`
 --
 ALTER TABLE `Permissoes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `PontoDeRecebimento`
+-- AUTO_INCREMENT de tabela `PontoDeRecebimento`
 --
 ALTER TABLE `PontoDeRecebimento`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- AUTO_INCREMENT for table `Produto`
+-- AUTO_INCREMENT de tabela `Produto`
 --
 ALTER TABLE `Produto`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
--- AUTO_INCREMENT for table `Usuario`
+-- AUTO_INCREMENT de tabela `Usuario`
 --
 ALTER TABLE `Usuario`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
--- Constraints for dumped tables
+-- Restrições para dumps de tabelas
 --
 
 --
--- Limitadores para a tabela `Caixa`
+-- Restrições para tabelas `Caixa`
 --
 ALTER TABLE `Caixa`
   ADD CONSTRAINT `FK_cs6s7dua9v4j22r91xulwl4o2` FOREIGN KEY (`usuario_id`) REFERENCES `Usuario` (`id`),
   ADD CONSTRAINT `FK_gd0mxkaqb64tyb66trsrche7q` FOREIGN KEY (`pontoDeRecebimento_id`) REFERENCES `PontoDeRecebimento` (`id`);
 
 --
--- Limitadores para a tabela `Categoria`
+-- Restrições para tabelas `Categoria`
 --
 ALTER TABLE `Categoria`
   ADD CONSTRAINT `FK_g5eb3f2klm27ca0s040j4ry3r` FOREIGN KEY (`CategoriaPai`) REFERENCES `Categoria` (`id`);
 
 --
--- Limitadores para a tabela `Cliente`
+-- Restrições para tabelas `Categoria_Produto`
+--
+ALTER TABLE `Categoria_Produto`
+  ADD CONSTRAINT `FK_iqd3ayo75njdhh8hpgrg747hp` FOREIGN KEY (`produtos_id`) REFERENCES `Produto` (`id`),
+  ADD CONSTRAINT `FK_o0tobvikmtq6py3hafmk5ne1q` FOREIGN KEY (`Categoria_id`) REFERENCES `Categoria` (`id`);
+
+--
+-- Restrições para tabelas `Cliente`
 --
 ALTER TABLE `Cliente`
   ADD CONSTRAINT `FK_qxiooc3mm81acqe8lwcxvkbjd` FOREIGN KEY (`endereco_id`) REFERENCES `Endereco` (`id`);
 
 --
--- Limitadores para a tabela `Contato`
+-- Restrições para tabelas `Contato`
 --
 ALTER TABLE `Contato`
   ADD CONSTRAINT `FK_2tm7255auggu1wsfgdfchi8e5` FOREIGN KEY (`empresa_id`) REFERENCES `Empresa` (`id`),
@@ -606,26 +665,26 @@ ALTER TABLE `Contato`
   ADD CONSTRAINT `FK_jndolte2ki8pv6kfmsraluwsy` FOREIGN KEY (`fornecedor_id`) REFERENCES `Fornecedor` (`id`);
 
 --
--- Limitadores para a tabela `Empresa`
+-- Restrições para tabelas `Empresa`
 --
 ALTER TABLE `Empresa`
   ADD CONSTRAINT `FK_qsj0om3x0g7ww0hdxd6xt1bui` FOREIGN KEY (`endereco_id`) REFERENCES `Endereco` (`id`);
 
 --
--- Limitadores para a tabela `Fornecedor`
+-- Restrições para tabelas `Fornecedor`
 --
 ALTER TABLE `Fornecedor`
   ADD CONSTRAINT `FK_m9jk0j6dahmt3tyxb59u2lx1r` FOREIGN KEY (`endereco_id`) REFERENCES `Endereco` (`id`);
 
 --
--- Limitadores para a tabela `ItensDoPedido`
+-- Restrições para tabelas `ItensDoPedido`
 --
 ALTER TABLE `ItensDoPedido`
   ADD CONSTRAINT `FK_68sindqgam3q84md4wax907n6` FOREIGN KEY (`produto_id`) REFERENCES `Produto` (`id`),
   ADD CONSTRAINT `FK_sqktchjvkhlghxqtduk70fgo6` FOREIGN KEY (`pedido_id`) REFERENCES `Pedido` (`id`);
 
 --
--- Limitadores para a tabela `Pagamento`
+-- Restrições para tabelas `Pagamento`
 --
 ALTER TABLE `Pagamento`
   ADD CONSTRAINT `FK_cv7dq9y81hj1hqlaqgebaxw98` FOREIGN KEY (`caixa_ID`) REFERENCES `Caixa` (`ID`),
@@ -633,20 +692,20 @@ ALTER TABLE `Pagamento`
   ADD CONSTRAINT `FK_qc4c61n7dkjjk1kgj37tia34e` FOREIGN KEY (`pagamento_id`) REFERENCES `Pagamento` (`id`);
 
 --
--- Limitadores para a tabela `Pedido`
+-- Restrições para tabelas `Pedido`
 --
 ALTER TABLE `Pedido`
   ADD CONSTRAINT `FK_nmx283i28kpfbnjwln34xu8lm` FOREIGN KEY (`cliente_id`) REFERENCES `Cliente` (`id`);
 
 --
--- Limitadores para a tabela `Produto`
+-- Restrições para tabelas `Produto`
 --
 ALTER TABLE `Produto`
   ADD CONSTRAINT `FK_7roeds87qp6pp2g07rv86t8cb` FOREIGN KEY (`categoria_id`) REFERENCES `Categoria` (`id`),
   ADD CONSTRAINT `FK_lrtcw8w6lnpretansc85oml99` FOREIGN KEY (`fornecedor_id`) REFERENCES `Fornecedor` (`id`);
 
 --
--- Limitadores para a tabela `Usuario`
+-- Restrições para tabelas `Usuario`
 --
 ALTER TABLE `Usuario`
   ADD CONSTRAINT `FK_67jhsvufl4c83nul9wxtvmv3y` FOREIGN KEY (`endereco_id`) REFERENCES `Endereco` (`id`),
