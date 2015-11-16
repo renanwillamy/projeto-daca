@@ -57,13 +57,13 @@
 					</p:link>
 				</p:column>
 			</div>
-			<p:column headerText="Excluir" styleClass="centralizarTexto">
+			<p:column headerText="Excluir" rendered="#{request.isUserInRole('admin')}" styleClass="centralizarTexto">
 
 				<h:form>
 
 					<p:commandLink value="Excluir"
 						actionListener="#{clienteLista.excluir(cli)}"
-						rendered="#{request.isUserInRole('admin')}"
+						
 						update=":tabelaClientes">
 						<p:confirm header="Atenção"
 							message="Tem certeza que deseja excluir #{cli.nome}?"

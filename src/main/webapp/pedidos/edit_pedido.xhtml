@@ -181,7 +181,7 @@
 			</h:form>
 
 			<h:form style="margin-top:20px; margin-left:50%; margin-right:50%">
-				<p:commandButton value="Editar Pedido" id="submit"
+				<p:commandButton disabled="#{!request.isUserInRole('admin')}"  value="Editar Pedido" id="submit"
 					action="#{pedidoEdit.updatePedido}"></p:commandButton>
 			</h:form>
 		</p:fieldset>
